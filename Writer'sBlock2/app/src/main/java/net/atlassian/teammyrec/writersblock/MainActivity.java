@@ -105,4 +105,12 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // @todo: Save the state of the activity here via RecoveryController
+
+    }
 }
