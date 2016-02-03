@@ -8,6 +8,9 @@ import android.content.*;
  */
 public class RecoveryController {
 
+    public static final String HOME_TAB = "home";
+    public static final String PAGE_TAB = "page";
+
     /*
      * saveState()
      * Description: Saves the state of the current activity to be restored later.
@@ -33,9 +36,9 @@ public class RecoveryController {
      *         keys - Keys to use when fetching values
      * @return Map<String, String>: HashMap containing the retrieved key-value pairs
      */
-    public Map<String, String> getLastState(Activity act, String[] keys) {
+    public HashMap<String, String> getLastState(Activity act, String[] keys) {
         SharedPreferences prefs = act.getPreferences(Context.MODE_PRIVATE);
-        Map<String, String> keyVals = new HashMap<String, String>();
+        HashMap<String, String> keyVals = new HashMap<String, String>();
         for(String key : keys) {
             String val = prefs.getString(key, ""); // If no value found, return empty string
             keyVals.put(key, val);

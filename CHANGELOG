@@ -1,0 +1,11 @@
+2016-02-03 Matt Porter <m2porter@ucsd.edu> 
+	
+	* SUMMARY: Integrated Parse with app and minor changes to 
+	RecoveryController 
+	 
+	* MainActivity.java: Move RecoveryController invocation to
+	onPause() lifecycle event 
+
+	* AndroidManifest.xml: Added permissions for Parse 
+
+	* build.gradle (Module: app): Added Parse dependencies  

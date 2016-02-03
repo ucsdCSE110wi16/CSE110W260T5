@@ -12,6 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import java.util.*;
+import com.parse.*;
+import android.widget.*;
+import android.content.*;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,8 +49,16 @@ public class MainActivity extends AppCompatActivity
         CharSequence text = "Hello Taost";
         int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context,text,duration);
+        Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+
+        Parse.enableLocalDatastore(this);
+
+        Parse.initialize(this);
+
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();
     }
 
     @Override
@@ -106,11 +118,19 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
     @Override
-    protected void onStop() {
-        super.onStop();
+    public void onPause() {
+        super.onPause();
 
-        // @todo: Save the state of the activity here via RecoveryController
-
+        HashMap<String, String> keyVals = new HashMap<String, String>();
+        keyVals.put("tab", RecoveryController.HOME_TAB);
+        RecoveryController rec = new RecoveryController();
+        rec.saveState(this, keyVals);
     }
+
 }
+
+
+
+
