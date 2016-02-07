@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">WritersBloc</string>
+    <string name="title_activity_category">CategoryActivity</string>
+    <string name="title_activity_add_category_fragment">AddCategoryFragment</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="in_progress">This page is currently being developed, as such, the layout and functionality is expected to change at the discretion of the developers.</string>
+    <string name="login_header">Login:</string>
+    <string name="username_label">User Name:</string>
+    <string name="password_label">Password:  </string>
+    <string name="title_activity_project">ProjectActivity</string>
+</resources>
+
+
