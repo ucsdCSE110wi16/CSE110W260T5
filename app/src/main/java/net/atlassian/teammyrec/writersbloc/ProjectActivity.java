@@ -1,16 +1,13 @@
 package net.atlassian.teammyrec.writersbloc;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,7 +23,7 @@ public class ProjectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.project_toolbar);
         setSupportActionBar(toolbar);
 
         String toastStr = this.getIntent().getStringExtra(INTENT_EXTRA_USERNAME) +
@@ -42,7 +39,10 @@ public class ProjectActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ProjectActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+                Intent categoryAct = new Intent(ProjectActivity.this, CategoryActivity.class);
+
+                //Pass in any needed info in category activity here
+                ProjectActivity.this.startActivity(categoryAct);
             }
         });
 
@@ -69,5 +69,6 @@ public class ProjectActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_category_activity, menu);
         return true;
     }
+
 
 }
