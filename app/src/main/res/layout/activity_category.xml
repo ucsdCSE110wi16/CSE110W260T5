@@ -9,5 +9,4 @@
 
 
 
-    <include layout="@layout/content_category" />
 </android.support.design.widget.CoordinatorLayout>

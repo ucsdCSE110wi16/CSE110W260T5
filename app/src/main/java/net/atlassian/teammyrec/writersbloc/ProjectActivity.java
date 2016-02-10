@@ -1,10 +1,13 @@
 package net.atlassian.teammyrec.writersbloc;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -12,7 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class ProjectActivity extends AppCompatActivity {
+public class ProjectActivity extends AppCompatActivity implements AddProject.OnFragmentInteractionListener {
 
     // These are here ONLY to framework the 'login'. Eventually this functionality will
     // NOT be in the ProjectActivity, but for demo purposes, this works well
@@ -25,6 +28,7 @@ public class ProjectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_project);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         String toastStr = this.getIntent().getStringExtra(INTENT_EXTRA_USERNAME) +
                             " successfully logged in with password " +
@@ -45,4 +49,9 @@ public class ProjectActivity extends AppCompatActivity {
         return true;
     }
 
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        return;
+    }
 }
