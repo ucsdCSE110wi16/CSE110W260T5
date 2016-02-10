@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import net.atlassian.teammyrec.writersbloc.R;
-
 /**
  * Created by williamchiu on 2/9/16.
  */
@@ -24,19 +22,19 @@ public class TextViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View gridView;
+        View listView;
 
         if (convertView == null) {
-            gridView = new View(context);
+            listView = new View(context);
 
-            gridView = inflater.inflate(R.layout.project_grid_item, null);
-            TextView textView = (TextView) gridView.findViewById(R.id.grid_item_label);
+            listView = inflater.inflate(R.layout.project_list_item, null);
+            TextView textView = (TextView) listView.findViewById(R.id.grid_item_label);
             textView.setText(textViewValues[position]);
         } else {
-            gridView = (View) convertView;
+            listView = (View) convertView;
         }
 
-        return gridView;
+        return listView;
     }
 
     @Override
