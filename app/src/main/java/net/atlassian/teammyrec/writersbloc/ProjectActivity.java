@@ -8,7 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ public class ProjectActivity extends AppCompatActivity {
 
     // These are here ONLY to framework the 'login'. Eventually this functionality will
     // NOT be in the ProjectActivity, but for demo purposes, this works well
+    //TODO
     public static final String INTENT_EXTRA_PASSWORD = "ProjectActivity.PASSWORD";
     public static final String INTENT_EXTRA_USERNAME = "ProjectActivity.USERNAME";
 
@@ -32,9 +35,31 @@ public class ProjectActivity extends AppCompatActivity {
         Toast.makeText(this, toastStr,Toast.LENGTH_LONG).show();
 
         ListView list = (ListView)findViewById(R.id.projects_list_view);
-        String[] strings = {};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,strings);
-        list.setAdapter(adapter);
+        String[] strings = {"Project 1", "Project 2", "Project 3", "Project 4", "Project 5"};
+        //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,strings);
+        list.setAdapter(new TextViewAdapter(this, strings));
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(ProjectActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        //GridView gridView = (GridView) findViewById(R.id.projects_grid_view);
+        //gridView.setAdapter(new TextViewAdapter(this, strings));
+
+        Toast.makeText(this, "here",Toast.LENGTH_SHORT).show();
+
+        /*
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(ProjectActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        */
 
     }
 
