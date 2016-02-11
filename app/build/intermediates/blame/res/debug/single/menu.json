@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/dheerajgottipalli/AndroidStudioProjects/CSE110W260T5/app/build/intermediates/res/merged/debug/menu/menu_category_activity.xml",
+        "source": "/Users/dheerajgottipalli/AndroidStudioProjects/CSE110W260T5/app/src/main/res/menu/menu_category_activity.xml"
+    },
+    {
+        "merged": "/Users/dheerajgottipalli/AndroidStudioProjects/CSE110W260T5/app/build/intermediates/res/merged/debug/menu/menu_add_category.xml",
+        "source": "/Users/dheerajgottipalli/AndroidStudioProjects/CSE110W260T5/app/src/main/res/menu/menu_add_category.xml"
+    }
+]
