@@ -12,7 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:id="@+id/spacer"
+            />
+
+
         <TextView
+            android:layout_below="@id/spacer"
             android:id="@+id/in_progress_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,7 +38,10 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/frameFragmentLayout"
+        android:visibility="invisible"
+        >
 
         <fragment
             android:layout_width="match_parent"

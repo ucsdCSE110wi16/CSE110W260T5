@@ -7,6 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,6 +94,15 @@ public class AddProject extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void createProject(View v) {
+        EditText projectName = (EditText) this.getActivity().findViewById(R.id.addProjectName);
+        try {
+            Project project = new Project(this.getActivity(), projectName.getText().toString());
+        } catch (Exception e){
+            Logger.getLogger("Hello World").log(Level.SEVERE, "Failed to create project" + e);
+        }
     }
 
     /**

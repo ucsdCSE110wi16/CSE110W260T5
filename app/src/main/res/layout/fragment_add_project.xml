@@ -29,11 +29,13 @@
             android:layout_height="wrap_content"
             android:hint="Name:"
             android:textAlignment="center"
+            android:id="@+id/addProjectName"
             />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add"
+            android:onClick="createProject"
             />
     </LinearLayout>
 
