@@ -11,6 +11,7 @@
     <string name="username_label">User Name:</string>
     <string name="password_label">Password:  </string>
     <string name="title_activity_project">ProjectActivity</string>
+    <string name="title_activity_signup">SignupActivity</string>
     <string name="title_activity_main">MainActivity</string>
 </resources>
 

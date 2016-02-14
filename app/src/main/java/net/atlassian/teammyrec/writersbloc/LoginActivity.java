@@ -5,13 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-
+import com.parse.*;
 public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Parse.initialize(this);
     }
 
     public void goToProjects(View v){
@@ -23,6 +24,15 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProjectActivity.class);
         intent.putExtra(ProjectActivity.INTENT_EXTRA_USERNAME, userName.getText().toString());
         intent.putExtra(ProjectActivity.INTENT_EXTRA_PASSWORD, password.getText().toString());
+        if(ParseController.checkLogin(userName.getText().toString(),
+                password.getText().toString())) {
+            this.startActivity(intent);
+        }
+    }
+
+
+    public void createAccount(View v) {
+        Intent intent = new Intent(this, SignupActivity.class);
         this.startActivity(intent);
     }
 }
