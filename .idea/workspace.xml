@@ -10,11 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69f9e5d4-8cd2-4b75-9933-fae9dbaa43f5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WritersBloc.iws" />
@@ -47,12 +42,12 @@
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="327" column="33" selection-start-line="327" selection-start-column="33" selection-end-line="327" selection-end-column="33" />
+              <caret line="309" column="33" selection-start-line="309" selection-start-column="33" selection-end-line="309" selection-end-column="33" />
               <folding>
-                <marker date="1455421492212" expanded="true" signature="169629:169646" placeholder="..." />
-                <marker date="1455421492212" expanded="true" signature="169629:169664" placeholder="..." />
-                <marker date="1455421492212" expanded="true" signature="169629:169677" placeholder="..." />
-                <marker date="1455421492212" expanded="true" signature="169629:172873" placeholder="..." />
+                <marker date="1455421509496" expanded="true" signature="165992:166009" placeholder="..." />
+                <marker date="1455421509496" expanded="true" signature="165992:166027" placeholder="..." />
+                <marker date="1455421509496" expanded="true" signature="165992:166040" placeholder="..." />
+                <marker date="1455421509496" expanded="true" signature="165992:169236" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -1970,7 +1965,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455421505647</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add secondary files due to .gitignore differences">
+      <created>1455421528517</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1455421528517</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2016,7 +2017,8 @@
     <MESSAGE value="Finish environmental changes to local environment" />
     <MESSAGE value="Prepare merge with jay branch" />
     <MESSAGE value="Merge branch 'jay'" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'jay'" />
+    <MESSAGE value="Add secondary files due to .gitignore differences" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add secondary files due to .gitignore differences" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2028,10 +2030,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="296" column="33" selection-start-line="296" selection-start-column="33" selection-end-line="296" selection-end-column="33" />
           <folding>
-            <marker date="1455421492212" expanded="true" signature="169629:169646" placeholder="..." />
-            <marker date="1455421492212" expanded="true" signature="169629:169664" placeholder="..." />
-            <marker date="1455421492212" expanded="true" signature="169629:169677" placeholder="..." />
-            <marker date="1455421492212" expanded="true" signature="169629:172873" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166009" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166027" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166040" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:169236" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -2105,10 +2107,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="309" column="68" selection-start-line="309" selection-start-column="68" selection-end-line="309" selection-end-column="68" />
           <folding>
-            <marker date="1455421492212" expanded="true" signature="169629:169646" placeholder="..." />
-            <marker date="1455421492212" expanded="true" signature="169629:169664" placeholder="..." />
-            <marker date="1455421492212" expanded="true" signature="169629:169677" placeholder="..." />
-            <marker date="1455421492212" expanded="true" signature="169629:172873" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166009" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166027" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166040" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:169236" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -2180,12 +2182,12 @@
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="327" column="33" selection-start-line="327" selection-start-column="33" selection-end-line="327" selection-end-column="33" />
+          <caret line="309" column="33" selection-start-line="309" selection-start-column="33" selection-end-line="309" selection-end-column="33" />
           <folding>
-            <marker date="1455421492212" expanded="true" signature="169629:169646" placeholder="..." />
-            <marker date="1455421492212" expanded="true" signature="169629:169664" placeholder="..." />
-            <marker date="1455421492212" expanded="true" signature="169629:169677" placeholder="..." />
-            <marker date="1455421492212" expanded="true" signature="169629:172873" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166009" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166027" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166040" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:169236" placeholder="..." />
           </folding>
         </state>
       </provider>
