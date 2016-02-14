@@ -31,7 +31,7 @@ public class ProjectActivity extends AppCompatActivity implements AddProject.OnF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.project_toolbar);
         setSupportActionBar(toolbar);
 
 

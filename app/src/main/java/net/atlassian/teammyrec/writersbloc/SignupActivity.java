@@ -15,7 +15,9 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Parse.initialize(this);
+        try {
+            Parse.initialize(this);
+        }catch (Exception e){}
         setContentView(R.layout.activity_signup);
 
 
