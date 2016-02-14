@@ -7,13 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="net.atlassian.teammyrec.writersbloc.LoginActivity">
-
-    <Space
-        android:id="@+id/textSpacer"
-        android:layout_width="match_parent"
-        android:layout_height="20sp"
-     />
+    tools:context="net.atlassian.teammyrec.writersbloc.SignupActivity">
 
     <TextView
         android:id="@+id/login_header"
@@ -32,20 +26,20 @@
         android:orientation="horizontal"
         android:layout_below="@id/login_header"
         >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/username_label"
-        android:textSize="20sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/username_label"
+            android:textSize="20sp"/>
 
-    <EditText
-        android:id="@+id/username_edit_activity_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:hint="User Name:"
-        />
+        <EditText
+            android:id="@+id/username_edit_activity_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:hint="User Name:"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -63,7 +57,7 @@
             />
 
         <EditText
-            android:id="@+id/password_edit_activity_login"
+            android:id="@+id/password_edit_activity_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="3"
@@ -71,42 +65,39 @@
             android:hint="Password:"
             />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/password_layout2"
         android:orientation="horizontal"
-        android:id="@+id/button_layout"
-        android:layout_below="@id/password_layout"
-        >
-
-        <Button
+        android:layout_below="@id/password_layout">
+        <TextView
             android:layout_width="match_parent"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:onClick="goToProjects"
-            android:text="Submit"
-            android:background="#0CE850"
+            android:text="Conform Password"
+            android:textSize="20sp"
+            android:layout_weight="5"
             />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/create_layout"
-        android:layout_below="@id/button_layout"
-        >
-        <Button
+        <EditText
+            android:id="@+id/password_edit_activity_signup2"
             android:layout_width="match_parent"
-            android:layout_height="74dp"
-            android:text="Create New Account"
-            android:id="@+id/button"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:onClick="createAccount" />
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:password="true"
+            android:hint="Password:"
+            />
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:id="@+id/button2"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="signup" />
 
 </RelativeLayout>

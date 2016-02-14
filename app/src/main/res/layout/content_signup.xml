@@ -9,13 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="net.atlassian.teammyrec.writersbloc.CategoryActivity"
-    tools:showIn="@layout/activity_category">
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/category_list_view">
-    </ListView>
+    tools:context="net.atlassian.teammyrec.writersbloc.SignupActivity"
+    tools:showIn="@layout/activity_signup">
 
 </RelativeLayout>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,17 +13,10 @@
     tools:context="net.atlassian.teammyrec.writersbloc.ProjectActivity"
     tools:showIn="@layout/activity_project">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/in_progress"
-        android:id="@+id/in_progress_text_content_project"
-        />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/in_progress_text_content_project"
-        android:id="@+id/projects_list_view"
-        ></ListView>
+        android:id="@+id/projects_list_view">
+    </ListView>
 </RelativeLayout>
+
