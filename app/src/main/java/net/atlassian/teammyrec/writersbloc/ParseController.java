@@ -26,10 +26,8 @@ public class ParseController {
                 if (e == null) {
                     //
                 } else {
-                    // error
-                    System.out.println(e.toString());
-                    System.out.println("error signing up");
-                    Logger.getLogger("ok").log(Level.INFO, "Error signing up");
+                    Logger.getLogger("parse_error").log(Level.ERROR, 
+                        "Error signing up (Parse error below):\n" + e.toString());
                 }
             }
         });
@@ -48,5 +46,14 @@ public class ParseController {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static void logoutCurrentUser() { 
+        ParseUser.logOut(); 
+    }
+
+    public static boolean userIsLoggedIn() { 
+        boolean val = (ParseUser.getCurrentUser() != null)? true : false; 
+        return val; 
     }
 }
