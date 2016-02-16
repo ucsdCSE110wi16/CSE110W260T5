@@ -1,2 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/home/jay/.gradle/caches/modules-2/files-2.1/com.parse/parse-android/1.13.0/58a7d54b6a4f28be11f0cecec93097eddf473e6f/parse-android-1.13.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="58a7d54b6a4f28be11f0cecec93097eddf473e6f">
+        <dex dex="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/pre-dexed/debug/parse-android-1.13.0_26a777f7d91e2413e7140d846a78fd36545297de.jar" />
+    </item>
+    <item
+        jar="/home/jay/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-applinks/1.4.0/8ad21bf21784dacce5f2043afb97218cc377e835/bolts-applinks-1.4.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8ad21bf21784dacce5f2043afb97218cc377e835">
+        <dex dex="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/pre-dexed/debug/bolts-applinks-1.4.0_c510c3acd1cec1d32e33c658e84bc84dee2eb3ef.jar" />
+    </item>
+    <item
+        jar="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_112053ce657bfb1281263e6b72251fe99063593e.jar" />
+    </item>
+    <item
+        jar="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.1.1_9bfffdf96d3f10181e0d90a39aaa334e585aef82.jar" />
+    </item>
+    <item
+        jar="/home/jay/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_77468f59ac30cb3b6380b798bedb9ac068bb0366.jar" />
+    </item>
+    <item
+        jar="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.1.1_8f856feb33e71fbe7c36d9dfa617cec14fba1157.jar" />
+    </item>
+    <item
+        jar="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/pre-dexed/debug/com.android.support-design-23.1.1_6b84059194833574947599ee4a9876672937e26c.jar" />
+    </item>
+    <item
+        jar="/opt/android-sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1_a191f39ca41bd9735f8d3a9cc6638ec5404adeab.jar" />
+    </item>
+    <item
+        jar="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="/home/jay/StudioProjects/WritersBloc/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.1.1_e8c82a1485df8bd0dd4ccbdb8f76d9eeb13e9eab.jar" />
+    </item>
+
+</items>

@@ -42,9 +42,18 @@
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
               <caret line="299" column="33" selection-start-line="299" selection-start-column="33" selection-end-line="299" selection-end-column="33" />
               <folding>
                 <marker date="1455610425503" expanded="true" signature="170546:170778" placeholder="..." />
+=======
+              <caret line="309" column="33" selection-start-line="309" selection-start-column="33" selection-end-line="309" selection-end-column="33" />
+              <folding>
+                <marker date="1455421509496" expanded="true" signature="165992:166009" placeholder="..." />
+                <marker date="1455421509496" expanded="true" signature="165992:166027" placeholder="..." />
+                <marker date="1455421509496" expanded="true" signature="165992:166040" placeholder="..." />
+                <marker date="1455421509496" expanded="true" signature="165992:169236" placeholder="..." />
+>>>>>>> master
               </folding>
             </state>
           </provider>
@@ -1751,7 +1760,13 @@
       <sortByType />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scratches" />
+=======
+      <pane id="ProjectPane" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+>>>>>>> master
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1762,8 +1777,11 @@
           </PATH>
         </subPane>
       </pane>
+<<<<<<< HEAD
       <pane id="PackagesPane" />
       <pane id="ProjectPane" />
+=======
+>>>>>>> master
       <pane id="Scope" />
     </panes>
   </component>
@@ -1968,6 +1986,7 @@
       <option name="project" value="LOCAL" />
       <updated>1455421528517</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL-00005" summary="Merge with origin/master">
       <created>1455421549520</created>
       <option name="number" value="00005" />
@@ -1975,6 +1994,9 @@
       <updated>1455421549520</updated>
     </task>
     <option name="localTasksCounter" value="6" />
+=======
+    <option name="localTasksCounter" value="5" />
+>>>>>>> master
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1988,6 +2010,10 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995495" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+=======
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+>>>>>>> master
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2001,6 +2027,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+<<<<<<< HEAD
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2008,6 +2035,14 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+>>>>>>> master
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2021,8 +2056,12 @@
     <MESSAGE value="Prepare merge with jay branch" />
     <MESSAGE value="Merge branch 'jay'" />
     <MESSAGE value="Add secondary files due to .gitignore differences" />
+<<<<<<< HEAD
     <MESSAGE value="Merge with origin/master" />
     <option name="LAST_COMMIT_MESSAGE" value="Merge with origin/master" />
+=======
+    <option name="LAST_COMMIT_MESSAGE" value="Add secondary files due to .gitignore differences" />
+>>>>>>> master
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2032,6 +2071,7 @@
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
           <caret line="304" column="33" selection-start-line="304" selection-start-column="33" selection-end-line="304" selection-end-column="33" />
           <folding>
             <marker date="1455610425503" expanded="true" signature="170546:170778" placeholder="..." />
@@ -2109,6 +2149,14 @@
           <caret line="296" column="33" selection-start-line="296" selection-start-column="33" selection-end-line="296" selection-end-column="33" />
           <folding>
             <marker date="1455610425503" expanded="true" signature="170546:170778" placeholder="..." />
+=======
+          <caret line="296" column="33" selection-start-line="296" selection-start-column="33" selection-end-line="296" selection-end-column="33" />
+          <folding>
+            <marker date="1455421509496" expanded="true" signature="165992:166009" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166027" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166040" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:169236" placeholder="..." />
+>>>>>>> master
           </folding>
         </state>
       </provider>
@@ -2182,7 +2230,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="309" column="68" selection-start-line="309" selection-start-column="68" selection-end-line="309" selection-end-column="68" />
           <folding>
+<<<<<<< HEAD
             <marker date="1455610425503" expanded="true" signature="170546:170778" placeholder="..." />
+=======
+            <marker date="1455421509496" expanded="true" signature="165992:166009" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166027" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166040" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:169236" placeholder="..." />
+>>>>>>> master
           </folding>
         </state>
       </provider>
@@ -2254,9 +2309,18 @@
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
           <caret line="299" column="33" selection-start-line="299" selection-start-column="33" selection-end-line="299" selection-end-column="33" />
           <folding>
             <marker date="1455610425503" expanded="true" signature="170546:170778" placeholder="..." />
+=======
+          <caret line="309" column="33" selection-start-line="309" selection-start-column="33" selection-end-line="309" selection-end-column="33" />
+          <folding>
+            <marker date="1455421509496" expanded="true" signature="165992:166009" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166027" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:166040" placeholder="..." />
+            <marker date="1455421509496" expanded="true" signature="165992:169236" placeholder="..." />
+>>>>>>> master
           </folding>
         </state>
       </provider>
