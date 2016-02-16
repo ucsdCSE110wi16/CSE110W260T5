@@ -13,6 +13,7 @@
     <string name="title_activity_project">ProjectActivity</string>
     <string name="title_activity_signup">SignupActivity</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_page_list">PageList</string>
 </resources>
 
 

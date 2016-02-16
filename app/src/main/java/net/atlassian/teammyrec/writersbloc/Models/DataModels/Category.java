@@ -21,7 +21,7 @@ public class Category {
     private final File categoryFile;
 
     public Category(String parentFolder, String categoryName) throws Exception{
-        this(parentFolder + categoryName);
+        this(parentFolder + "/" + categoryName);
         PROJECT_LOGGER.log(Level.INFO, LOG_NEW_CATEGORY + categoryName );
     }
 
@@ -62,6 +62,10 @@ public class Category {
         if(file.exists()){
             file.delete();
         }
+    }
+
+    public String toString(){
+        return categoryFile.getName();
     }
 
 }
