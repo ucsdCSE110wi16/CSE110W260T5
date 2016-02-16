@@ -14,11 +14,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/atlassian/teammyrec/writersbloc/Models/DataModels/Page.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/atlassian/teammyrec/writersbloc/Models/DataModels/Page.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/atlassian/teammyrec/writersbloc/Models/DataModels/PageInformation.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/atlassian/teammyrec/writersbloc/Models/DataModels/PageInformation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/atlassian/teammyrec/writersbloc/PageListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/atlassian/teammyrec/writersbloc/PageListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_page_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_page_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_page_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_page_list.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WritersBloc.iws" />
@@ -70,10 +66,12 @@
       <file leaf-file-name="PageInformation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/net/atlassian/teammyrec/writersbloc/Models/DataModels/PageInformation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0870337">
-              <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.5843694">
+              <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#725#726#0" expanded="true" />
+                <element signature="e#764#765#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1913,7 +1911,7 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Galaxy_Nexus_API_23_2" />
     <property name="FullScreen" value="false" />
   </component>
@@ -2117,7 +2115,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455615762818</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add PageInformation support (Title and Text Info)">
+      <created>1455660545426</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1455660545426</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2174,7 +2178,8 @@
     <MESSAGE value="Merge branch 'jay'" />
     <MESSAGE value="Add secondary files due to .gitignore differences" />
     <MESSAGE value="Merge branch 'jay' -- Add ProjectActivity functionality&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'jay' -- Add ProjectActivity functionality&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;" />
+    <MESSAGE value="Add PageInformation support (Title and Text Info)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add PageInformation support (Title and Text Info)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2199,7 +2204,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/net/atlassian/teammyrec/writersbloc/Models/DataModels/PageInformation.java</url>
-          <line>34</line>
+          <line>43</line>
           <properties />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
@@ -2601,10 +2606,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/net/atlassian/teammyrec/writersbloc/Models/DataModels/PageInformation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0870337">
-          <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.5843694">
+          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#725#726#0" expanded="true" />
+            <element signature="e#764#765#0" expanded="true" />
           </folding>
         </state>
       </provider>
