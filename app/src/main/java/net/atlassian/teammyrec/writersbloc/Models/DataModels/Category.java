@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.io.File;
 import java.lang.Exception;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,6 +41,14 @@ public class Category {
         }
     }
 
+    public Project getProject(){
+        try{
+            return new Project(categoryFile.getParent());
+        } catch (Exception e){
+            return null;
+        }
+    }
+
     public File[] getFiles(){
         return categoryFile.listFiles();
     }
@@ -62,6 +71,18 @@ public class Category {
         if(file.exists()){
             file.delete();
         }
+    }
+
+    public ArrayList<Page> getPages(){
+        ArrayList<Page> pages = new ArrayList<Page>();
+        try {
+            for (File f : categoryFile.listFiles()) {
+                pages.add(new Page(f.getAbsolutePath()));
+            }
+        } catch (Exception e){
+            Logger.getAnonymousLogger().log(Level.WARNING, "Error handling page creation");
+        }
+        return pages;
     }
 
     public String toString(){
