@@ -12,4 +12,8 @@ public class Page {
         this(parent + "/" + pageName);
     }
 
+    public Category getCategory(){
+        return null;
+    }
+
 }

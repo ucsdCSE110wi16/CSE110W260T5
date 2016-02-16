@@ -1,5 +1,6 @@
 package net.atlassian.teammyrec.writersbloc;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +9,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Category;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
@@ -42,7 +43,17 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         }
 
         ArrayAdapter<Category> categoryArrayAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_list_item_1, mCategories);
-        ((ListView)findViewById(R.id.category_list_view)).setAdapter(categoryArrayAdapter);
+        ListView list = ((ListView)findViewById(R.id.category_list_view));
+        list.setAdapter(categoryArrayAdapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), PageListActivity.class);
+                intent.putExtra(PageListActivity.INTENT_EXTRA_PROJECT_ABSOLUTE_DIR, mCategories.get(position).getAbsolutePath());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
