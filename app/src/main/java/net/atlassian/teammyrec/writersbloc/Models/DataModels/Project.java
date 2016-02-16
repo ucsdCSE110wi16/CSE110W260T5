@@ -3,6 +3,9 @@ package net.atlassian.teammyrec.writersbloc.Models.DataModels;
 import android.content.Context;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by jay on 2/10/16.
@@ -32,6 +35,19 @@ public class Project {
     public void deleteCategory(String categoryName){
         File category = new File(projectFile.getAbsolutePath() + "/" + categoryName);
         category.delete();
+    }
+
+    public ArrayList<Category> getCategories() {
+        ArrayList<Category> categories = new ArrayList<Category>();
+        try {
+            for (File f : projectFile.listFiles())
+                categories.add(new Category(f.getAbsolutePath()));
+        } catch (Exception e){
+            Logger.getLogger("Project.DataModel").log(Level.WARNING, "Error detected when creating "
+                    +"project from project folder: " + e);
+
+        }
+        return categories;
     }
 
 }

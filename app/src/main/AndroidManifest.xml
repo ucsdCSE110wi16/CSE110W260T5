@@ -40,13 +40,19 @@
         <activity
             android:name=".SignupActivity"
             android:label="@string/title_activity_signup"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="com.parse.APPLICATION_ID"
             android:value="bscm7UQaxrFSTZnTN29Vwf3zEyL22XmkneD1mRWp" />
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="rGlmX7aI0F9li5wA9fPJc6tmgkFFlJwIN07zDIlF" />
+
+        <activity
+            android:name=".PageList"
+            android:label="@string/title_activity_page_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -17,12 +17,12 @@ import java.util.logging.Logger;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link AddProject.OnFragmentInteractionListener} interface
+ * {@link AddProjectFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link AddProject#newInstance} factory method to
+ * Use the {@link AddProjectFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddProject extends Fragment {
+public class AddProjectFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,7 +34,7 @@ public class AddProject extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public AddProject() {
+    public AddProjectFragment() {
         // Required empty public constructor
     }
 
@@ -44,11 +44,11 @@ public class AddProject extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AddProject.
+     * @return A new instance of fragment AddProjectFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddProject newInstance(String param1, String param2) {
-        AddProject fragment = new AddProject();
+    public static AddProjectFragment newInstance(String param1, String param2) {
+        AddProjectFragment fragment = new AddProjectFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

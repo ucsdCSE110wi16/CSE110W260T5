@@ -12,12 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:id="@+id/spacer"
-            />
-
 
         <TextView
             android:layout_below="@id/spacer"
@@ -32,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_below="@id/in_progress_text"
-            android:id="@+id/projects_list_view"
+            android:id="@+id/category_list_view"
             ></ListView>
     </RelativeLayout>
 
@@ -46,9 +40,9 @@
         <fragment
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="net.atlassian.teammyrec.writersbloc.AddProjectFragment"
-            tools:layout="@layout/fragment_add_project"
-            android:id="@+id/overlayAddProject"
+            android:name="net.atlassian.teammyrec.writersbloc.AddCategoryFragment"
+            tools:layout="@layout/fragment_add_category"
+            android:id="@+id/overlayAddCategory"
             />
 
     </FrameLayout>

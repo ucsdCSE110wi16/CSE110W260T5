@@ -1,26 +1,24 @@
 package net.atlassian.teammyrec.writersbloc;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
-import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class ProjectActivity extends AppCompatActivity implements AddProject.OnFragmentInteractionListener {
+public class ProjectActivity extends AppCompatActivity implements AddProjectFragment.OnFragmentInteractionListener {
 
     // These are here ONLY to framework the 'login'. Eventually this functionality will
     // NOT be in the ProjectActivity, but for demo purposes, this works well
@@ -44,18 +42,26 @@ public class ProjectActivity extends AppCompatActivity implements AddProject.OnF
         String[] strings = getFilesDir().list();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,strings);
         list.setAdapter(adapter);
-
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String projectName = ((AppCompatTextView)view).getText().toString();
+                Intent intent = new Intent(getApplicationContext(), CategoryActivity.class);
+                intent.putExtra(CategoryActivity.INTENT_EXTRA_PROJECT_PATH, getFilesDir()+"/"+projectName);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_category_activity, menu);
+        inflater.inflate(R.menu.menu_add_item, menu);
         return true;
     }
 
     public void createProject(View v){
-        AddProject fragment = (AddProject)getSupportFragmentManager().findFragmentById(R.id.overlayAddProject);
+        AddProjectFragment fragment = (AddProjectFragment)getSupportFragmentManager().findFragmentById(R.id.overlayAddProject);
         fragment.createProject(v);
 
         ListView list = (ListView)findViewById(R.id.projects_list_view);
