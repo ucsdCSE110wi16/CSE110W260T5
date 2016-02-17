@@ -72,5 +72,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void logout(View v){
         ParseController.logoutCurrentUser();
+
     }
 }

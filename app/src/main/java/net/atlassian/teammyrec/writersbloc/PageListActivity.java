@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import android.content.*;
 
 public class PageListActivity extends AppCompatActivity {
 
@@ -48,6 +51,16 @@ public class PageListActivity extends AppCompatActivity {
         ArrayAdapter<Page> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mPages);
         list.setAdapter(adapter);
 
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String pageName = ((AppCompatTextView) view).getText().toString();
+                Intent intent = new Intent(getApplicationContext(), PageActivity.class);
+                intent.putExtra(PageActivity.INTENT_PAGE_NAME, pageName);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -69,6 +82,11 @@ public class PageListActivity extends AppCompatActivity {
         }catch (Exception e){
             Logger.getLogger(LOG_ID).log(Level.WARNING, "Invalid IO error when creating page: " + e);
         }
+    }
+
+    public void goToPage(View v) {
+        Intent intent = new Intent(this, PageActivity.class);
+        this.startActivity(intent);
     }
 
     @Override
