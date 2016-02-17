@@ -1,5 +1,6 @@
 package net.atlassian.teammyrec.writersbloc;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 
 import com.parse.Parse;
 import android.content.*;
+import android.widget.Toast;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -27,6 +29,12 @@ public class SignupActivity extends AppCompatActivity {
         EditText passConfirm = (EditText)findViewById(R.id.password_edit_activity_signup2);
 
         if(!password.getText().toString().equals(passConfirm.getText().toString())) {
+            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+            dlgAlert.setMessage("Incorrect Login Credentials");
+            dlgAlert.setTitle("Error");
+            dlgAlert.setPositiveButton("OK", null);
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
             return;
         }
 

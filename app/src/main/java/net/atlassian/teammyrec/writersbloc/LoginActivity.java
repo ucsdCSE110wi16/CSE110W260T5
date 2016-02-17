@@ -8,6 +8,8 @@ import android.widget.EditText;
 import com.parse.*;
 
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
+import android.widget.*;
+import android.app.*;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -48,9 +50,17 @@ public class LoginActivity extends AppCompatActivity {
                 this.startActivity(intent);
             } else {
                 // invalid password
+                Toast.makeText(this, "Incorrect login credentials",
+                        Toast.LENGTH_LONG).show();
             }
         } catch(Exception e) {
             e.printStackTrace();
+            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+            dlgAlert.setMessage("Incorrect Login Credentials");
+            dlgAlert.setTitle("Error");
+            dlgAlert.setPositiveButton("OK", null);
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
         }
     }
 
