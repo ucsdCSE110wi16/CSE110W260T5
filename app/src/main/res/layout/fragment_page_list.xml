@@ -7,21 +7,21 @@
     >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="60sp"
-        android:layout_marginRight="60sp"
+        android:layout_marginLeft="40sp"
+        android:layout_marginRight="40sp"
         android:orientation="vertical"
         android:background="@drawable/border"
-        android:padding="10px"
+        android:padding="10sp"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="40sp"
             android:paddingRight="40sp"
-            android:text="Project:"
+            android:text="Page:"
             android:textSize="30sp"
             />
         <EditText
@@ -31,12 +31,30 @@
             android:textAlignment="center"
             android:id="@+id/addPageName"
             />
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Add"
             android:onClick="createPage"
+            android:background="@drawable/add_button"
+            android:textColor="#f0f0f0"
             />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:background="@drawable/cancel_button"
+            android:onClick="cancelCreatePage"
+            android:textColor="#f0f0f0"
+            />
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>

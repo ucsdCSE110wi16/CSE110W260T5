@@ -78,6 +78,10 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
 
     }
 
+    public void cancelCreateProject(View v){
+        findViewById(R.id.frameFragmentLayout).setVisibility(View.INVISIBLE);
+    }
+
 
 
     @Override

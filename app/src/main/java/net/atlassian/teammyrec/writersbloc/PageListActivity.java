@@ -101,4 +101,8 @@ public class PageListActivity extends AppCompatActivity {
         }
     }
 
+    public void cancelCreatePage(View v){
+        findViewById(R.id.frameFragmentLayout).setVisibility(View.INVISIBLE);
+    }
+
 }

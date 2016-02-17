@@ -92,6 +92,10 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         }
     }
 
+    public void cancelCreateCategory(View v){
+        findViewById(R.id.frameFragmentLayout).setVisibility(View.INVISIBLE);
+    }
+
     public void toGraph(View v) {
         Intent intent = new Intent(this, GraphActivity.class);
         this.startActivity(intent);
