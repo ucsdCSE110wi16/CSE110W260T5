@@ -23,7 +23,14 @@
         <activity
             android:name=".CategoryActivity"
             android:label="@string/title_activity_category"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".ProjectActivity"
             android:label="@string/title_activity_project"
@@ -48,15 +55,20 @@
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="rGlmX7aI0F9li5wA9fPJc6tmgkFFlJwIN07zDIlF" />
-
+        <activity
+            android:name=".GraphActivity"
+            android:label="@string/title_activity_graph"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".PageListActivity"
             android:label="@string/title_activity_page_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PageActivity"
-            android:label="@string/title_activity_page"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_page_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

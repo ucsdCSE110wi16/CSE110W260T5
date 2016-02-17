@@ -6,12 +6,19 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:layout="@layout/fragment_add_project"
-    >
+    android:id="@+id/z">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Graph"
+        android:id="@+id/button4"
+        android:layout_gravity="right|bottom"
+        android:onClick="toGraph"
+        android:nestedScrollingEnabled="true" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <TextView
             android:layout_below="@id/spacer"
@@ -27,7 +34,12 @@
             android:layout_height="match_parent"
             android:layout_below="@id/in_progress_text"
             android:id="@+id/category_list_view"
-            ></ListView>
+            >
+
+
+
+        </ListView>
+
     </RelativeLayout>
 
     <FrameLayout
@@ -43,7 +55,8 @@
             android:name="net.atlassian.teammyrec.writersbloc.AddCategoryFragment"
             tools:layout="@layout/fragment_add_category"
             android:id="@+id/overlayAddCategory"
-            />
+            android:layout_gravity="right|bottom" />
+
 
     </FrameLayout>
 

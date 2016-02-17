@@ -92,6 +92,11 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         }
     }
 
+    public void toGraph(View v) {
+        Intent intent = new Intent(this, GraphActivity.class);
+        this.startActivity(intent);
+    }
+
 
     @Override
     public void onFragmentInteraction(Uri uri) {
