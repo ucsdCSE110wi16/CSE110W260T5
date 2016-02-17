@@ -54,7 +54,7 @@ public class PageListActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String pageName = ((AppCompatTextView) view).getText().toString();
+                String pageName = mPages.get(position).getAbsolutePath();
                 Intent intent = new Intent(getApplicationContext(), PageActivity.class);
                 intent.putExtra(PageActivity.INTENT_PAGE_NAME, pageName);
                 startActivity(intent);

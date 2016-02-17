@@ -49,4 +49,7 @@ public class Page {
         writer.close();
     }
 
+    public String getAbsolutePath(){
+        return baseFile.getAbsolutePath();
+    }
 }

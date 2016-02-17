@@ -34,9 +34,12 @@ public class PageInformation {
 
     PageInformation(JSONObject object) throws JSONException{
         if(object.length() > 0) {
-            title = (String) object.get(TITLE_KEY);
-            text = (String) object.get(TEXT_KEY);
-            links = (String[]) object.get(LINK_KEY);
+            if(object.has(TITLE_KEY))
+                title = (String) object.get(TITLE_KEY);
+            if(object.has(TEXT_KEY))
+                text = (String) object.get(TEXT_KEY);
+            if(object.has(LINK_KEY))
+                links = (String[]) object.get(LINK_KEY);
         }
     }
 
@@ -46,6 +49,30 @@ public class PageInformation {
         object.put(TEXT_KEY, text);
         object.put(LINK_KEY, links);
         return object.toString();
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public void setTitle(String title) {
+       this.title = title;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getText(){
+        return text;
+    }
+
+    public String[] getLinks() {
+        return  links;
+    }
+
+    public void setLinks(String[] links) {
+        this.links = links;
     }
 
 
