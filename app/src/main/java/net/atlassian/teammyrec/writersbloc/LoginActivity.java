@@ -6,13 +6,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import com.parse.*;
+
+import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //Parse.initialize(this);
+        try {
+            Parse.initialize(this);
+        } catch(Exception e) {
+        }
+
+        if(ParseController.userIsLoggedIn()) {
+            Intent intent = new Intent(this, ProjectActivity.class);
+            intent.putExtra(ProjectActivity.INTENT_EXTRA_USERNAME,
+                    ParseUser.getCurrentUser().getUsername());
+            this.startActivity(intent);
+        }
+
     }
 
     public void goToProjects(View v){
@@ -21,15 +35,32 @@ public class LoginActivity extends AppCompatActivity {
         EditText password = (EditText)findViewById(R.id.password_edit_activity_login);
 
         // Create intent for ProjectActivity, and go to ProjectActivity
-        Intent intent = new Intent(this, ProjectActivity.class);
-        intent.putExtra(ProjectActivity.INTENT_EXTRA_USERNAME, userName.getText().toString());
-        intent.putExtra(ProjectActivity.INTENT_EXTRA_PASSWORD, password.getText().toString());
-        this.startActivity(intent);
+        try {
+            ParseUser validUser = ParseUser.logIn(userName.getText().toString(),
+                    password.getText().toString());
+            if(validUser != null) {
+                Intent intent = new Intent(this, ProjectActivity.class);
+
+                intent.putExtra(ProjectActivity.INTENT_EXTRA_USERNAME,
+                        userName.getText().toString());
+                intent.putExtra(ProjectActivity.INTENT_EXTRA_PASSWORD,
+                        password.getText().toString());
+                this.startActivity(intent);
+            } else {
+                // invalid password
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
     public void createAccount(View v) {
         Intent intent = new Intent(this, SignupActivity.class);
         this.startActivity(intent);
+    }
+
+    public void logout(View v){
+        ParseController.logoutCurrentUser();
     }
 }

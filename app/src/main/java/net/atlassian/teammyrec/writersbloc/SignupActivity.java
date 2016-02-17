@@ -9,15 +9,13 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.parse.Parse;
+import android.content.*;
 
 public class SignupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
-            Parse.initialize(this);
-        }catch (Exception e){}
         setContentView(R.layout.activity_signup);
 
 
@@ -32,8 +30,11 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        // @todo: username validation (no weird characters, spaces..)
         ParseController.addUser(username.getText().toString(), password.getText().toString());
+        Intent intent = new Intent(this, ProjectActivity.class);
+        intent.putExtra(ProjectActivity.INTENT_EXTRA_USERNAME, username.getText().toString());
+        intent.putExtra(ProjectActivity.INTENT_EXTRA_PASSWORD, password.getText().toString());
+        this.startActivity(intent);
 
     }
 

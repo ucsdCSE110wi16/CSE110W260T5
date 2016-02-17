@@ -49,4 +49,13 @@ public class ParseController {
             return false;
         }
     }
+
+    public static void logoutCurrentUser() {
+        ParseUser.logOut();
+    }
+
+    public static boolean userIsLoggedIn() {
+        boolean val = (ParseUser.getCurrentUser() != null)? true : false;
+        return val;
+    }
 }
