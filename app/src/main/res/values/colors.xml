@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="addButton">#3F42D4</color>
+    <color name="listItem">#c033345C</color>
     <color name="cancelButton">#C41C2D</color>
+    <color name="graphButton">#DB5742</color>
 </resources>

@@ -7,40 +7,17 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:layout="@layout/fragment_add_project"
     android:id="@+id/z">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Graph"
-        android:id="@+id/button4"
-        android:layout_gravity="right|bottom"
-        android:onClick="toGraph"
-        android:nestedScrollingEnabled="true" />
 
-    <RelativeLayout
+
+
+
+
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:layout_below="@id/spacer"
-            android:id="@+id/in_progress_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/in_progress"
-            android:layout_marginTop="10sp"
-            />
-
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_below="@id/in_progress_text"
-            android:id="@+id/category_list_view"
-            >
-
-
-
-        </ListView>
-
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:id="@+id/category_list_view"
+        android:background="@drawable/list_background"
+        />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -58,6 +35,25 @@
             android:layout_gravity="right|bottom" />
 
 
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:padding="20px"
+        >
+        <ImageButton
+            android:background="@drawable/graph_btn"
+            android:contentDescription="Graph"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="15dp"
+            android:id="@+id/graphButton"
+            android:src="@drawable/ic_graph"
+            android:scaleType="fitXY"
+            android:layout_gravity="right|bottom"
+            android:nestedScrollingEnabled="true"/>
     </FrameLayout>
 
 </FrameLayout>

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">WritersBloc</string>
-    <string name="title_activity_category">CategoryActivity</string>
+    <string name="title_activity_category">Categories</string>
     <string name="title_activity_add_category_fragment">AddCategoryFragment</string>
     <string name="action_settings">Settings</string>
 
@@ -10,11 +10,11 @@
     <string name="login_header">Login:</string>
     <string name="username_label">User Name:</string>
     <string name="password_label">Password:  </string>
-    <string name="title_activity_project">ProjectActivity</string>
-    <string name="title_activity_signup">SignupActivity</string>
+    <string name="title_activity_project">Projects</string>
+    <string name="title_activity_signup">Signup:</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_page_list">PageList</string>
-    <string name="title_activity_graph">GraphActivity</string>
+    <string name="title_activity_page_list">Pages</string>
+    <string name="title_activity_graph">Graph</string>
 </resources>
 
 

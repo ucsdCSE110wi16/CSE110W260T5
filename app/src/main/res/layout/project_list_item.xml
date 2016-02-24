@@ -1,9 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/grid_item_label"
-    android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="@+id/label"
-    android:layout_marginTop="5dp"
-    android:textSize="15sp" >
-</TextView>
+    tools:context="net.atlassian.teammyrec.writersbloc.ProjectListItemFragment"
+    android:orientation="horizontal"
+    android:background="@color/listItem"
+    android:id="@+id/listItemLayout"
+    >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:id="@+id/listItemTextID"
+        android:text="@string/action_settings"
+        android:textColor="#f0f0f0"
+        android:textSize="30dp"
+        android:layout_weight="7"
+        android:gravity="center"
+        />
+
+    <ImageView
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_navigate_next"
+        android:layout_gravity="right"
+        />
+
+</LinearLayout>

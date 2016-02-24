@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Category;
@@ -38,11 +39,20 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         try {
             mCurrentProject = new Project(fileName);
             mCategories = mCurrentProject.getCategories();
+            if(mCategories.size() == 0 ){
+                // Create default categories
+                mCategories.add(new Category(fileName, "Character"));
+                mCategories.add(new Category(fileName, "Location"));
+                mCategories.add(new Category(fileName, "Event"));
+                mCategories.add(new Category(fileName, "Object"));
+                mCategories.add(new Category(fileName, "Other"));
+
+            }
         }catch (Exception e){
             Logger.getLogger(LOG_ID, "Unhandled IO Exception when opening categories");
         }
 
-        ArrayAdapter<Category> categoryArrayAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_list_item_1, mCategories);
+        ArrayAdapter<Category> categoryArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mCategories);
         ListView list = ((ListView)findViewById(R.id.category_list_view));
         list.setAdapter(categoryArrayAdapter);
 
@@ -54,6 +64,15 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
                 startActivity(intent);
             }
         });
+
+        ImageButton imageButton = (ImageButton)findViewById(R.id.graphButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toGraph(v);
+            }
+        });
+
     }
 
     @Override

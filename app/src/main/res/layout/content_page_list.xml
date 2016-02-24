@@ -8,27 +8,13 @@
     tools:layout="@layout/fragment_page_list"
     >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <TextView
-            android:layout_below="@id/spacer"
-            android:id="@+id/in_progress_text"
+    <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/in_progress"
-            android:layout_marginTop="10sp"
-            />
-
-        <ListView
-            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_below="@id/in_progress_text"
             android:id="@+id/page_list_view"
-            ></ListView>
-    </RelativeLayout>
+            android:background="@drawable/list_background"
+        />
+
 
     <FrameLayout
         android:layout_width="match_parent"

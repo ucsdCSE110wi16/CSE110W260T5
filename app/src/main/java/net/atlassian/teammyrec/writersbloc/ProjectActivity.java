@@ -32,12 +32,6 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
         Toolbar toolbar = (Toolbar) findViewById(R.id.project_toolbar);
         setSupportActionBar(toolbar);
 
-
-        String toastStr = this.getIntent().getStringExtra(INTENT_EXTRA_USERNAME) +
-                            " successfully logged in with password " +
-                            this.getIntent().getStringExtra(INTENT_EXTRA_PASSWORD);
-        Toast.makeText(this, toastStr,Toast.LENGTH_LONG).show();
-
         ListView list = (ListView)findViewById(R.id.projects_list_view);
         String[] strings = getFilesDir().list();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,strings);

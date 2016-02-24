@@ -10,7 +10,7 @@ import android.widget.TextView;
 /**
  * Created by williamchiu on 2/9/16.
  */
-public class TextViewAdapter extends BaseAdapter {
+/*public class TextViewAdapter extends BaseAdapter {
     private Context context;
     private final String[] textViewValues;
 
@@ -53,3 +53,4 @@ public class TextViewAdapter extends BaseAdapter {
         return 0;
     }
 }
+*/
