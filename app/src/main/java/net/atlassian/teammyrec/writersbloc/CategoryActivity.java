@@ -116,9 +116,10 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
     }
 
     public void toGraph(View v) {
-        Intent intent = new Intent(this, GraphActivity.class);
+        Intent intent = new Intent(this, GridActivity.class);
         this.startActivity(intent);
     }
+
 
 
     @Override
