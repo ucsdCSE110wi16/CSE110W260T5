@@ -83,7 +83,7 @@ public class PageActivity extends AppCompatActivity {
         }
         int index = 0;
         for(Pair<Integer, String> p : phrases) {
-            ss.setSpan(spans.get(index),p.first,p.first+2,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE );
+            ss.setSpan(spans.get(index),p.first,p.first+p.second.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE );
             index++;
         }
 
