@@ -75,7 +75,7 @@ public class GridCustomView extends View {
         super.onTouchEvent(e);
         switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                dostuff = true;
+                dostuff = !dostuff;
 
                 invalidate();
                 if (listen != null) {

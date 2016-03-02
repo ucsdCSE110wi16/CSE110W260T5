@@ -1,5 +1,6 @@
 package net.atlassian.teammyrec.writersbloc;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,8 +18,8 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
 
 
     private GridLayout g;
-    private final int colC = 4;
-    private final int maxSize = 80;
+    private final int colC = 5;
+    private final int maxSize = 100;
     private final int rowC = 20 ;
     private GridCustomView[] pV;//paininmyassView
 
@@ -104,9 +105,13 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
     @Override
     public void OnToggled(GridCustomView view, boolean stuff)
     {
-        Toast.makeText(GridActivity.this, "I did some stuff", Toast.LENGTH_SHORT).show();
+        toGridGraph(view);
     }
-
+    public void toGridGraph(View v) {
+        Intent intent = new Intent(this, GraphActivity.class);
+        this.startActivity(intent);
+    }
+    /*
     private String[] sortbyA(String [] i) {
         String[] b = new String[i.length];
         for (int y = 0; y < i.length; y++)
@@ -118,6 +123,6 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
             }
         }
         return i;
-    }
+    }*/
 
 }
