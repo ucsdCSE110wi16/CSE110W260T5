@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
-public class GridActivity extends AppCompatActivity //implements View.OnClickListener
+public class GridActivity extends AppCompatActivity implements GridCustomView.OnToggledListener
+//implements View.OnClickListener
 {
 
 
@@ -48,7 +50,7 @@ public class GridActivity extends AppCompatActivity //implements View.OnClickLis
             for (int x = 0; x < colC; x++) {
 
                 GridCustomView tempView = new GridCustomView(this, x, y, t[x + y * colC]);
-                //tempView.setOnClickListener(this);
+                tempView.setOnToggledListener(this);
 
                 pV[x + y * colC] = tempView;
 
@@ -68,10 +70,8 @@ public class GridActivity extends AppCompatActivity //implements View.OnClickLis
                 int w = pWidth / colC;
                 int h = pHeight / rowC;
 
-                for (int y = 0; y < rowC; y++)
-                {
-                    for (int x = 0; x < colC; x++)
-                    {
+                for (int y = 0; y < rowC; y++) {
+                    for (int x = 0; x < colC; x++) {
 
                         GridLayout.LayoutParams gP =
                                 (GridLayout.LayoutParams) pV[x + y * colC].getLayoutParams();
@@ -100,13 +100,13 @@ public class GridActivity extends AppCompatActivity //implements View.OnClickLis
 
         }*/
     }
-    /*
-    @Override
-    public void OnClick(View view)
-    {
 
+    @Override
+    public void OnToggled(GridCustomView view, boolean stuff)
+    {
+        Toast.makeText(GridActivity.this, "I did some stuff", Toast.LENGTH_SHORT).show();
     }
-    */
+
     private String[] sortbyA(String [] i) {
         String[] b = new String[i.length];
         for (int y = 0; y < i.length; y++)
