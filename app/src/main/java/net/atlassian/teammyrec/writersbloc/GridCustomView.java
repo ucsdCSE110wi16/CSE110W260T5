@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 /**
@@ -26,6 +27,15 @@ public class GridCustomView extends View {
     private int nColor = Color.BLACK;
     private float nD = 50;
 
+    private OnToggledListener listen;
+    private boolean dostuff;
+
+
+    public interface OnToggledListener
+    {
+        void OnToggled(GridCustomView view, boolean stuff);
+    }
+
     public GridCustomView(Context context, int x, int y, String name) {
         super(context);
         XP = x;
@@ -34,6 +44,7 @@ public class GridCustomView extends View {
         setName(name);
         setnD(30);
         setColor(Color.BLACK);
+        dostuff = false;
         init();
     }
 
@@ -57,12 +68,55 @@ public class GridCustomView extends View {
 
     private void init() {
     }
+    private boolean clicked;
+    @Override
+    public boolean onTouchEvent(MotionEvent e)
+    {
+        super.onTouchEvent(e);
+        switch (e.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                dostuff = !dostuff;
+
+                invalidate();
+                if (listen != null) {
+                    listen.OnToggled(this, dostuff);
+                }
+                clicked = true;
+                return true;
+            case MotionEvent.ACTION_UP:
+                if (clicked) {
+                    clicked = false;
+                    performClick();
+                    return true;
+                }
+        }
+        return false;
+
+    }
+
+    @Override
+    public boolean performClick()
+    {
+        super.performClick();
+        return true ;
+    }
+
+    public void setOnToggledListener( OnToggledListener liste)
+    {
+        listen = liste;
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawColor(0x3B5998);
-
+        if( dostuff )
+        {
+            canvas.drawColor(Color.BLUE);
+        }
+        else
+        {
+            canvas.drawColor(Color.YELLOW);
+        }
 
         int paddingLeft = getPaddingLeft();
         int paddingTop = getPaddingTop();
