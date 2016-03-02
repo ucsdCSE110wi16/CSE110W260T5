@@ -42,6 +42,7 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
                 String projectName = ((AppCompatTextView)view).getText().toString();
                 Intent intent = new Intent(getApplicationContext(), CategoryActivity.class);
                 intent.putExtra(CategoryActivity.INTENT_EXTRA_PROJECT_PATH, getFilesDir()+"/"+projectName);
+                intent.putExtra(CategoryActivity.INTENT_EXTRA_PROJECT_NAME, projectName);
                 startActivity(intent);
             }
         });

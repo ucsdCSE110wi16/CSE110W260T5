@@ -1,4 +1,6 @@
-import java.util.*; 
+package net.atlassian.teammyrec.writersbloc;
+import java.util.*;
+import android.util.*;
 
 public class PhraseLinker { 
 
@@ -6,9 +8,9 @@ public class PhraseLinker {
 	 * findPhrases()
 	 * Description: Finds all of the keyphrases within a body of text. 
 	 */ 
-	public static HashMap<Integer, String> findPhrases(String body, PriorityQueue<String> keyPhrases) { 
-
-		HashMap<Integer, String> links = new HashMap<Integer, String>(); 
+	public static PriorityQueue< Pair<Integer, String> > findPhrases(String body, PriorityQueue<String> keyPhrases) {
+        PairComparator pc = new PairComparator();
+	    PriorityQueue< Pair<Integer, String> > links = new PriorityQueue< Pair<Integer, String> >(10, pc);
 		boolean[] hasBeenLinked = new boolean[body.length()];
 
 		// Valid delimiters that can be to the left or right of the keyphrase
@@ -24,7 +26,9 @@ public class PhraseLinker {
 			if(localIndex != -1) {
 				String newBody = body; 
 				
-				do { 
+				do {
+                    System.out.println("BEG OF LOOP: globalIndex = " + globalIndex);
+                    System.out.println(phrase + " has been found at index " + globalIndex);
 					String beforeDelim;
 					String afterDelim;
 
@@ -48,12 +52,14 @@ public class PhraseLinker {
 							addToLinks = false; 
 							break; 
 						}
-					}type
+					}
+
+                    if(!addToLinks) System.out.println("We're not adding " + phrase + " to links this time.");
 
 					// Check that they're valid delimiters - this indicates the token is an intended link 
 					if(delimiters.contains(beforeDelim) && delimiters.contains(afterDelim)) { 
-						if(addToLinks) { 
-							links.put(new Integer(globalIndex), phrase);
+						if(addToLinks) {
+                            links.add(new Pair(new Integer(globalIndex), phrase));
 
 							// Mark entire phrase in body as part of a link
 							for(int i = globalIndex; i < globalIndex + phrase.length(); i++) { 
@@ -61,11 +67,13 @@ public class PhraseLinker {
 							}
 						}
 					}
-					globalIndex = localIndex + phrase.length(); 
+					globalIndex = localIndex + phrase.length();
+                    System.out.println("END OF LOOP: localIndex = " + localIndex);
 					newBody = newBody.substring(localIndex + phrase.length());
+                    System.out.println("newBody: " + newBody);
 					localIndex = newBody.toLowerCase().indexOf(phrase.toLowerCase());
-					globalIndex += localIndex; 
-
+					globalIndex += localIndex;
+                    System.out.println("END OF LOOP: globalIndex = " + globalIndex);
 				} while(localIndex != -1);
 			}
 		}
@@ -83,6 +91,22 @@ class StringLengthComparator implements Comparator<String>
     {
     	if(x.length() == y.length()) return 0;
      	return (x.length() > y.length()? -1 : 1);
+    }
+}
+
+class PairComparator implements Comparator< Pair<Integer, String> >
+{
+    @Override
+    public int compare(Pair<Integer, String> x, Pair<Integer, String> y)
+    {
+
+        if(x.first < y.first) {
+            return 1;
+        } else if(x.first > y.first) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }
 

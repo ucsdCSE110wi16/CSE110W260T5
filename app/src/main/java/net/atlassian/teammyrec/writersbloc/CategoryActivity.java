@@ -26,6 +26,7 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
 
     public static final String INTENT_EXTRA_PROJECT_PATH = "INTENT_EXTRA_FOLDERPATH";
     private static final String LOG_ID = "CategoryActivity.net.atlassian.teammyrec.writersbloc";
+    public static final String INTENT_EXTRA_PROJECT_NAME = "";
 
     private Project mCurrentProject;
     private ArrayList<Category> mCategories;
@@ -61,6 +62,7 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), PageListActivity.class);
                 intent.putExtra(PageListActivity.INTENT_EXTRA_PROJECT_ABSOLUTE_DIR, mCategories.get(position).getAbsolutePath());
+                intent.putExtra(PageListActivity.INTENT_EXTRA_PROJECT_NAME, getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
                 startActivity(intent);
             }
         });

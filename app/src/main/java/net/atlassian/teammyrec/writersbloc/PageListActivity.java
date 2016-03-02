@@ -30,6 +30,7 @@ public class PageListActivity extends AppCompatActivity {
 
     public static final String INTENT_EXTRA_PROJECT_ABSOLUTE_DIR = "Absolute_Directory";
     private static final String LOG_ID = "PageListActivity.net.atlassian.teammyrec.writersbloc";
+    public static final String INTENT_EXTRA_PROJECT_NAME = "";
 
     private Category mCategory;
     private ArrayList<Page> mPages;
@@ -57,6 +58,8 @@ public class PageListActivity extends AppCompatActivity {
                 String pageName = mPages.get(position).getAbsolutePath();
                 Intent intent = new Intent(getApplicationContext(), PageActivity.class);
                 intent.putExtra(PageActivity.INTENT_PAGE_NAME, pageName);
+                String projName = getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME);
+                intent.putExtra(PageActivity.INTENT_PROJECT_NAME, projName);
                 startActivity(intent);
             }
         });
