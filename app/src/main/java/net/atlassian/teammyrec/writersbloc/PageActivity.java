@@ -1,5 +1,6 @@
 package net.atlassian.teammyrec.writersbloc;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -61,28 +62,37 @@ public class PageActivity extends AppCompatActivity {
         eText.setText(mPageInformation.getText());
         eText.setSelection(eText.length());
 
-        PriorityQueue<String> pages = mProject.getAllPages();
+        PriorityQueue<Page> pages = mProject.getAllPages();
 
-        PriorityQueue< Pair<Integer, String> > phrases =
+        PriorityQueue< Pair<Integer, Page> > phrases =
                 PhraseLinker.findPhrases(mPageInformation.getText(), pages);
 
         System.out.println("Number of phrases: " + phrases.size());
-
+        String pageNameTmp;
         //Link the words in the text
         SpannableString ss = new SpannableString(eText.getText());
         ArrayList<ClickableSpan> spans = new ArrayList<>(10);
-        for(Pair<Integer, String> p : phrases) {
+        for(Pair<Integer, Page> p : phrases) {
+            final String pageNameTmp3 = p.second.getAbsolutePath();
+            final String prjName = getIntent().getStringExtra(INTENT_PROJECT_NAME);
 
             spans.add(new ClickableSpan() {
                 @Override
                 public void onClick(View widget) {
+
                     //do something
                     System.out.println("Clicked a link");
+                    System.out.println("Page name clicked: " + pageNameTmp3);
+                    Intent intent = new Intent(getApplicationContext(), PageActivity.class);
+                    intent.putExtra(PageActivity.INTENT_PAGE_NAME, pageNameTmp3);
+                    intent.putExtra(PageActivity.INTENT_PROJECT_NAME, prjName);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getBaseContext().startActivity(intent);
                 }
             });
         }
         int index = 0;
-        for(Pair<Integer, String> p : phrases) {
+        for(Pair<Integer, Page> p : phrases) {
             ss.setSpan(spans.get(index),p.first,p.first+p.second.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE );
             index++;
         }

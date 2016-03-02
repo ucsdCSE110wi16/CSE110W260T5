@@ -76,6 +76,7 @@ public class PageListActivity extends AppCompatActivity {
     public void createPage(View v){
         try{
             Page page = mCategory.addPage(((EditText)findViewById(R.id.addPageName)).getText().toString());
+            ((EditText) findViewById(R.id.addPageName)).setText("");
             PageInformation info = page.getPageInformation();
             page.writePageInformation(info);
             mPages.add(page);

@@ -1,6 +1,7 @@
 package net.atlassian.teammyrec.writersbloc;
 import java.util.*;
 import android.util.*;
+import net.atlassian.teammyrec.writersbloc.Models.DataModels.Page;
 
 public class PhraseLinker { 
 
@@ -8,9 +9,12 @@ public class PhraseLinker {
 	 * findPhrases()
 	 * Description: Finds all of the keyphrases within a body of text. 
 	 */ 
-	public static PriorityQueue< Pair<Integer, String> > findPhrases(String body, PriorityQueue<String> keyPhrases) {
+	public static PriorityQueue< Pair<Integer, Page> > findPhrases(String body, PriorityQueue<Page> keyPhrases) {
         PairComparator pc = new PairComparator();
-	    PriorityQueue< Pair<Integer, String> > links = new PriorityQueue< Pair<Integer, String> >(10, pc);
+	    PriorityQueue< Pair<Integer, Page> > links = new PriorityQueue< Pair<Integer, Page> >(10, pc);
+        if(body == null){
+            return links;
+        }
 		boolean[] hasBeenLinked = new boolean[body.length()];
 
 		// Valid delimiters that can be to the left or right of the keyphrase
@@ -19,7 +23,8 @@ public class PhraseLinker {
 		
 		
 		// Check each keyphrase to see if it's part of the body
-		for(String phrase : keyPhrases) { 
+		for(Page page : keyPhrases) {
+			String phrase = page.toString();
 			boolean addToLinks = true; 
 			int localIndex = body.toLowerCase().indexOf(phrase.toLowerCase());
 			int globalIndex = localIndex; 
@@ -27,6 +32,7 @@ public class PhraseLinker {
 				String newBody = body; 
 				
 				do {
+                    addToLinks = true;
                     System.out.println("BEG OF LOOP: globalIndex = " + globalIndex);
                     System.out.println(phrase + " has been found at index " + globalIndex);
 					String beforeDelim;
@@ -48,9 +54,11 @@ public class PhraseLinker {
 
 					// If any part of the phrase is part of another link, don't add 
 					for(int i = globalIndex; i < globalIndex + phrase.length(); i++) { 
-						if(hasBeenLinked[i]) { 
+						if(hasBeenLinked[i]) {
+                            System.out.println("Index " + i + " has already been linked.");
 							addToLinks = false; 
-							break; 
+							//break;
+							continue;
 						}
 					}
 
@@ -59,7 +67,7 @@ public class PhraseLinker {
 					// Check that they're valid delimiters - this indicates the token is an intended link 
 					if(delimiters.contains(beforeDelim) && delimiters.contains(afterDelim)) { 
 						if(addToLinks) {
-                            links.add(new Pair(new Integer(globalIndex), phrase));
+                            links.add(new Pair(new Integer(globalIndex), page));
 
 							// Mark entire phrase in body as part of a link
 							for(int i = globalIndex; i < globalIndex + phrase.length(); i++) { 
@@ -94,10 +102,10 @@ class StringLengthComparator implements Comparator<String>
     }
 }
 
-class PairComparator implements Comparator< Pair<Integer, String> >
+class PairComparator implements Comparator< Pair<Integer, Page> >
 {
     @Override
-    public int compare(Pair<Integer, String> x, Pair<Integer, String> y)
+    public int compare(Pair<Integer, Page> x, Pair<Integer, Page> y)
     {
 
         if(x.first < y.first) {

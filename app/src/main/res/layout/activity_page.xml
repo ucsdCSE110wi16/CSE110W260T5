@@ -9,14 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
-        android:id="@+id/view">
+        android:id="@+id/view"
+        >
 
     </android.support.design.widget.AppBarLayout>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
+        android:inputType="textMultiLine|textNoSuggestions"
         android:ems="10"
         android:id="@+id/editText"
         android:layout_alignParentRight="true"

@@ -50,13 +50,16 @@ public class Project {
         }
         return categories;
     }
-    public PriorityQueue<String> getAllPages() {
-        Comparator<String> comparator = new StringLengthComparator();
-        PriorityQueue<String> queue = new PriorityQueue<String>(10, comparator);
+    public PriorityQueue<Page> getAllPages() {
+        Comparator<Page> comparator = new PageComparator();
+        PriorityQueue<Page> queue = new PriorityQueue<Page>(10, comparator);
         ArrayList<Category> categories = new ArrayList<Category>();
         try {
-            for (File f : projectFile.listFiles())
-                categories.add(new Category(f.getAbsolutePath()));
+            for(Category category: getCategories()){
+                for(Page page: category.getPages()){
+                    queue.add(page);
+                }
+            }
         } catch (Exception e){
             Logger.getLogger("Project.DataModel").log(Level.WARNING, "Error detected when creating "
                     +"project from project folder: " + e);
@@ -68,9 +71,7 @@ public class Project {
             ArrayList<Page> currPages = category.getPages();
             for(Page page : currPages) {
                 try {
-                    System.out.println(page.getPageInformation().getTitle());
-                    String[] path = page.getAbsolutePath().split("/");
-                    queue.add(path[path.length - 1]);
+
                 } catch (Exception e) {
                 }
             }
@@ -80,13 +81,14 @@ public class Project {
     }
 
     // Bottom of Project.java
-    class StringLengthComparator implements Comparator<String>
+    class PageComparator implements Comparator<Page>
     {
         @Override
-        public int compare(String x, String y)
+        public int compare(Page x, Page y)
         {
-            if(x.length() == y.length()) return 0;
-            return (x.length() > y.length()? -1 : 1);
+
+            if(x.toString().length() == y.toString().length()) return 0;
+            return (x.toString().length() > y.toString().length()? -1 : 1);
         }
     }
 
