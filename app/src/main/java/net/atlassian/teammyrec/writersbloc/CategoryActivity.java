@@ -1,6 +1,7 @@
 package net.atlassian.teammyrec.writersbloc;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,9 @@ import java.util.logging.Logger;
 
 public class CategoryActivity extends AppCompatActivity implements AddCategoryFragment.OnFragmentInteractionListener{
 
+
+
+    private static boolean showOverlay = false;
     public static final String INTENT_EXTRA_PROJECT_PATH = "INTENT_EXTRA_FOLDERPATH";
     private static final String LOG_ID = "CategoryActivity.net.atlassian.teammyrec.writersbloc";
     public static final String INTENT_EXTRA_PROJECT_NAME = "";
@@ -53,9 +57,9 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
             Logger.getLogger(LOG_ID, "Unhandled IO Exception when opening categories");
         }
 
-        ArrayAdapter<Category> categoryArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mCategories);
         ListView list = ((ListView)findViewById(R.id.category_list_view));
-        list.setAdapter(categoryArrayAdapter);
+
+        updateListAdapter();
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -66,6 +70,9 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
                 startActivity(intent);
             }
         });
+
+        if(showOverlay)
+            findViewById(R.id.frameFragmentLayout).setVisibility(View.VISIBLE);
 
         ImageButton imageButton = (ImageButton)findViewById(R.id.graphButton);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -78,9 +85,14 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_add_item, menu);
+        inflater.inflate(R.menu.menu_add_folder, menu);
         return true;
     }
 
@@ -93,11 +105,22 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         }
 
         ((EditText) findViewById(R.id.addProjectName)).setText("");
+        showOverlay = false;
         findViewById(R.id.frameFragmentLayout).setVisibility(View.INVISIBLE);
 
-        ArrayAdapter<Category> categoryArrayAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_list_item_1, mCategories);
-        ((ListView)findViewById(R.id.category_list_view)).setAdapter(categoryArrayAdapter);
+        updateListAdapter();
 
+    }
+
+    private void updateListAdapter(){
+
+        ArrayList<CategoryListAdapter.CategoryListViewModel> models = new ArrayList<>();
+        for(Category category: mCategories){
+            models.add(new CategoryListAdapter.CategoryListViewModel(category.toString()));
+        }
+
+        CategoryListAdapter categoryArrayAdapter = new CategoryListAdapter(this, R.layout.category_list_item, models);
+        ((ListView)findViewById(R.id.category_list_view)).setAdapter(categoryArrayAdapter);
 
     }
 
@@ -106,6 +129,7 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.CategoryMenuTitle:
+                showOverlay = true;
                 findViewById(R.id.frameFragmentLayout).setVisibility(View.VISIBLE);
                 return true;
             default:
@@ -114,6 +138,8 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
     }
 
     public void cancelCreateCategory(View v){
+        ((EditText) findViewById(R.id.addProjectName)).setText("");
+        showOverlay = false;
         findViewById(R.id.frameFragmentLayout).setVisibility(View.INVISIBLE);
     }
 
@@ -121,8 +147,6 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         Intent intent = new Intent(this, GridActivity.class);
         this.startActivity(intent);
     }
-
-
 
     @Override
     public void onFragmentInteraction(Uri uri) {

@@ -16,7 +16,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class ProjectActivity extends AppCompatActivity implements AddProjectFragment.OnFragmentInteractionListener {
 
@@ -33,15 +36,18 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
         setSupportActionBar(toolbar);
 
         ListView list = (ListView)findViewById(R.id.projects_list_view);
-        String[] strings = getFilesDir().list();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,strings);
+        ArrayList<ProjectListAdapter.ProjectListViewModel> models = new ArrayList<>();
+        for(String s: getFilesDir().list()){
+            models.add(new ProjectListAdapter.ProjectListViewModel(s));
+        }
+        ProjectListAdapter adapter = new ProjectListAdapter(this, R.layout.project_list_item,models);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String projectName = ((AppCompatTextView)view).getText().toString();
+                String projectName = ((TextView)view.findViewById(R.id.listItemTextID)).getText().toString();
                 Intent intent = new Intent(getApplicationContext(), CategoryActivity.class);
-                intent.putExtra(CategoryActivity.INTENT_EXTRA_PROJECT_PATH, getFilesDir()+"/"+projectName);
+                intent.putExtra(CategoryActivity.INTENT_EXTRA_PROJECT_PATH, getFilesDir() + "/" + projectName);
                 intent.putExtra(CategoryActivity.INTENT_EXTRA_PROJECT_NAME, projectName);
                 startActivity(intent);
             }
@@ -51,7 +57,7 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_add_item, menu);
+        inflater.inflate(R.menu.menu_add_folder, menu);
         return true;
     }
 
@@ -60,8 +66,13 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
         fragment.createProject(v);
 
         ListView list = (ListView)findViewById(R.id.projects_list_view);
-        String[] strings = getFilesDir().list();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,strings);
+
+        ArrayList<ProjectListAdapter.ProjectListViewModel> models = new ArrayList<>();
+        for(String s: getFilesDir().list()){
+            models.add(new ProjectListAdapter.ProjectListViewModel(s));
+        }
+
+        ProjectListAdapter adapter = new ProjectListAdapter(this, R.layout.project_list_item, models);
         list.setAdapter(adapter);
 
         EditText edit = ((EditText)fragment.getActivity().findViewById(R.id.addProjectName));

@@ -17,14 +17,17 @@
         android:padding="10sp"
         >
         <TextView
+            android:textColor="@color/menuColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="40sp"
+            android:paddingLeft="20sp"
             android:paddingRight="40sp"
             android:text="Category:"
-            android:textSize="25sp"
+            android:textSize="30sp"
             />
+
         <EditText
+            android:textColorHint="@color/menuColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name:"
@@ -32,6 +35,7 @@
             android:id="@+id/addProjectName"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"
+            android:textSize="25sp"
             />
 
         <LinearLayout

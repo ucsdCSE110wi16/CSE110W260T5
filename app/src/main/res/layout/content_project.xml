@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/spacer"
         android:id="@+id/projects_list_view"
-        android:background="@drawable/list_background"
+        android:background="@color/listBackgroundColor"
         />
 
     <FrameLayout
