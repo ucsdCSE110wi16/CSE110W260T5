@@ -57,8 +57,8 @@ public class PhraseLinker {
                     for(int i = globalIndex; i < globalIndex + phrase.length(); i++) {
                         if(hasBeenLinked[i]) {
                             System.out.println("Index " + i + " has already been linked.");
-                            //addToLinks = false;
-                            //break;
+                            addToLinks = false;
+                            break;
                         }
                     }
 
@@ -71,7 +71,7 @@ public class PhraseLinker {
 
                             // Mark entire phrase in body as part of a link
                             for(int i = globalIndex; i < globalIndex + phrase.length(); i++) {
-                                //hasBeenLinked[i] = true;
+                                hasBeenLinked[i] = true;
                             }
                         }
                     }
