@@ -9,7 +9,7 @@ public class PhraseLinker {
      * findPhrases()
      * Description: Finds all of the keyphrases within a body of text.
      */
-    public static PriorityQueue< Pair<Integer, Page> > findPhrases(String body, PriorityQueue<Page> keyPhrases) {
+    public static PriorityQueue< Pair<Integer, Page> > findPhrases(String body, PriorityQueue<Page> keyPhrases, String currPage) {
         PairComparator pc = new PairComparator();
         PriorityQueue< Pair<Integer, Page> > links = new PriorityQueue< Pair<Integer, Page> >(10, pc);
         if(body == null){
@@ -25,6 +25,7 @@ public class PhraseLinker {
         // Check each keyphrase to see if it's part of the body
         for(Page page : keyPhrases) {
             String phrase = page.toString();
+            if(phrase.equals(currPage)){continue;}
             boolean addToLinks = true;
             int localIndex = body.toLowerCase().indexOf(phrase.toLowerCase());
             int globalIndex = localIndex;

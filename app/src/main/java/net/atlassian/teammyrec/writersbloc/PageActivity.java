@@ -65,7 +65,7 @@ public class PageActivity extends AppCompatActivity {
         PriorityQueue<Page> pages = mProject.getAllPages();
 
         PriorityQueue< Pair<Integer, Page> > phrases =
-                PhraseLinker.findPhrases(mPageInformation.getText(), pages);
+                PhraseLinker.findPhrases(mPageInformation.getText(), pages,mPage.toString());
 
         System.out.println("Number of phrases: " + phrases.size());
         String pageNameTmp;
