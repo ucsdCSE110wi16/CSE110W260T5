@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -33,7 +34,7 @@ public class GridCustomView extends View {
 
     public interface OnToggledListener
     {
-        void OnToggled(GridCustomView view, boolean stuff);
+        void OnToggled(GridCustomView view, boolean stuff , String pageName);
     }
 
     public GridCustomView(Context context, int x, int y, String name) {
@@ -79,7 +80,7 @@ public class GridCustomView extends View {
 
                 invalidate();
                 if (listen != null) {
-                    listen.OnToggled(this, dostuff);
+                    listen.OnToggled(this, dostuff , n);
                 }
                 clicked = true;
                 return true;
@@ -109,13 +110,15 @@ public class GridCustomView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if( dostuff )
+        if( n.equals("") )
         {
-            canvas.drawColor(Color.BLUE);
+
+            //canvas.drawColor(ContextCompat.getColor(this.getContext(), R.color.listBackgroundColor));
         }
         else
         {
-            canvas.drawColor(Color.YELLOW);
+            //canvas.drawColor(Color.BLUE);
+            canvas.drawColor(ContextCompat.getColor(this.getContext(), R.color.GridButton));
         }
 
         int paddingLeft = getPaddingLeft();

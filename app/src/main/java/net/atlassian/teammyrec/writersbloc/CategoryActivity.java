@@ -145,6 +145,7 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
 
     public void toGraph(View v) {
         Intent intent = new Intent(this, GridActivity.class);
+        intent.putExtra(GridActivity.PROJECT_INTENT,mCurrentProject.toString());
         this.startActivity(intent);
     }
 

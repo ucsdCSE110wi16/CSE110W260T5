@@ -92,4 +92,8 @@ public class Project {
         }
     }
 
+    public String toString(){
+        return projectFile.getName();
+    }
+
 }
