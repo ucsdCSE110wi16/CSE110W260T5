@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.parse.Parse;
+
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
 
 import java.util.logging.Level;
@@ -99,7 +101,19 @@ public class AddProjectFragment extends Fragment {
     public void createProject(View v) {
         EditText projectName = (EditText) this.getActivity().findViewById(R.id.addProjectName);
         try {
-            Project project = new Project(this.getActivity(), projectName.getText().toString());
+            Project project = new Project(projectName.getText().toString(), ParseController.getCurrentUser());
+            ParseController.createProject(projectName.getText().toString(),
+                    ParseController.getCurrentUser());
+            ParseController.createCategory("Character", projectName.getText().toString(),
+                    ParseController.getCurrentUser());
+            ParseController.createCategory("Location", projectName.getText().toString(),
+                    ParseController.getCurrentUser());
+            ParseController.createCategory("Object", projectName.getText().toString(),
+                    ParseController.getCurrentUser());
+            ParseController.createCategory("Other", projectName.getText().toString(),
+                    ParseController.getCurrentUser());
+            ParseController.createCategory("Event", projectName.getText().toString(),
+                    ParseController.getCurrentUser());
         } catch (Exception e){
             Logger.getLogger("Hello World").log(Level.SEVERE, "Failed to create project" + e);
         }

@@ -2,6 +2,10 @@ package net.atlassian.teammyrec.writersbloc.Models.DataModels;
 
 import android.util.Log;
 
+import com.parse.Parse;
+
+import net.atlassian.teammyrec.writersbloc.ParseController;
+
 import java.io.File;
 import java.lang.Exception;
 import java.util.ArrayList;
@@ -19,74 +23,45 @@ public class Category {
     private static final String PAGE_EXCEPTION = "Encountered an exception while creating a page:";
     private static final String CREATE_EXCEPTION = "Encountered an exception while creating category: ";
 
-    private final File categoryFile;
+    private String categoryName;
+    private String projectName;
+    private String owner;
 
-    public Category(String parentFolder, String categoryName) throws Exception{
-        this(parentFolder + "/" + categoryName);
-        PROJECT_LOGGER.log(Level.INFO, LOG_NEW_CATEGORY + categoryName );
+
+
+    public Category(String categoryName, String owner, String projectName) {
+        this.categoryName = categoryName;
+        this.owner = owner;
+        this.projectName = projectName;
     }
 
-
-    public Category(String absoluteName) throws Exception{
-        // Create file
-        categoryFile = new File(absoluteName);
-
-        if(!categoryFile.exists())
-        {
-            if(!categoryFile.mkdir()) {
-                Exception e = new Exception("Unhandled IO Exception");
-                PROJECT_LOGGER.log(Level.SEVERE, CREATE_EXCEPTION + e);
-                throw e;
-            }
-        }
-    }
 
     public Project getProject(){
-        try{
-            return new Project(categoryFile.getParent());
-        } catch (Exception e){
-            return null;
-        }
+         return new Project(this.projectName, this.owner);
     }
 
-    public File[] getFiles(){
-        return categoryFile.listFiles();
-    }
-
-    public String getAbsolutePath(){
-        return categoryFile.getAbsolutePath();
-    }
 
     public Page addPage(String pageName){
-        try {
-            return new Page(categoryFile.getAbsolutePath(), pageName);
-        } catch (Exception e){
-            PROJECT_LOGGER.log(Level.SEVERE, PAGE_EXCEPTION + e);
-            return null;
-        }
+        Page p = new Page(pageName, this.categoryName, this.projectName, this.owner);
+        ParseController.createPage(pageName, categoryName, projectName, owner);
+        return p;
+
     }
 
     public void removePage(String page){
-        File file = new File(categoryFile.getAbsolutePath() + "/" + page);
-        if(file.exists()){
-            file.delete();
-        }
+
     }
 
     public ArrayList<Page> getPages(){
-        ArrayList<Page> pages = new ArrayList<Page>();
-        try {
-            for (File f : categoryFile.listFiles()) {
-                pages.add(new Page(f.getAbsolutePath()));
-            }
-        } catch (Exception e){
-            Logger.getAnonymousLogger().log(Level.WARNING, "Error handling page creation");
-        }
-        return pages;
+        return ParseController.getAllPagesForCategory(this.categoryName, this.projectName);
+    }
+
+    public void delete(){
+        ParseController.deleteCategory(categoryName, projectName, owner);
     }
 
     public String toString(){
-        return categoryFile.getName();
+        return this.categoryName;
     }
 
 }

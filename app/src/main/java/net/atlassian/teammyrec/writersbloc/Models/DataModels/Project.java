@@ -2,93 +2,81 @@ package net.atlassian.teammyrec.writersbloc.Models.DataModels;
 
 import android.content.Context;
 
+import com.parse.Parse;
+
+import net.atlassian.teammyrec.writersbloc.ParseController;
+
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.*;
-
+import android.util.*;
+import net.atlassian.teammyrec.writersbloc.Models.DataModels.*;
 /**
  * Created by jay on 2/10/16.
  */
 public class Project {
 
-    private File projectFile;
-    public Project(String absoluteProjectName) throws Exception{
-        projectFile = new File(absoluteProjectName);
+    private String projectName;
+    private String owner;
 
-        if(!projectFile.exists())
-        {
-            if(!projectFile.mkdir()){
-                throw new Exception("Unexpected IO Error");
-            }
-        }
+    public Project(String projectName, String owner) {
+        this.projectName = projectName;
+        this.owner = owner;
+
     }
 
-    public Project(Context context, String projectName) throws Exception{
-        this(context.getFilesDir().getAbsolutePath() + "/" + projectName);
+
+    public Category createCategory(String categoryName) {
+        Category c = new Category(categoryName, this.owner, this.projectName);
+        ParseController.createCategory(categoryName, projectName, owner);
+        return c;
+
     }
 
-    public Category createCategory(String categoryName) throws Exception{
-        return new Category(projectFile.getAbsolutePath(), categoryName);
-    }
+    public String toString() { return this.projectName; }
 
-    public void deleteCategory(String categoryName){
-        File category = new File(projectFile.getAbsolutePath() + "/" + categoryName);
-        category.delete();
-    }
 
     public ArrayList<Category> getCategories() {
-        ArrayList<Category> categories = new ArrayList<Category>();
-        try {
-            for (File f : projectFile.listFiles())
-                categories.add(new Category(f.getAbsolutePath()));
-        } catch (Exception e){
-            Logger.getLogger("Project.DataModel").log(Level.WARNING, "Error detected when creating "
-                    +"project from project folder: " + e);
-
-        }
-        return categories;
+       return ParseController.getAllCategoriesForProject(this.projectName);
     }
-    public PriorityQueue<Page> getAllPages() {
-        Comparator<Page> comparator = new PageComparator();
-        PriorityQueue<Page> queue = new PriorityQueue<Page>(10, comparator);
-        ArrayList<Category> categories = new ArrayList<Category>();
-        try {
-            for(Category category: getCategories()){
-                for(Page page: category.getPages()){
-                    queue.add(page);
-                }
+
+
+    public PriorityQueue< Pair<Category, Page> > getAllPages() {
+        Comparator< Pair<Category,Page> > comparator = new PageComparator();
+        PriorityQueue< Pair<Category, Page> > queue =
+                new PriorityQueue< Pair<Category, Page> >(10, comparator);
+
+        PageComparator pc = new PageComparator();
+        PriorityQueue< Pair<Category, Page> > allPages = new PriorityQueue< Pair<Category, Page> >(10, pc);
+        ArrayList<Category> categories = ParseController.getAllCategoriesForProject(this.projectName);
+        for(Category c : categories) {
+            ArrayList<Page> localPages = ParseController.getAllPagesForCategory(
+                    c.toString(), this.toString());
+            for(Page p : localPages) {
+                allPages.add(new Pair(c, p));
             }
-        } catch (Exception e){
-            Logger.getLogger("Project.DataModel").log(Level.WARNING, "Error detected when creating "
-                    +"project from project folder: " + e);
-
         }
+        return allPages;
+    }
 
-        for(Category category : categories) {
-            System.out.println(category.getAbsolutePath());
-            ArrayList<Page> currPages = category.getPages();
-            for(Page page : currPages) {
-                try {
 
-                } catch (Exception e) {
-                }
-            }
+    public void delete(){
+        ParseController.deleteProject(projectName, owner);
 
-        }
-        return queue;
     }
 
     // Bottom of Project.java
-    class PageComparator implements Comparator<Page>
+    class PageComparator implements Comparator<Pair<Category, Page>>
     {
         @Override
-        public int compare(Page x, Page y)
+        public int compare(Pair<Category, Page> x, Pair<Category, Page> y)
         {
 
-            if(x.toString().length() == y.toString().length()) return 0;
-            return (x.toString().length() > y.toString().length()? -1 : 1);
+            if(x.second.toString().length() == y.second.toString().length()) return 0;
+            return (x.second.toString().length() > y.second.toString().length()? -1 : 1);
         }
     }
 

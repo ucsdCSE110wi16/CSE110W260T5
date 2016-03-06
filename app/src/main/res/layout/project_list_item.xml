@@ -1,19 +1,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="70dp"
     tools:context="net.atlassian.teammyrec.writersbloc.ProjectListItemFragment"
     android:orientation="horizontal"
     android:id="@+id/listItemLayout"
+    android:background="@color/menuColor"
     >
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/list_item_height"
         android:id="@+id/listItemTextID"
         android:text="@string/action_settings"
+        android:textColor="#f0f0f0"
         android:textSize="30dp"
-        android:textColor="#0f0f0f"
+
         android:layout_weight="7"
         android:gravity="left|center_vertical"
         android:layout_marginLeft="40dp"
@@ -24,7 +26,7 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:src="@drawable/ic_navigate_next"
+        android:src="@drawable/ic_navigate_next_white"
         android:layout_gravity="right|center_vertical"
         />
 

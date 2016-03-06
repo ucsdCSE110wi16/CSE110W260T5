@@ -1,7 +1,8 @@
 package net.atlassian.teammyrec.writersbloc;
 import java.util.*;
 import android.util.*;
-import net.atlassian.teammyrec.writersbloc.Models.DataModels.Page;
+import net.atlassian.teammyrec.writersbloc.Models.DataModels.*;
+import android.util.*;
 
 public class PhraseLinker {
 
@@ -9,9 +10,9 @@ public class PhraseLinker {
      * findPhrases()
      * Description: Finds all of the keyphrases within a body of text.
      */
-    public static PriorityQueue< Pair<Integer, Page> > findPhrases(String body, PriorityQueue<Page> keyPhrases, String currPage) {
+    public static PriorityQueue< Pair<Pair<Integer, Page>, Category> > findPhrases(String body, PriorityQueue< Pair<Category, Page> > keyPhrases, String currPage) {
         PairComparator pc = new PairComparator();
-        PriorityQueue< Pair<Integer, Page> > links = new PriorityQueue< Pair<Integer, Page> >(10, pc);
+        PriorityQueue< Pair< Pair<Integer, Page>, Category> > links = new PriorityQueue< Pair<Pair<Integer, Page>, Category> >(10, pc);
         if(body == null){
             return links;
         }
@@ -23,8 +24,8 @@ public class PhraseLinker {
 
 
         // Check each keyphrase to see if it's part of the body
-        for(Page page : keyPhrases) {
-            String phrase = page.toString();
+        for(Pair p : keyPhrases) {
+            String phrase = p.second.toString();
             if(phrase.equals(currPage)){continue;}
             boolean addToLinks = true;
             int localIndex = body.toLowerCase().indexOf(phrase.toLowerCase());
@@ -67,7 +68,7 @@ public class PhraseLinker {
                     // Check that they're valid delimiters - this indicates the token is an intended link
                     if(delimiters.contains(beforeDelim) && delimiters.contains(afterDelim)) {
                         if(addToLinks) {
-                            links.add(new Pair(new Integer(globalIndex), page));
+                            links.add(new Pair(new Pair(new Integer(globalIndex), p.second), p.first));
 
                             // Mark entire phrase in body as part of a link
                             for(int i = globalIndex; i < globalIndex + phrase.length(); i++) {
@@ -101,15 +102,15 @@ class StringLengthComparator implements Comparator<String>
     }
 }
 
-class PairComparator implements Comparator< Pair<Integer, Page> >
+class PairComparator implements Comparator< Pair<Pair<Integer, Page>, Category> >
 {
     @Override
-    public int compare(Pair<Integer, Page> x, Pair<Integer, Page> y)
+    public int compare(Pair< Pair<Integer, Page>, Category> x, Pair< Pair<Integer, Page>, Category> y)
     {
 
-        if(x.first < y.first) {
+        if(x.first.first < y.first.first) {
             return 1;
-        } else if(x.first > y.first) {
+        } else if(x.first.first > y.first.first) {
             return -1;
         } else {
             return 0;
