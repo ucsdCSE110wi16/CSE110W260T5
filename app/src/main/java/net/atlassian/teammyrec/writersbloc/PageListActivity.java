@@ -102,7 +102,7 @@ public class PageListActivity extends AppCompatActivity {
             PageListAdapter adapter = new PageListAdapter(this, R.layout.page_list_item, mPages);
             ((ListView)findViewById(R.id.page_list_view)).setAdapter(adapter);
 
-            ((ListView)findViewById(R.id.page_list_delete_view)).setAdapter(new DeleteListAdapter<Page>(this,R.layout.project_trash_view_item, mPages));
+            ((ListView)findViewById(R.id.page_list_delete_view)).setAdapter(new DeleteListAdapter<Page>(this,R.layout.page_list_trash_item, mPages));
             findViewById(R.id.frameFragmentLayout).setVisibility(View.INVISIBLE);
         }catch (Exception e){
             Logger.getLogger(LOG_ID).log(Level.WARNING, "Invalid IO error when creating page: " + e);
