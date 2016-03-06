@@ -18,7 +18,7 @@ public class PageInformation {
 
     PageInformation(){
         title = null;
-        text = null;
+        text = "";
         links = null;
     }
 

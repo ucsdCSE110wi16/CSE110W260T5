@@ -19,7 +19,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.Parse;
+
 import java.util.ArrayList;
+import net.atlassian.teammyrec.writersbloc.Models.DataModels.*;
 
 public class ProjectActivity extends AppCompatActivity implements AddProjectFragment.OnFragmentInteractionListener {
 
@@ -41,17 +44,31 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
         Toolbar toolbar = (Toolbar) findViewById(R.id.project_toolbar);
         setSupportActionBar(toolbar);
 
+        ArrayList<Project> projects = ParseController.getAllProjects();
+        System.out.println(projects.size());
+        for(Project project : projects) {
+            ArrayList<Category> categories = ParseController.getAllCategoriesForProject(project.toString());
+            for(Category category : categories) {
+                System.out.println(category);
+                ArrayList<Page> pages = ParseController.getAllPagesForCategory(category.toString(), project.toString());
+                for(Page page : pages) {
+                    System.out.println("Page " + page.toString() + " is in category " + category + " and project " +
+                            project);
+                }
+            }
+        }
+
         ListView list = (ListView)findViewById(R.id.projects_list_view);
         ArrayList<ProjectListAdapter.ProjectListViewModel> models = new ArrayList<>();
-        for(String s: getFilesDir().list()){
-            models.add(new ProjectListAdapter.ProjectListViewModel(s));
+        for(Project p : ParseController.getAllProjects()){
+            models.add(new ProjectListAdapter.ProjectListViewModel(p.toString()));
         }
         ProjectListAdapter adapter = new ProjectListAdapter(this, R.layout.project_list_item,models);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String projectName = ((TextView)view.findViewById(R.id.listItemTextID)).getText().toString();
+                String projectName = ((TextView) view.findViewById(R.id.listItemTextID)).getText().toString();
                 Intent intent = new Intent(getApplicationContext(), CategoryActivity.class);
                 intent.putExtra(CategoryActivity.INTENT_EXTRA_PROJECT_PATH, getFilesDir() + "/" + projectName);
                 intent.putExtra(CategoryActivity.INTENT_EXTRA_PROJECT_NAME, projectName);
@@ -73,9 +90,10 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
 
         ListView list = (ListView)findViewById(R.id.projects_list_view);
 
+
         ArrayList<ProjectListAdapter.ProjectListViewModel> models = new ArrayList<>();
-        for(String s: getFilesDir().list()){
-            models.add(new ProjectListAdapter.ProjectListViewModel(s));
+        for(Project p: ParseController.getAllProjects()){
+            models.add(new ProjectListAdapter.ProjectListViewModel(p.toString()));
         }
 
         ProjectListAdapter adapter = new ProjectListAdapter(this, R.layout.project_list_item, models);
@@ -87,6 +105,7 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
 
         InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mgr.hideSoftInputFromWindow(edit.getWindowToken(), 0);
+
 
     }
 
@@ -103,15 +122,31 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
             case R.id.CategoryMenuTitle:
                 findViewById(R.id.frameFragmentLayout).setVisibility(View.VISIBLE);
                 return true;
+            case R.id.LogoutIcon:
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                ParseController.logoutCurrentUser();
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(!ParseController.userIsLoggedIn()) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            this.overridePendingTransition(0,0);
+        }
+    }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
 
         return;
     }
+
+
 }

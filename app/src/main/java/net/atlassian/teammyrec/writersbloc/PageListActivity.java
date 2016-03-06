@@ -30,7 +30,8 @@ public class PageListActivity extends AppCompatActivity {
 
     public static final String INTENT_EXTRA_PROJECT_ABSOLUTE_DIR = "Absolute_Directory";
     private static final String LOG_ID = "PageListActivity.net.atlassian.teammyrec.writersbloc";
-    public static final String INTENT_EXTRA_PROJECT_NAME = "";
+    public static final String INTENT_EXTRA_PROJECT_NAME = "pn";
+    public static final String INTENT_EXTRA_CATEGORY_NAME = "cn";
 
     private Category mCategory;
     private ArrayList<Page> mPages;
@@ -47,8 +48,9 @@ public class PageListActivity extends AppCompatActivity {
         }
 
         try {
-            mCategory = new Category(getIntent().getStringExtra(INTENT_EXTRA_PROJECT_ABSOLUTE_DIR));
-            mPages = mCategory.getPages();
+            mCategory = new Category(getIntent().getStringExtra(INTENT_EXTRA_CATEGORY_NAME),
+                    ParseController.getCurrentUser(), getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
+           mPages = mCategory.getPages();
         }catch (Exception e){
             Logger.getLogger(LOG_ID).log(Level.WARNING, "Error on category creation: " + e);
         }
@@ -60,11 +62,13 @@ public class PageListActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String pageName = mPages.get(position).getAbsolutePath();
+                String pageName = mPages.get(position).toString();
                 Intent intent = new Intent(getApplicationContext(), PageActivity.class);
                 intent.putExtra(PageActivity.INTENT_PAGE_NAME, pageName);
                 String projName = getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME);
                 intent.putExtra(PageActivity.INTENT_PROJECT_NAME, projName);
+                intent.putExtra(PageActivity.INTENT_CATEGORY_NAME,
+                        getIntent().getStringExtra(INTENT_EXTRA_CATEGORY_NAME));
                 startActivity(intent);
             }
         });
@@ -82,8 +86,10 @@ public class PageListActivity extends AppCompatActivity {
         try{
             Page page = mCategory.addPage(((EditText)findViewById(R.id.addPageName)).getText().toString());
             ((EditText) findViewById(R.id.addPageName)).setText("");
-            PageInformation info = page.getPageInformation();
-            page.writePageInformation(info);
+            //PageInformation info = page.getPageInformation();
+            //ParseController.createPage(page.toString(), mCategory.toString(),
+              //      getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME), ParseController.getCurrentUser());
+            //page.writePageInformation(info);
             mPages.add(page);
             ArrayAdapter<Page> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mPages);
             ((ListView)findViewById(R.id.page_list_view)).setAdapter(adapter);

@@ -15,6 +15,10 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.parse.Parse;
+import com.parse.ParseUser;
 
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Category;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
@@ -32,6 +36,8 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
     private static final String LOG_ID = "CategoryActivity.net.atlassian.teammyrec.writersbloc";
     public static final String INTENT_EXTRA_PROJECT_NAME = "";
 
+    public String chosenCategory;
+
     private Project mCurrentProject;
     private ArrayList<Category> mCategories;
     @Override
@@ -48,15 +54,21 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         }
 
         try {
-            mCurrentProject = new Project(fileName);
+            mCurrentProject = new Project(getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME),
+                    ParseController.getCurrentUser());
             mCategories = mCurrentProject.getCategories();
             if(mCategories.size() == 0 ){
                 // Create default categories
-                mCategories.add(new Category(fileName, "Character"));
-                mCategories.add(new Category(fileName, "Location"));
-                mCategories.add(new Category(fileName, "Event"));
-                mCategories.add(new Category(fileName, "Object"));
-                mCategories.add(new Category(fileName, "Other"));
+                mCategories.add(new Category("Character", ParseController.getCurrentUser(),
+                        mCurrentProject.toString()));
+                mCategories.add(new Category("Location", ParseController.getCurrentUser(),
+                        mCurrentProject.toString()));
+                mCategories.add(new Category("Event", ParseController.getCurrentUser(),
+                        mCurrentProject.toString()));
+                mCategories.add(new Category("Object", ParseController.getCurrentUser(),
+                        mCurrentProject.toString()));
+                mCategories.add(new Category("Other", ParseController.getCurrentUser(),
+                        mCurrentProject.toString()));
 
             }
         }catch (Exception e){
@@ -71,8 +83,10 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), PageListActivity.class);
-                intent.putExtra(PageListActivity.INTENT_EXTRA_PROJECT_ABSOLUTE_DIR, mCategories.get(position).getAbsolutePath());
-                intent.putExtra(PageListActivity.INTENT_EXTRA_PROJECT_NAME, getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
+                chosenCategory = ((TextView) view.findViewById(R.id.listItemTextID)).getText().toString();
+                intent.putExtra(PageListActivity.INTENT_EXTRA_CATEGORY_NAME, chosenCategory);
+                intent.putExtra(PageListActivity.INTENT_EXTRA_PROJECT_NAME,
+                        getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
                 startActivity(intent);
             }
         });
@@ -93,6 +107,12 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
     @Override
     public void onResume(){
         super.onResume();
+
+        if(!ParseController.userIsLoggedIn()) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            this.overridePendingTransition(0,0);
+        }
     }
 
     @Override
@@ -101,6 +121,7 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         inflater.inflate(R.menu.menu_add_folder, menu);
         return true;
     }
+
 
     public void createCategory(View v) {
         try {
@@ -137,6 +158,11 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
             case R.id.CategoryMenuTitle:
                 showOverlay = true;
                 findViewById(R.id.frameFragmentLayout).setVisibility(View.VISIBLE);
+                return true;
+            case R.id.LogoutIcon:
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                ParseController.logoutCurrentUser();
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
