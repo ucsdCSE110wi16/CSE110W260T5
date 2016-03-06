@@ -43,6 +43,11 @@ public class PageActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if(!ParseController.userIsLoggedIn()) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+        }
+
         String pageName = getIntent().getStringExtra(INTENT_PAGE_NAME);
         try {
             mPage = new Page(pageName);
@@ -59,7 +64,7 @@ public class PageActivity extends AppCompatActivity {
         textView2.setText(mPage.toString());
 
         EditText eText = (EditText)findViewById(R.id.editText);
-        eText.setText(mPageInformation.getText());
+        eText.setText(mPageInformation.getText() + " ");
         eText.setSelection(eText.length());
 
         PriorityQueue<Page> pages = mProject.getAllPages();
@@ -100,6 +105,7 @@ public class PageActivity extends AppCompatActivity {
 
         eText.setText(ss);
         eText.setMovementMethod(LinkMovementMethod.getInstance());
+
 
 
     }
