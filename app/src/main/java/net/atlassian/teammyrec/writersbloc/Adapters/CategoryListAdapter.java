@@ -1,15 +1,14 @@
-package net.atlassian.teammyrec.writersbloc;
+package net.atlassian.teammyrec.writersbloc.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import net.atlassian.teammyrec.writersbloc.Models.DataModels.Category;
+import net.atlassian.teammyrec.writersbloc.R;
 
 import java.util.List;
 

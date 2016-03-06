@@ -1,1 +1,1 @@
-include ':app', ':swipemenulistview-1.1.0'
+include ':app'

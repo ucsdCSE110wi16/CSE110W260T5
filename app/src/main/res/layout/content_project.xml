@@ -10,13 +10,27 @@
 
 
 
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/spacer"
-        android:id="@+id/projects_list_view"
-        android:background="@color/listBackgroundColor"
-        />
+        android:orientation="horizontal"
+        >
+        <ListView android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/project_delete_view"
+            android:background="@color/listBackgroundColor"
+            ></ListView>
+        <ListView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:id="@+id/projects_list_view"
+            android:background="@color/listBackgroundColor"
+            />
+
+
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"

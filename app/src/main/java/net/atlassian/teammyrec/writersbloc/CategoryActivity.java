@@ -1,7 +1,6 @@
 package net.atlassian.teammyrec.writersbloc;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,13 +8,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.parse.Parse;
+import com.parse.ParseUser;
+
+import net.atlassian.teammyrec.writersbloc.Adapters.CategoryListAdapter;
+import net.atlassian.teammyrec.writersbloc.Adapters.DeleteListAdapter;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Category;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
 
@@ -31,6 +36,8 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
     public static final String INTENT_EXTRA_PROJECT_PATH = "INTENT_EXTRA_FOLDERPATH";
     private static final String LOG_ID = "CategoryActivity.net.atlassian.teammyrec.writersbloc";
     public static final String INTENT_EXTRA_PROJECT_NAME = "";
+
+    public String chosenCategory;
 
     private Project mCurrentProject;
     private ArrayList<Category> mCategories;
@@ -48,15 +55,21 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         }
 
         try {
-            mCurrentProject = new Project(fileName);
+            mCurrentProject = new Project(getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME),
+                    ParseController.getCurrentUser());
             mCategories = mCurrentProject.getCategories();
             if(mCategories.size() == 0 ){
                 // Create default categories
-                mCategories.add(new Category(fileName, "Character"));
-                mCategories.add(new Category(fileName, "Location"));
-                mCategories.add(new Category(fileName, "Event"));
-                mCategories.add(new Category(fileName, "Object"));
-                mCategories.add(new Category(fileName, "Other"));
+                mCategories.add(new Category("Character", ParseController.getCurrentUser(),
+                        mCurrentProject.toString()));
+                mCategories.add(new Category("Location", ParseController.getCurrentUser(),
+                        mCurrentProject.toString()));
+                mCategories.add(new Category("Event", ParseController.getCurrentUser(),
+                        mCurrentProject.toString()));
+                mCategories.add(new Category("Object", ParseController.getCurrentUser(),
+                        mCurrentProject.toString()));
+                mCategories.add(new Category("Other", ParseController.getCurrentUser(),
+                        mCurrentProject.toString()));
 
             }
         }catch (Exception e){
@@ -71,9 +84,24 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), PageListActivity.class);
-                intent.putExtra(PageListActivity.INTENT_EXTRA_PROJECT_ABSOLUTE_DIR, mCategories.get(position).getAbsolutePath());
-                intent.putExtra(PageListActivity.INTENT_EXTRA_PROJECT_NAME, getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
+                chosenCategory = ((TextView) view.findViewById(R.id.listItemTextID)).getText().toString();
+                intent.putExtra(PageListActivity.INTENT_EXTRA_CATEGORY_NAME, chosenCategory);
+                intent.putExtra(PageListActivity.INTENT_EXTRA_PROJECT_NAME,
+                        getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
                 startActivity(intent);
+            }
+        });
+
+
+
+        ListView deleteList = (ListView) findViewById(R.id.category_delete_list_view);
+        deleteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Category category = mCategories.get(position);
+                category.delete();
+                mCategories.remove(category);
+                updateListAdapter();
             }
         });
 
@@ -93,6 +121,12 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
     @Override
     public void onResume(){
         super.onResume();
+
+        if(!ParseController.userIsLoggedIn()) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            this.overridePendingTransition(0,0);
+        }
     }
 
     @Override
@@ -101,6 +135,7 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         inflater.inflate(R.menu.menu_add_folder, menu);
         return true;
     }
+
 
     public void createCategory(View v) {
         try {
@@ -128,6 +163,8 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         CategoryListAdapter categoryArrayAdapter = new CategoryListAdapter(this, R.layout.category_list_item, models);
         ((ListView)findViewById(R.id.category_list_view)).setAdapter(categoryArrayAdapter);
 
+        ListView deleteList = (ListView) findViewById(R.id.category_delete_list_view);
+        deleteList.setAdapter(new DeleteListAdapter<CategoryListAdapter.CategoryListViewModel>(this, R.layout.category_trash_list_item, models));
     }
 
     @Override
@@ -137,6 +174,11 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
             case R.id.CategoryMenuTitle:
                 showOverlay = true;
                 findViewById(R.id.frameFragmentLayout).setVisibility(View.VISIBLE);
+                return true;
+            case R.id.LogoutIcon:
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                ParseController.logoutCurrentUser();
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
