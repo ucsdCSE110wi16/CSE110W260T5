@@ -30,6 +30,12 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if(!ParseController.userIsLoggedIn()) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
         Toolbar toolbar = (Toolbar) findViewById(R.id.project_toolbar);
@@ -105,6 +111,7 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
         return;
     }
 }

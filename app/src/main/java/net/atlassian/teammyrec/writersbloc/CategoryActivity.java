@@ -41,6 +41,12 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         Toolbar toolbar = (Toolbar) findViewById(R.id.category_toolbar);
         setSupportActionBar(toolbar);
         String fileName = getIntent().getStringExtra(INTENT_EXTRA_PROJECT_PATH);
+
+        if(!ParseController.userIsLoggedIn()) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+        }
+
         try {
             mCurrentProject = new Project(fileName);
             mCategories = mCurrentProject.getCategories();
