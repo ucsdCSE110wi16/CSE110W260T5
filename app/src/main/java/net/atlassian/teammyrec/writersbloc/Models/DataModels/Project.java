@@ -38,9 +38,6 @@ public class Project {
 
     public String toString() { return this.projectName; }
 
-    public void deleteCategory(String categoryName){
-
-    }
 
     public ArrayList<Category> getCategories() {
        return ParseController.getAllCategoriesForProject(this.projectName);
@@ -67,6 +64,7 @@ public class Project {
 
 
     public void delete(){
+        ParseController.deleteProject(projectName, owner);
 
     }
 

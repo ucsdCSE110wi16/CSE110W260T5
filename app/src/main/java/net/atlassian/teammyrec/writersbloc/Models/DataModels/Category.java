@@ -57,7 +57,7 @@ public class Category {
     }
 
     public void delete(){
-
+        ParseController.deleteCategory(categoryName, projectName, owner);
     }
 
     public String toString(){
