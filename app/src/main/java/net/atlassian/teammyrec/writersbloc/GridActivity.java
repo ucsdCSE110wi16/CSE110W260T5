@@ -42,6 +42,7 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
         setContentView(R.layout.activity_grid);
 
         String projectName = getIntent().getStringExtra(PROJECT_INTENT);
+        System.out.println("Project Name:" + projectName);
         if(projectName != null){
             try {
                 Project project = new Project(this, projectName);
@@ -92,11 +93,11 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
 
                     GridCustomView tempView ;
                     if( x + y * colC < maxSize) {
-                        tempView = new GridCustomView(this, x, y, pageNames.get(x + y * colC));
+                        tempView = new GridCustomView(this, x, y, pageNames.get(x + y * colC),pages.get(x + y * colC).getAbsolutePath());
                     }
                     else
                     {
-                        tempView = new GridCustomView(this, x ,y, "");
+                        tempView = new GridCustomView(this, x ,y, "",null);
                     }
                     tempView.setOnToggledListener(this);
 
@@ -131,44 +132,23 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
 
             }
         });
-        /*
-        Button[] buttonArray = new Button[maxSize] ;
-        for( int x = 0; x < maxSize ; x++)
-        {
-            buttonArray[x] = new Button(this);
-            buttonArray[x].setText(t[x]);
-            RelativeLayout.LayoutParams buttonL = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT,
-                    RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-            buttonArray[x].setLayoutParams( buttonL);
-            g.addView(buttonArray[x]);
-
-        }*/
     }
 
     @Override
-    public void OnToggled(GridCustomView view, boolean stuff , String pageName)
+    public void OnToggled(GridCustomView view, boolean stuff , String pageName, String pagePath)
     {
-        toGridGraph(view , pageName);
+        if(stuff) {
+            toGridGraph(view, pageName, pagePath);
+        }
     }
-    public void toGridGraph(View v , String pageName) {
+    public void toGridGraph(View v , String pageN, String pageP) {
         Intent intent = new Intent(this, GraphActivity.class);
-        intent.putExtra(GraphActivity.PAGE_INTENT,pageName);
+        intent.putExtra(GraphActivity.PAGE_INTENT, pageN);
+        intent.putExtra(GraphActivity.PAGE_PATH, pageP);
+        intent.putExtra(GraphActivity.INTENT_PROJECT_NAME, getIntent().getStringExtra(PROJECT_INTENT));
         this.startActivity(intent);
     }
-    /*
-    private String[] sortbyA(String [] i) {
-        String[] b = new String[i.length];
-        for (int y = 0; y < i.length; y++)
-        {
-            String temp = i[0];
-            for (int x = 0; x < i.length; x++)
-            {
 
-            }
-        }
-        return i;
-    }*/
 
 }

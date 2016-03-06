@@ -27,6 +27,7 @@ public class GridCustomView extends View {
     private TextPaint nPaint;
     private int nColor = Color.BLACK;
     private float nD = 50;
+    private String p;
 
     private OnToggledListener listen;
     private boolean dostuff;
@@ -34,18 +35,19 @@ public class GridCustomView extends View {
 
     public interface OnToggledListener
     {
-        void OnToggled(GridCustomView view, boolean stuff , String pageName);
+        void OnToggled(GridCustomView view, boolean stuff , String pageName , String pagePath);
     }
 
-    public GridCustomView(Context context, int x, int y, String name) {
+    public GridCustomView(Context context, int x, int y, String name , String path) {
         super(context);
         XP = x;
         YP = y;
         nPaint = new TextPaint();
         setName(name);
+        p = path;
         setnD(30);
         setColor(Color.BLACK);
-        dostuff = false;
+        dostuff = true;
         init();
     }
 
@@ -76,11 +78,11 @@ public class GridCustomView extends View {
         super.onTouchEvent(e);
         switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                dostuff = !dostuff;
+
 
                 invalidate();
                 if (listen != null) {
-                    listen.OnToggled(this, dostuff , n);
+                    listen.OnToggled(this, dostuff , n , p);
                 }
                 clicked = true;
                 return true;
@@ -112,7 +114,7 @@ public class GridCustomView extends View {
         super.onDraw(canvas);
         if( n.equals("") )
         {
-
+            dostuff= false;
             //canvas.drawColor(ContextCompat.getColor(this.getContext(), R.color.listBackgroundColor));
         }
         else
