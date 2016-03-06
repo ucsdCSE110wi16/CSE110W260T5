@@ -27,20 +27,21 @@ public class UIEspressoTests extends InstrumentationTestCase {
         super.setUp();
         device = UiDevice.getInstance(getInstrumentation());
         device.pressHome();
-        device.wait(Until.hasObject(By.text("Apps")), 3000);
-        UiObject2 appsButton = device.findObject(By.text("Apps"));
-        appsButton.click();
-        device.wait(Until.hasObject(By.text("WritersBloc")), 3000);
-        UiObject2 writersBlocApp = device.findObject(By.text("WritersBloc"));
+        //device.swipe(5, 5, 25, 100, 1);
+        //device.wait(Until.hasObject(By.text("Apps")), 3000);
+        //UiObject2 appsButton = device.findObject(By.text("Apps"));
+        //appsButton.click();
+        device.wait(Until.hasObject(By.descContains("WritersBloc")), 3000);
+        UiObject2 writersBlocApp = device.findObject(By.descContains("WritersBloc"));
         writersBlocApp.click();
-        //device.waitForIdle(3000);
+        device.waitForIdle(3000);
     }
 
     public void testSignInButton() throws Exception {
 
         device.wait(Until.hasObject(By.text("Login:")), 3000);
         device.wait(Until.hasObject(By.clazz("EditText")), 3000);
-        UiObject2 userText = device.findObject(By.text("User Name:"));
+        UiObject2 userText = device.findObject(By.res("net.atlassian.teammyrec.writersbloc", "username_edit_activity_login"));
         userText.setText("demouser");
 
         UiObject2 passText = device.findObject(By.res("net.atlassian.teammyrec.writersbloc", "password_edit_activity_login"));
@@ -52,7 +53,10 @@ public class UIEspressoTests extends InstrumentationTestCase {
 
         device.waitForIdle(3000);
 
-        UiObject2 listView = device.findObject(By.clazz("ListView"));
+        device.wait(Until.hasObject(By.text("Projects")), 3000);
+        UiObject2 listView = device.findObject(By.text("Projects"));
+
+        device.waitForIdle(3000);
 
         assertTrue(listView != null);
     }

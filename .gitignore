@@ -3,3 +3,5 @@ app/build/
 .idea/
 .gradle
 local.properties
+app/app.iml
+swipemenulistview-1.1.0/swipemenulistview-1.1.0.iml
