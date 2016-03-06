@@ -85,6 +85,13 @@ public class Category {
         return pages;
     }
 
+    public void delete(){
+        for(Page p: getPages()){
+            p.delete();
+        }
+        categoryFile.delete();
+    }
+
     public String toString(){
         return categoryFile.getName();
     }

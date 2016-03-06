@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,11 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import net.atlassian.teammyrec.writersbloc.Adapters.DeleteListAdapter;
+import net.atlassian.teammyrec.writersbloc.Adapters.ProjectListAdapter;
+import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
 
 import java.util.ArrayList;
 
@@ -42,12 +43,9 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
         setSupportActionBar(toolbar);
 
         ListView list = (ListView)findViewById(R.id.projects_list_view);
-        ArrayList<ProjectListAdapter.ProjectListViewModel> models = new ArrayList<>();
-        for(String s: getFilesDir().list()){
-            models.add(new ProjectListAdapter.ProjectListViewModel(s));
-        }
-        ProjectListAdapter adapter = new ProjectListAdapter(this, R.layout.project_list_item,models);
-        list.setAdapter(adapter);
+
+        updateAdapter();
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -58,6 +56,26 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
                 startActivity(intent);
             }
         });
+
+        ListView deleteList = (ListView)findViewById(R.id.project_delete_view);
+
+        deleteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    Project project = new Project(getApplicationContext(), getFilesDir().list()[position]);
+                    if(project.delete())
+                        updateAdapter();
+                }catch (Exception e){
+
+                }
+            }
+        });
+
+
+
+
+
     }
 
     @Override
@@ -73,13 +91,7 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
 
         ListView list = (ListView)findViewById(R.id.projects_list_view);
 
-        ArrayList<ProjectListAdapter.ProjectListViewModel> models = new ArrayList<>();
-        for(String s: getFilesDir().list()){
-            models.add(new ProjectListAdapter.ProjectListViewModel(s));
-        }
-
-        ProjectListAdapter adapter = new ProjectListAdapter(this, R.layout.project_list_item, models);
-        list.setAdapter(adapter);
+        updateAdapter();
 
         EditText edit = ((EditText)fragment.getActivity().findViewById(R.id.addProjectName));
         edit.setText("");
@@ -106,6 +118,20 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void updateAdapter() {
+        ListView list = (ListView)findViewById(R.id.projects_list_view);
+        ArrayList<ProjectListAdapter.ProjectListViewModel> models = new ArrayList<>();
+        for(String s: getFilesDir().list()){
+            models.add(new ProjectListAdapter.ProjectListViewModel(s));
+        }
+        ProjectListAdapter adapter = new ProjectListAdapter(this, R.layout.project_list_item,models);
+        list.setAdapter(adapter);
+
+        ListView deleteList = (ListView)findViewById(R.id.project_delete_view);
+        DeleteListAdapter<ProjectListAdapter.ProjectListViewModel> deleteAdapter = new DeleteListAdapter<>(this,R.layout.project_trash_view_item, models);
+        deleteList.setAdapter(deleteAdapter);
     }
 
 

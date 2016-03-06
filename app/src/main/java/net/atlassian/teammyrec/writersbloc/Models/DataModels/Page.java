@@ -49,6 +49,10 @@ public class Page {
         writer.close();
     }
 
+    public void delete(){
+        baseFile.delete();
+    }
+
     public String getAbsolutePath(){
         return baseFile.getAbsolutePath();
     }

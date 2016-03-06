@@ -80,6 +80,13 @@ public class Project {
         return queue;
     }
 
+    public boolean delete(){
+        for(Category f: getCategories()){
+            f.delete();
+        }
+        return projectFile.delete();
+    }
+
     // Bottom of Project.java
     class PageComparator implements Comparator<Page>
     {
