@@ -1,10 +1,6 @@
 package net.atlassian.teammyrec.writersbloc;
 
-import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
@@ -17,11 +13,7 @@ import android.content.*;
 import android.text.*;
 import android.util.*;
 
-import com.parse.Parse;
-import com.parse.ParseUser;
-
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Page;
-import net.atlassian.teammyrec.writersbloc.Models.DataModels.PageInformation;
 
 import java.util.PriorityQueue;
 import java.util.logging.Level;
@@ -37,7 +29,6 @@ public class PageActivity extends AppCompatActivity {
 
 
     private Page mPage;
-    private PageInformation mPageInformation;
     private Project mProject;
 
     @Override

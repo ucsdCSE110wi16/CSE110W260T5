@@ -66,10 +66,15 @@ public class Project {
     }
 
 
-    class PageComparator implements Comparator< Pair<Category, Page> >
+    public void delete(){
+
+    }
+
+    // Bottom of Project.java
+    class PageComparator implements Comparator<Pair<Category, Page>>
     {
         @Override
-        public int compare(Pair x, Pair y)
+        public int compare(Pair<Category, Page> x, Pair<Category, Page> y)
         {
 
             if(x.second.toString().length() == y.second.toString().length()) return 0;

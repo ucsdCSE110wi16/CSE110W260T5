@@ -1,7 +1,6 @@
-package net.atlassian.teammyrec.writersbloc;
+package net.atlassian.teammyrec.writersbloc.Adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,28 +8,23 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import net.atlassian.teammyrec.writersbloc.Models.DataModels.Page;
+import net.atlassian.teammyrec.writersbloc.R;
+
 import java.util.List;
 
+/**
+ * Created by jay on 3/5/16.
+ */
+public class PageListAdapter extends ArrayAdapter<Page>{
+    private List<Page> list;
 
-public class ProjectListAdapter extends ArrayAdapter<ProjectListAdapter.ProjectListViewModel> {
-
-    private List<ProjectListAdapter.ProjectListViewModel> list;
-
-    public static class ProjectListViewModel{
+    public static class PageListViewModel{
         private String mProjectName;
         private Drawable mProjectDrawable;
         private int color;
 
-        public ProjectListViewModel(){
-            this(null, null);
-        }
-
-        public ProjectListViewModel(String name){ this(name, null);}
-
-        public ProjectListViewModel(String name, Drawable drawable){
-            mProjectName = name;
-            mProjectDrawable = drawable;
-        }
+        public PageListViewModel(String name){ mProjectName = name;}
 
         public void setProjectName(String name){
             mProjectName = name;
@@ -51,7 +45,7 @@ public class ProjectListAdapter extends ArrayAdapter<ProjectListAdapter.ProjectL
 
     }
 
-    public ProjectListAdapter(Context context, int resID, List<ProjectListViewModel> list){
+    public PageListAdapter(Context context, int resID, List<Page> list){
         super(context, resID, list);
         this.list = list;
     }
@@ -62,17 +56,17 @@ public class ProjectListAdapter extends ArrayAdapter<ProjectListAdapter.ProjectL
 
         if(v == null){
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.project_list_item, null);
+            v = inflater.inflate(R.layout.page_list_item, null);
         }
 
-        ProjectListViewModel model = list.get(position);
+        Page model = list.get(position);
 
         if( model != null){
 
             TextView text = (TextView)v.findViewById(R.id.listItemTextID);
 
             if(text != null){
-                text.setText(model.getProjectName());
+                text.setText(model.toString());
             }
         }
 

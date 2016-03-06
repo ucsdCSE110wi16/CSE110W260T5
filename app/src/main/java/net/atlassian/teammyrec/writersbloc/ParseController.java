@@ -23,7 +23,7 @@ public class ParseController {
         ParseUser user = new ParseUser();
         user.setUsername(username);
         user.setPassword(password);
-        user.signUpInBackground(new SignUpCallback() {
+        /*user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
                     //
@@ -34,7 +34,12 @@ public class ParseController {
                     Logger.getLogger("ok").log(Level.INFO, "Error signing up");
                 }
             }
-        });
+        });*/
+        try {
+            user.signUp();
+        } catch(ParseException e) {
+
+        }
 
     }
 

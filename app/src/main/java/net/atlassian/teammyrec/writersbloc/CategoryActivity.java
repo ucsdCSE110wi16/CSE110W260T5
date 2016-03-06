@@ -1,7 +1,6 @@
 package net.atlassian.teammyrec.writersbloc;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -20,6 +19,8 @@ import android.widget.TextView;
 import com.parse.Parse;
 import com.parse.ParseUser;
 
+import net.atlassian.teammyrec.writersbloc.Adapters.CategoryListAdapter;
+import net.atlassian.teammyrec.writersbloc.Adapters.DeleteListAdapter;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Category;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
 
@@ -91,6 +92,19 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
             }
         });
 
+
+
+        ListView deleteList = (ListView) findViewById(R.id.category_delete_list_view);
+        deleteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Category category = mCategories.get(position);
+                category.delete();
+                mCategories.remove(category);
+                updateListAdapter();
+            }
+        });
+
         if(showOverlay)
             findViewById(R.id.frameFragmentLayout).setVisibility(View.VISIBLE);
 
@@ -149,6 +163,8 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         CategoryListAdapter categoryArrayAdapter = new CategoryListAdapter(this, R.layout.category_list_item, models);
         ((ListView)findViewById(R.id.category_list_view)).setAdapter(categoryArrayAdapter);
 
+        ListView deleteList = (ListView) findViewById(R.id.category_delete_list_view);
+        deleteList.setAdapter(new DeleteListAdapter<CategoryListAdapter.CategoryListViewModel>(this, R.layout.category_trash_list_item, models));
     }
 
     @Override

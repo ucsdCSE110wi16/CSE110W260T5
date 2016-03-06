@@ -56,6 +56,10 @@ public class Category {
         return ParseController.getAllPagesForCategory(this.categoryName, this.projectName);
     }
 
+    public void delete(){
+
+    }
+
     public String toString(){
         return this.categoryName;
     }

@@ -37,4 +37,11 @@ public class Page {
         return this.pageName;
     }
 
+
+
+
+    public void delete(){
+    }
+
+
 }
