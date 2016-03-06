@@ -66,7 +66,6 @@ public class GraphActivity extends AppCompatActivity {
         String pagePath = getIntent().getStringExtra(PAGE_PATH);
         //System.out.println("Page path: " + getIntent().getStringExtra(PAGE_PATH));
         try {
-            mPage = new Page(pagePath);
             mPageInformation = mPage.getPageInformation();
             System.out.println("Project name: " + getIntent().getStringExtra(INTENT_PROJECT_NAME));
             mProject = new Project(getIntent().getStringExtra(INTENT_PROJECT_NAME), ParseController.getCurrentUser());
