@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.pdf.PdfDocument;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
@@ -13,10 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import net.atlassian.teammyrec.writersbloc.Models.DataModels.Category;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Page;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.concurrent.SynchronousQueue;
+import java.util.logging.Logger;
 
 
 public class GridActivity extends AppCompatActivity implements GridCustomView.OnToggledListener
@@ -24,6 +29,9 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
 {
 
     public static final String PROJECT_INTENT = "Project_Name";
+    private static final String LOG_ID = "GridActivity.net.atlassian.teammyrec.writersbloc";
+    public static final String INTENT_EXTRA_PROJECT_NAME = "pn";
+    public static final String INTENT_EXTRA_CATEGORY_NAME = "cn";
 
     private GridLayout g;
     private int fillup ;
@@ -31,13 +39,26 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
     private final int minRowC = 5;
     private final int colC = 5;
     private int maxSize = 0;
-    private final ArrayList<String> pageNames = new ArrayList<>();
-    private final ArrayList<Page> pages = new ArrayList<>();
+
+    //private final ArrayList<Category> listOfCate = new ArrayList<>();
+    //private final PriorityQueue< Pair<Category, Page> > PAGES = new PriorityQueue<>();
+    private ArrayList<String> pageNames = new ArrayList<>();
+    private ArrayList<Page> pages = new ArrayList<>();
+
     private int rowC = 0 ;
-    private GridCustomView[] pV;//paininmyassView
+    private GridCustomView[] pV;
+    private Project mCurrentProject;
+    private ArrayList<Category> mCategories;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+/*
+        if(!ParseController.userIsLoggedIn()) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+        }
+*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
 
@@ -45,14 +66,23 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
         System.out.println("Project Name:" + projectName);
         if(projectName != null){
             try {
-                Project project = new Project(this, projectName);
-                pageNames.clear();
-                pages.clear();
-                for(Page p: project.getAllPages()){
-                    pageNames.add(p.toString());
-                    pages.add(p);
+
+                mCurrentProject = new Project(getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME),
+                        ParseController.getCurrentUser());
+                mCategories = mCurrentProject.getCategories();
+                for(int x = 0 ; x < mCategories.size() ; x++)
+                {
+                    pages.addAll((mCategories.get(x)).getPages());
                 }
-            }catch (Exception e){}
+                for(int x = 0 ; x < pages.size() ; x++)
+                {
+                    pageNames.add( (pages.get(x)).toString() );
+
+                }
+
+            }catch (Exception e){
+                Logger.getLogger(LOG_ID, "Failed");
+            }
         }
         maxSize = pageNames.size() ;
         //getMaxsize/update rowC here;
@@ -93,11 +123,12 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
 
                     GridCustomView tempView ;
                     if( x + y * colC < maxSize) {
-                        tempView = new GridCustomView(this, x, y, pageNames.get(x + y * colC),pages.get(x + y * colC).getAbsolutePath());
+                        tempView = new GridCustomView(this, x, y, pageNames.get(x + y * colC),
+                                pages.get(x + y * colC).toString(), pages.get(x + y * colC).getCategory());
                     }
                     else
                     {
-                        tempView = new GridCustomView(this, x ,y, "",null);
+                        tempView = new GridCustomView(this, x ,y, "",null,null);
                     }
                     tempView.setOnToggledListener(this);
 
@@ -119,7 +150,6 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
 
                 for (int y = 0; y < rowC; y++) {
                     for (int x = 0; x < colC; x++) {
-
                         GridLayout.LayoutParams gP =
                                 (GridLayout.LayoutParams) pV[x + y * colC].getLayoutParams();
                         gP.width = w - 2 * MARGIN;
@@ -129,6 +159,7 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
 
                     }
                 }
+                //System.out.println("AfterLoop");
 
             }
         });
@@ -136,17 +167,18 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
     }
 
     @Override
-    public void OnToggled(GridCustomView view, boolean stuff , String pageName, String pagePath)
+    public void OnToggled(GridCustomView view, boolean stuff , String pageName, String pagePath, Category cate)
     {
         if(stuff) {
-            toGridGraph(view, pageName, pagePath);
+            toGridGraph(view, pageName, pagePath,cate);
         }
     }
-    public void toGridGraph(View v , String pageN, String pageP) {
+    public void toGridGraph(View v , String pageN, String pageP, Category cate) {
         Intent intent = new Intent(this, GraphActivity.class);
         intent.putExtra(GraphActivity.PAGE_INTENT, pageN);
         intent.putExtra(GraphActivity.PAGE_PATH, pageP);
-        intent.putExtra(GraphActivity.INTENT_PROJECT_NAME, getIntent().getStringExtra(PROJECT_INTENT));
+        intent.putExtra(GraphActivity.INTENT_CATEGORY_NAME, cate.toString());
+        intent.putExtra(GraphActivity.INTENT_PROJECT_NAME, getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
         this.startActivity(intent);
     }
 

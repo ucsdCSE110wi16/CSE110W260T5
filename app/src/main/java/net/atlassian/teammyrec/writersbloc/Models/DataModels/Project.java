@@ -81,9 +81,9 @@ public class Project {
             return (x.second.toString().length() > y.second.toString().length()? -1 : 1);
         }
     }
-
+    /*
     public String toString(){
         return projectFile.getName();
-    }
+    }*/
 
 }

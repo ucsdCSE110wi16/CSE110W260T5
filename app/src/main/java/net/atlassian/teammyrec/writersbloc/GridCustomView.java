@@ -12,6 +12,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import net.atlassian.teammyrec.writersbloc.Models.DataModels.Category;
+
 /**
  * TODO: document your custom view class.
  */
@@ -28,6 +30,7 @@ public class GridCustomView extends View {
     private int nColor = Color.BLACK;
     private float nD = 50;
     private String p;
+    private Category c ;
 
     private OnToggledListener listen;
     private boolean dostuff;
@@ -35,10 +38,10 @@ public class GridCustomView extends View {
 
     public interface OnToggledListener
     {
-        void OnToggled(GridCustomView view, boolean stuff , String pageName , String pagePath);
+        void OnToggled(GridCustomView view, boolean stuff , String pageName , String pagePath , Category cate);
     }
 
-    public GridCustomView(Context context, int x, int y, String name , String path) {
+    public GridCustomView(Context context, int x, int y, String name , String path, Category cate) {
         super(context);
         XP = x;
         YP = y;
@@ -48,6 +51,7 @@ public class GridCustomView extends View {
         setnD(30);
         setColor(Color.BLACK);
         dostuff = true;
+        c = cate ;
         init();
     }
 
@@ -82,7 +86,7 @@ public class GridCustomView extends View {
 
                 invalidate();
                 if (listen != null) {
-                    listen.OnToggled(this, dostuff , n , p);
+                    listen.OnToggled(this, dostuff , n , p , c);
                 }
                 clicked = true;
                 return true;

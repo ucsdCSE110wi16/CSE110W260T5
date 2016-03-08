@@ -192,9 +192,21 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
     }
 
     public void toGraph(View v) {
+        Intent intent = new Intent(getApplicationContext(), GridActivity.class);
+        //chosenCategory = ((TextView) v.findViewById(R.id.listItemTextID)).getText().toString();
+        //intent.putExtra(PageListActivity.INTENT_EXTRA_CATEGORY_NAME, chosenCategory);
+
+        intent.putExtra(GridActivity.PROJECT_INTENT, mCurrentProject.toString());
+        intent.putExtra(GridActivity.INTENT_EXTRA_PROJECT_NAME,
+                getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
+        intent.putExtra(GridActivity.INTENT_EXTRA_CATEGORY_NAME, chosenCategory);
+        this.startActivity(intent);
+
+        /*
         Intent intent = new Intent(this, GridActivity.class);
         intent.putExtra(GridActivity.PROJECT_INTENT,mCurrentProject.toString());
         this.startActivity(intent);
+        */
     }
 
     @Override
