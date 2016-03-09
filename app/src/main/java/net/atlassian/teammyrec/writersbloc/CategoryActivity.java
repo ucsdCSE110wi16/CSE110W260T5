@@ -1,5 +1,6 @@
 package net.atlassian.teammyrec.writersbloc;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -55,20 +56,21 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
         }
 
         try {
-            mCurrentProject = new Project(getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME),
+            mCurrentProject = new Project(this,
+                    getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME),
                     ParseController.getCurrentUser());
             mCategories = mCurrentProject.getCategories();
             if(mCategories.size() == 0 ){
                 // Create default categories
-                mCategories.add(new Category("Character", ParseController.getCurrentUser(),
+                mCategories.add(new Category(this, "Character", ParseController.getCurrentUser(),
                         mCurrentProject.toString()));
-                mCategories.add(new Category("Location", ParseController.getCurrentUser(),
+                mCategories.add(new Category(this, "Location", ParseController.getCurrentUser(),
                         mCurrentProject.toString()));
-                mCategories.add(new Category("Event", ParseController.getCurrentUser(),
+                mCategories.add(new Category(this, "Event", ParseController.getCurrentUser(),
                         mCurrentProject.toString()));
-                mCategories.add(new Category("Object", ParseController.getCurrentUser(),
+                mCategories.add(new Category(this, "Object", ParseController.getCurrentUser(),
                         mCurrentProject.toString()));
-                mCategories.add(new Category("Other", ParseController.getCurrentUser(),
+                mCategories.add(new Category(this, "Other", ParseController.getCurrentUser(),
                         mCurrentProject.toString()));
 
             }
@@ -139,6 +141,20 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
 
     public void createCategory(View v) {
         try {
+            ArrayList<Category> allCategories =  ParseController.getAllCategoriesForProject(mCurrentProject.toString());
+            for(Category c : allCategories){
+                if(((EditText) findViewById(R.id.addProjectName)).getText().toString().equals(c.toString()))
+                {
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+                    dlgAlert.setMessage("Category '" + ((EditText) findViewById(R.id.addProjectName)).
+                                        getText().toString() + "' already exists.");
+                    dlgAlert.setTitle("Error");
+                    dlgAlert.setPositiveButton("OK", null);
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+                    return;
+                }
+            }
             Category category = mCurrentProject.createCategory(((EditText) findViewById(R.id.addProjectName)).getText().toString());
             mCategories.add(category);
         }catch (Exception e){

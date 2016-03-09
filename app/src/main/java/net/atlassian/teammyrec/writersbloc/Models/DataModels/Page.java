@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import android.content.*;
 
 /**
  * Created by jay on 2/6/16.
@@ -20,6 +21,7 @@ public class Page {
     private String projectName;
     private String owner;
     private String pageName;
+    private Context context;
 
 
     public Page(String pageName, String categoryName, String projectName, String owner) {
@@ -27,10 +29,11 @@ public class Page {
         this.categoryName = categoryName;
         this.projectName = projectName;
         this.owner = owner;
+        this.context = context;
     }
 
     public Category getCategory(){
-        return new Category(this.categoryName, this.owner, this.projectName);
+        return new Category(this.context, this.categoryName, this.owner, this.projectName);
     }
 
     public String toString(){

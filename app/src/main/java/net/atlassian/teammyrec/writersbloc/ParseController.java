@@ -11,12 +11,19 @@ import com.parse.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.*;
+import android.content.*;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.*;
 
 /**
  * Created by matt on 2/10/16.
  */
 public class ParseController {
+
+    public static Context context;
+
+    public static void setContext(Context context) {
+        ParseController.context = context;
+    }
 
     public static void addUser(String username, String password) {
 
@@ -188,7 +195,7 @@ public class ParseController {
         try {
             List<ParseObject> results = query.find();
             for(ParseObject result : results) {
-                projects.add(new Project((String)result.get("projectName"),
+                projects.add(new Project(ParseController.context, (String)result.get("projectName"),
                         ParseController.getCurrentUser()));
             }
         } catch (ParseException e) {
@@ -224,7 +231,7 @@ public class ParseController {
         try {
             List<ParseObject> results = query.find();
             for(ParseObject result : results) {
-                categories.add(new Category((String)result.get("categoryName"),
+                categories.add(new Category(ParseController.context, (String)result.get("categoryName"),
                         ParseController.getCurrentUser(), project));
             }
         } catch (ParseException e) {

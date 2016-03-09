@@ -1,5 +1,6 @@
 package net.atlassian.teammyrec.writersbloc.Models.DataModels;
 
+import android.app.AlertDialog;
 import android.content.Context;
 
 import com.parse.Parse;
@@ -18,19 +19,26 @@ import net.atlassian.teammyrec.writersbloc.Models.DataModels.*;
  * Created by jay on 2/10/16.
  */
 public class Project {
-
+    private Context context;
     private String projectName;
     private String owner;
 
-    public Project(String projectName, String owner) {
+    public Project(Context context, String projectName, String owner) {
         this.projectName = projectName;
         this.owner = owner;
+        this.context = context;
 
     }
 
 
     public Category createCategory(String categoryName) {
-        Category c = new Category(categoryName, this.owner, this.projectName);
+        ArrayList<Category> categories = ParseController.getAllCategoriesForProject(this.toString());
+        ArrayList<String> categoryNames = new ArrayList<String>();
+        for(Category c: categories) {
+            System.out.println("Adding " + c.toString() + " to existing projects.");
+            categoryNames.add(c.toString());
+        }
+        Category c = new Category(this.context, categoryName, this.owner, this.projectName);
         ParseController.createCategory(categoryName, projectName, owner);
         return c;
 

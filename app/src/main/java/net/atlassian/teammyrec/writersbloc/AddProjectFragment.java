@@ -1,5 +1,6 @@
 package net.atlassian.teammyrec.writersbloc;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.*;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -101,7 +103,24 @@ public class AddProjectFragment extends Fragment {
     public void createProject(View v) {
         EditText projectName = (EditText) this.getActivity().findViewById(R.id.addProjectName);
         try {
-            Project project = new Project(projectName.getText().toString(), ParseController.getCurrentUser());
+            ArrayList<Project> projects = ParseController.getAllProjects();
+            ArrayList<String> projectNames = new ArrayList<String>();
+            for(Project p: projects) {
+                System.out.println("Adding " + p.toString() + " to existing projects.");
+                projectNames.add(p.toString());
+            }
+
+            if(projectNames.contains(projectName.getText().toString())) {
+                AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this.getContext());
+                dlgAlert.setMessage("Project '" + projectName.getText().toString() + "' already exists.");
+                dlgAlert.setTitle("Error");
+                dlgAlert.setPositiveButton("OK", null);
+                dlgAlert.setCancelable(true);
+                dlgAlert.create().show();
+
+                return;
+            }
+            Project project = new Project(getContext(), projectName.getText().toString(), ParseController.getCurrentUser());
             ParseController.createProject(projectName.getText().toString(),
                     ParseController.getCurrentUser());
             ParseController.createCategory("Character", projectName.getText().toString(),

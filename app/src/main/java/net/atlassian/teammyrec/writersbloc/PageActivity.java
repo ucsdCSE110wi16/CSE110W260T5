@@ -48,7 +48,7 @@ public class PageActivity extends AppCompatActivity {
             mPage = new Page(pageName, getIntent().getStringExtra(INTENT_CATEGORY_NAME),
                     getIntent().getStringExtra(INTENT_PROJECT_NAME), ParseController.getCurrentUser());
             System.out.println("Project name: " + getIntent().getStringExtra(INTENT_PROJECT_NAME));
-            mProject = new Project(getIntent().getStringExtra(INTENT_PROJECT_NAME),
+            mProject = new Project(getApplicationContext(), getIntent().getStringExtra(INTENT_PROJECT_NAME),
                     ParseController.getCurrentUser());
         }catch (Exception e){
             Logger.getLogger(LOG_ID).log(Level.WARNING, "Error creating page: "+e);

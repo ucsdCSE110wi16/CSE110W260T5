@@ -90,7 +90,8 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    Project project = new Project(mProjects.get(position).toString(), ParseController.getCurrentUser());
+                    Project project = new Project(getApplicationContext(), mProjects.get(position).toString(),
+                            ParseController.getCurrentUser());
                     project.delete();
                     mProjects.remove(position);
                     updateAdapter();

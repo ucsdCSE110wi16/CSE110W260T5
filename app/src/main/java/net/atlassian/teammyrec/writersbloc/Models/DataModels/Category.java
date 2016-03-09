@@ -1,5 +1,6 @@
 package net.atlassian.teammyrec.writersbloc.Models.DataModels;
 
+import android.app.AlertDialog;
 import android.util.Log;
 
 import com.parse.Parse;
@@ -11,6 +12,7 @@ import java.lang.Exception;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import android.content.*;
 
 /**
  * Created by jay on 2/6/16.
@@ -26,18 +28,20 @@ public class Category {
     private String categoryName;
     private String projectName;
     private String owner;
+    private Context context;
 
 
 
-    public Category(String categoryName, String owner, String projectName) {
+    public Category(Context context, String categoryName, String owner, String projectName) {
         this.categoryName = categoryName;
         this.owner = owner;
         this.projectName = projectName;
+        this.context = context;
     }
 
 
     public Project getProject(){
-         return new Project(this.projectName, this.owner);
+         return new Project(this.context, this.projectName, this.owner);
     }
 
 

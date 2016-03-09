@@ -1,5 +1,6 @@
 package net.atlassian.teammyrec.writersbloc;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -43,7 +44,7 @@ public class PageListActivity extends AppCompatActivity {
         }
 
         try {
-            mCategory = new Category(getIntent().getStringExtra(INTENT_EXTRA_CATEGORY_NAME),
+            mCategory = new Category(this, getIntent().getStringExtra(INTENT_EXTRA_CATEGORY_NAME),
                     ParseController.getCurrentUser(), getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
            mPages = mCategory.getPages();
         }catch (Exception e){
@@ -91,6 +92,24 @@ public class PageListActivity extends AppCompatActivity {
 
     public void createPage(View v){
         try{
+
+            ArrayList<Page> allPages =  ParseController.getAllPagesForCategory(
+                    getIntent().getStringExtra(INTENT_EXTRA_CATEGORY_NAME),
+                    getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
+            for(Page pg : allPages){
+                if(((EditText) findViewById(R.id.addPageName)).getText().toString().equals(pg.toString()))
+                {
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+                    dlgAlert.setMessage("Page '" + ((EditText) findViewById(R.id.addPageName)).
+                            getText().toString() + "' already exists.");
+                    dlgAlert.setTitle("Error");
+                    dlgAlert.setPositiveButton("OK", null);
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+                    return;
+                }
+            }
+
             Page page = mCategory.addPage(((EditText) findViewById(R.id.addPageName)).getText().toString());
             ((EditText) findViewById(R.id.addPageName)).setText("");
             //ParseController.createPage(page.toString(), mCategory.toString(),
