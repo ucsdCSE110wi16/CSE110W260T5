@@ -2,6 +2,7 @@ package net.atlassian.teammyrec.writersbloc;
 
 
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
@@ -169,6 +170,25 @@ public class UIEspressoTests extends InstrumentationTestCase {
         UiObject2 testpg = device.findObject(By.text("Test Page"));
 
         assertTrue(testpg != null);
+    }
+
+    public void test6DeletingProject() {
+        device.pressBack();
+        device.pressBack();
+
+        device.wait(Until.hasObject(By.text("Projects")), 3000);
+        UiObject2 proj = device.findObject(By.text("Test Project"));
+        proj.swipe(Direction.LEFT, .5f);
+
+        device.wait(Until.hasObject(By.res("net.atlassian.teammyrec.writersbloc", "trash_button")), 3000);
+        UiObject2 deleteButt = device.findObject(By.res("net.atlassian.teammyrec.writersbloc", "trash_button"));
+        deleteButt.click();
+
+        device.waitForIdle(3000);
+
+        UiObject2 checkproj = device.findObject(By.text("Test Project"));
+
+        assertTrue(checkproj == null);
     }
 
 }
