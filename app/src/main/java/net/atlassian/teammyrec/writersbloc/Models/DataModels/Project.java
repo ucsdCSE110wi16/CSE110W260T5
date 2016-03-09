@@ -1,9 +1,11 @@
 package net.atlassian.teammyrec.writersbloc.Models.DataModels;
 
+import android.app.AlertDialog;
 import android.content.Context;
 
 import com.parse.Parse;
 
+import net.atlassian.teammyrec.writersbloc.Interfaces.Deletable;
 import net.atlassian.teammyrec.writersbloc.ParseController;
 
 import java.io.File;
@@ -17,7 +19,9 @@ import net.atlassian.teammyrec.writersbloc.Models.DataModels.*;
 /**
  * Created by jay on 2/10/16.
  */
-public class Project {
+
+public class Project implements Deletable {
+
 
     private String projectName;
     private String owner;
@@ -25,11 +29,16 @@ public class Project {
     public Project(String projectName, String owner) {
         this.projectName = projectName;
         this.owner = owner;
-
     }
 
 
     public Category createCategory(String categoryName) {
+        ArrayList<Category> categories = ParseController.getAllCategoriesForProject(this.toString());
+        ArrayList<String> categoryNames = new ArrayList<String>();
+        for(Category c: categories) {
+            System.out.println("Adding " + c.toString() + " to existing projects.");
+            categoryNames.add(c.toString());
+        }
         Category c = new Category(categoryName, this.owner, this.projectName);
         ParseController.createCategory(categoryName, projectName, owner);
         return c;
@@ -66,8 +75,9 @@ public class Project {
     }
 
 
+    @Override
     public void delete(){
-
+        ParseController.deleteProject(this.projectName, this.owner);
     }
 
     // Bottom of Project.java

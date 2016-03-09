@@ -37,7 +37,7 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
     private int fillup ;
     private final int minColC = 5;
     private final int minRowC = 5;
-    private final int colC = 5;
+    private final int colC = 2;
     private int maxSize = 0;
 
     //private final ArrayList<Category> listOfCate = new ArrayList<>();
@@ -91,6 +91,7 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
 
     protected void setUpGrid() {
         g = (GridLayout) findViewById(R.id.grid);
+
         g.setColumnCount(colC);
         if( maxSize % colC == 0) {
             g.setRowCount(maxSize/colC);

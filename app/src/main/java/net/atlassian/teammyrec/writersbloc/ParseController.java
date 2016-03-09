@@ -11,7 +11,9 @@ import com.parse.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.*;
+import android.content.*;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.*;
+
 
 /**
  * Created by matt on 2/10/16.
@@ -97,18 +99,37 @@ public class ParseController {
 
 
     public static void deletePage(String pageName, String category, String project, String userName) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Page");
-        query.whereEqualTo("title", pageName);
-        query.whereEqualTo("category", category);
-        query.whereEqualTo("project", project);
-        query.whereEqualTo("owner", userName);
-        query.setLimit(1);
+
+        final String page = new String(pageName);
+        final String categoryName = new String(category);
+        final String projectName = new String(project);
+        final String user = new String(userName);
 
         try {
-            List<ParseObject> pages = query.find();
-            ParseObject page = pages.get(0);
-            page.delete();
-        } catch(ParseException e) {
+
+            Thread th = new Thread(){
+                @Override
+                public void run(){
+                    try {
+                        final ParseQuery<ParseObject> query = ParseQuery.getQuery("Page");
+                        query.whereEqualTo("title", page);
+                        query.whereEqualTo("category", categoryName);
+                        query.whereEqualTo("project", projectName);
+                        query.whereEqualTo("owner", user);
+                        query.setLimit(1);
+                        List<ParseObject> pages = query.find();
+                        ParseObject page = pages.get(0);
+                        page.delete();
+                    }catch (ParseException e){
+
+                    }
+                }
+            };
+
+            th.start();
+
+
+        } catch(Exception e) {
 
         }
     }
@@ -145,23 +166,38 @@ public class ParseController {
     }
 
     public static void deleteProject(String projectName, String owner) {
-        ArrayList<Category> categories = ParseController.getAllCategoriesForProject(projectName);
-        for(Category c : categories) {
-            ParseController.deleteCategory(c.toString(), projectName, owner);
-        }
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Project");
-        query.whereEqualTo("projectName", projectName);
-        query.whereEqualTo("owner", owner);
-        query.setLimit(1);
+
+
+        final String name = new String(projectName);
+        final String own = new String(owner);
+
 
         try {
-            List<ParseObject> projects = query.find();
-            ParseObject project = projects.get(0);
-            project.delete();
-        } catch (ParseException e) {
+            Thread th = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        ArrayList<Category> categories = ParseController.getAllCategoriesForProject(name);
+                        for(Category c : categories) {
+                            ParseController.deleteCategory(c.toString(), name, own);
+                        }
+                        final ParseQuery<ParseObject> query = ParseQuery.getQuery("Project");
+                        query.whereEqualTo("projectName", name);
+                        query.whereEqualTo("owner", own);
+                        query.setLimit(1);
+                        List<ParseObject> projects = query.find();
+                        ParseObject project = projects.get(0);
+                        project.delete();
+                    }catch (ParseException e){
+
+                    }
+                }
+            };
+
+            th.start();
+        } catch (Exception e) {
 
         }
-
 
     }
 
@@ -179,23 +215,37 @@ public class ParseController {
     }
 
 
-    public static void deleteCategory(String categoryName, String project, String owner) {
-        ArrayList<Page> pages = ParseController.getAllPagesForCategory(categoryName, project);
+    public static void deleteCategory(String categoryName, final String project, String owner) {
 
-        for(Page page : pages) {
-            ParseController.deletePage(page.toString(), categoryName, project, owner);
-        }
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Category");
-        query.whereEqualTo("categoryName", categoryName);
-        query.whereEqualTo("project", project);
-        query.whereEqualTo("owner", owner);
-        query.setLimit(1);
+        final String name = new String(categoryName);
+        final String projectName = new String(project);
+        final String own = new String(owner);
 
         try {
-            List<ParseObject> categories = query.find();
-            ParseObject category = categories.get(0);
-            category.delete();
-        } catch (ParseException e) {
+            Thread th = new Thread(){
+                @Override
+                public void run(){
+                    try{
+                        ArrayList<Page> pages = ParseController.getAllPagesForCategory(name, projectName);
+
+                        for(Page page : pages) {
+                            ParseController.deletePage(page.toString(), name, projectName, own);
+                        }
+                        final ParseQuery<ParseObject> query = ParseQuery.getQuery("Category");
+                        query.whereEqualTo("categoryName", name);
+                        query.whereEqualTo("project", projectName);
+                        query.whereEqualTo("owner", own);
+                        query.setLimit(1);
+                        List<ParseObject> categories = query.find();
+                        ParseObject category = categories.get(0);
+                        category.delete();
+                    }catch (ParseException e){}
+                }
+            };
+
+            th.start();
+
+        } catch (Exception e) {
 
         }
     }

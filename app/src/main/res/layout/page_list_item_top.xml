@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="net.atlassian.teammyrec.writersbloc.ProjectListItemFragment"
+    android:orientation="horizontal"
+    android:id="@+id/listItemLayout"
+    >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:id="@+id/listItemTextID"
+        android:text="@string/action_settings"
+        android:textSize="30dp"
+        android:textColor="#0f0f0f"
+        android:layout_weight="7"
+        android:gravity="left|center_vertical"
+        android:layout_marginLeft="40dp"
+        />
+
+    <ImageView
+
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_navigate_next"
+        android:layout_gravity="right|center_vertical"
+        />
+
+</LinearLayout>

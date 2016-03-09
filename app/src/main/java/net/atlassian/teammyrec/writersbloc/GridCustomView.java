@@ -49,7 +49,7 @@ public class GridCustomView extends View {
         setName(name);
         p = path;
         setnD(30);
-        setColor(Color.BLACK);
+        setColor(Color.WHITE);
         dostuff = true;
         c = cate ;
         init();
@@ -124,7 +124,7 @@ public class GridCustomView extends View {
         else
         {
             //canvas.drawColor(Color.BLUE);
-            canvas.drawColor(ContextCompat.getColor(this.getContext(), R.color.GridButton));
+            canvas.drawColor(ContextCompat.getColor(this.getContext(), R.color.listItem));
         }
 
         int paddingLeft = getPaddingLeft();
