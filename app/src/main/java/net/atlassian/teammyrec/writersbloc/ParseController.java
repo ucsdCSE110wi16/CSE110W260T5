@@ -75,6 +75,28 @@ public class ParseController {
 
     }
 
+    public static String getPageBody(String pageName, String categoryName, String projectName, String owner) {
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Page");
+        query.whereEqualTo("title", pageName);
+        query.whereEqualTo("category", categoryName);
+        query.whereEqualTo("project", projectName);
+        query.whereEqualTo("owner", owner);
+        query.setLimit(1);
+
+        try {
+            List<ParseObject> pages = query.find();
+            ParseObject page = pages.get(0);
+            return (String)page.get("pageContent");
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
+
+    }
+
+
     public static void deletePage(String pageName, String category, String project, String userName) {
         final ParseQuery<ParseObject> query = ParseQuery.getQuery("Page");
         query.whereEqualTo("title", pageName);
