@@ -127,6 +127,11 @@ public class PageListActivity extends AppCompatActivity {
             case R.id.CategoryMenuTitle:
                 findViewById(R.id.frameFragmentLayout).setVisibility(View.VISIBLE);
                 return true;
+            case R.id.LogoutIcon:
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                ParseController.logoutCurrentUser();
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -138,6 +143,17 @@ public class PageListActivity extends AppCompatActivity {
 
     public void updateListAdapter(){
         ((FolderListAdapter) ((ListView)findViewById(R.id.page_list_view)).getAdapter()).notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        if(!ParseController.userIsLoggedIn()) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            this.overridePendingTransition(0,0);
+        }
     }
 
 }
