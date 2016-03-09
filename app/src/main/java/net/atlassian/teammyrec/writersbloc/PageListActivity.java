@@ -12,9 +12,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import net.atlassian.teammyrec.writersbloc.Adapters.DeleteListAdapter;
 import net.atlassian.teammyrec.writersbloc.Adapters.FolderListAdapter;
-import net.atlassian.teammyrec.writersbloc.Adapters.PageListAdapter;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Category;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Page;
 
@@ -23,9 +21,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import android.content.*;
 
+import com.parse.Parse;
+
 public class PageListActivity extends AppCompatActivity {
 
-    public static final String INTENT_EXTRA_PROJECT_ABSOLUTE_DIR = "Absolute_Directory";
+    private static boolean showOverlay = false;
     private static final String LOG_ID = "PageListActivity.net.atlassian.teammyrec.writersbloc";
     public static final String INTENT_EXTRA_PROJECT_NAME = "pn";
     public static final String INTENT_EXTRA_CATEGORY_NAME = "cn";
@@ -44,17 +44,8 @@ public class PageListActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        try {
-            mCategory = new Category(getIntent().getStringExtra(INTENT_EXTRA_CATEGORY_NAME),
-                    ParseController.getCurrentUser(), getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
-           mPages = mCategory.getPages();
-        }catch (Exception e){
-            Logger.getLogger(LOG_ID).log(Level.WARNING, "Error on category creation: " + e);
-        }
-
         ListView list = (ListView) findViewById(R.id.page_list_view);
-        FolderListAdapter<Page> adapter = new FolderListAdapter<>(this, R.layout.page_list_item, mPages);
-        list.setAdapter(adapter);
+
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -70,6 +61,35 @@ public class PageListActivity extends AppCompatActivity {
             }
         });
 
+        if(showOverlay)
+            findViewById(R.id.frameFragmentLayout).setVisibility(View.INVISIBLE);
+
+
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        try {
+            mCategory = new Category(getIntent().getStringExtra(INTENT_EXTRA_CATEGORY_NAME),
+                    ParseController.getCurrentUser(), getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
+            mPages = mCategory.getPages();
+        }catch (Exception e){
+            Logger.getLogger(LOG_ID).log(Level.WARNING, "Error on category creation: " + e);
+        }
+
+        setTitle(mCategory.toString());
+
+        ListView list = (ListView) findViewById(R.id.page_list_view);
+        FolderListAdapter<Page> adapter = new FolderListAdapter<>(this, R.layout.page_list_item, mPages);
+        list.setAdapter(adapter);
+
+        if(!ParseController.userIsLoggedIn()) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            this.overridePendingTransition(0,0);
+        }
     }
 
     @Override
@@ -110,6 +130,7 @@ public class PageListActivity extends AppCompatActivity {
             updateListAdapter();
 
             findViewById(R.id.frameFragmentLayout).setVisibility(View.INVISIBLE);
+            showOverlay = false;
         }catch (Exception e){
             Logger.getLogger(LOG_ID).log(Level.WARNING, "Invalid IO error when creating page: " + e);
         }
@@ -126,6 +147,7 @@ public class PageListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.CategoryMenuTitle:
                 findViewById(R.id.frameFragmentLayout).setVisibility(View.VISIBLE);
+                showOverlay = true;
                 return true;
             case R.id.LogoutIcon:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -138,22 +160,14 @@ public class PageListActivity extends AppCompatActivity {
     }
 
     public void cancelCreatePage(View v){
+        ((EditText) findViewById(R.id.addPageName)).setText("");
         findViewById(R.id.frameFragmentLayout).setVisibility(View.INVISIBLE);
+        showOverlay=false;
     }
 
     public void updateListAdapter(){
         ((FolderListAdapter) ((ListView)findViewById(R.id.page_list_view)).getAdapter()).notifyDataSetChanged();
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-
-        if(!ParseController.userIsLoggedIn()) {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-            this.overridePendingTransition(0,0);
-        }
-    }
 
 }

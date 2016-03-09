@@ -1,6 +1,5 @@
 package net.atlassian.teammyrec.writersbloc;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,13 +16,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import net.atlassian.teammyrec.writersbloc.Adapters.DeleteListAdapter;
 import net.atlassian.teammyrec.writersbloc.Adapters.FolderListAdapter;
 import net.atlassian.teammyrec.writersbloc.Adapters.ProjectListAdapter;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
 
 import com.daimajia.swipe.adapters.ArraySwipeAdapter;
-import com.parse.Parse;
 
 import java.util.ArrayList;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.*;
@@ -31,9 +28,8 @@ import net.atlassian.teammyrec.writersbloc.Models.DataModels.*;
 public class ProjectActivity extends AppCompatActivity implements AddProjectFragment.OnFragmentInteractionListener {
 
     // These are here ONLY to framework the 'login'. Eventually this functionality will
-    // NOT be in the ProjectActivity, but for demo purposes, this works well
-    public static final String INTENT_EXTRA_PASSWORD = "ProjectActivity.PASSWORD";
     public static final String INTENT_EXTRA_USERNAME = "ProjectActivity.USERNAME";
+    private static boolean showOverlay = false;
 
     private ArrayList<Project> mProjects;
 
@@ -87,6 +83,12 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
             }
         });
 
+        if(showOverlay)
+            findViewById(R.id.frameFragmentLayout).setVisibility(View.VISIBLE);
+
+
+
+        setTitle(ParseController.getCurrentUser());
     }
 
     @Override
@@ -108,6 +110,7 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
         EditText edit = ((EditText)fragment.getActivity().findViewById(R.id.addProjectName));
         edit.setText("");
         findViewById(R.id.frameFragmentLayout).setVisibility(View.INVISIBLE);
+        showOverlay=false;
 
         InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mgr.hideSoftInputFromWindow(edit.getWindowToken(), 0);
@@ -116,7 +119,9 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
     }
 
     public void cancelCreateProject(View v){
+        ((EditText) findViewById(R.id.addPageName)).setText("");
         findViewById(R.id.frameFragmentLayout).setVisibility(View.INVISIBLE);
+        showOverlay=false;
     }
 
 
@@ -127,6 +132,7 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
         switch (item.getItemId()) {
             case R.id.CategoryMenuTitle:
                 findViewById(R.id.frameFragmentLayout).setVisibility(View.VISIBLE);
+                showOverlay=true;
                 return true;
             case R.id.LogoutIcon:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

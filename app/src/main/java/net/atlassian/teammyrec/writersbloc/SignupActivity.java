@@ -24,9 +24,9 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void signup(View v) {
-        EditText username = (EditText)findViewById(R.id.username_edit_activity_signup);
-        EditText password = (EditText)findViewById(R.id.password_edit_activity_signup);
-        EditText passConfirm = (EditText)findViewById(R.id.password_edit_activity_signup2);
+        EditText username = (EditText)findViewById(R.id.userNameEdit);
+        EditText password = (EditText)findViewById(R.id.passwordEdit);
+        EditText passConfirm = (EditText)findViewById(R.id.confirmEdit);
 
         if(!password.getText().toString().equals(passConfirm.getText().toString())) {
             AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
@@ -41,7 +41,6 @@ public class SignupActivity extends AppCompatActivity {
         ParseController.addUser(username.getText().toString(), password.getText().toString());
         Intent intent = new Intent(this, ProjectActivity.class);
         intent.putExtra(ProjectActivity.INTENT_EXTRA_USERNAME, username.getText().toString());
-        intent.putExtra(ProjectActivity.INTENT_EXTRA_PASSWORD, password.getText().toString());
         this.startActivity(intent);
 
     }

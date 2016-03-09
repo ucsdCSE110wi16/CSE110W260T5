@@ -12,4 +12,15 @@
     <color name="menuAccent">#7D4430</color>
     <color name="listBackgroundColor">#fffdcc</color>
     <color name="GridButton">#ffff99</color>
+    <color name="whiteText">#f0f0f0</color>
+    <color name="whiteHint">#d0d0d0</color>
+
+    <color name="smallMenu">@color/registerEditText</color>
+
+    <color name="registerBackground">#121212</color>
+    <color name="registerEditText">#242424</color>
+    <color name="registerButton">#2f802f</color>
+    <color name="loginButton">#c02f802f</color>
+    <color name="loginRegisterButton">#c0121212</color>
+
 </resources>

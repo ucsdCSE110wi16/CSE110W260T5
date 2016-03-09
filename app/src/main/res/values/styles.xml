@@ -5,7 +5,21 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/menuColor</item>
         <item name="colorPrimaryDark">@color/menuAccent</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/menuAccent</item>
+    </style>
+
+    <style name="AppThemeRegister" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/menuColor</item>
+        <item name="colorPrimaryDark">@color/smallMenu</item>
+        <item name="colorAccent">@color/whiteHint</item>
+    </style>
+
+    <style name="AppThemeLogin" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/menuColor</item>
+        <item name="colorPrimaryDark">@color/smallMenu</item>
+        <item name="colorAccent">@color/whiteHint</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

@@ -22,6 +22,12 @@
     <string name="onboard_intro2_desc">Seamlessly create pages that describe parts of your story</string>
     <string name="onboard_intro3_title">Linking between Pages</string>
     <string name="onboard_intro3_desc">Automatically links page names together to show relationship</string>
+    <string name="userNameHint">User Name: </string>
+    <string name="passwordHint">Password:</string>
+    <string name="confirmHint">Confirm:</string>
+    <string name="register_str">Register:</string>
+    <string name="account_btn">Sign Up</string>
+
 </resources>
 
 

@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,10 @@
         android:theme="@style/AppTheme">
         <activity android:name=".OnboardTutorial"
             android:label="@string/app_intro" />
-        <activity android:name=".LoginActivity">
+
+        <activity android:name=".LoginActivity"
+            android:theme="@style/AppThemeLogin"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -17,11 +16,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.parse.Parse;
-import com.parse.ParseUser;
-
-import net.atlassian.teammyrec.writersbloc.Adapters.CategoryListAdapter;
-import net.atlassian.teammyrec.writersbloc.Adapters.DeleteListAdapter;
 import net.atlassian.teammyrec.writersbloc.Adapters.FolderListAdapter;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Category;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
@@ -108,6 +102,7 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
             }
         });
 
+        setTitle(mCurrentProject.toString());
     }
 
     @Override
