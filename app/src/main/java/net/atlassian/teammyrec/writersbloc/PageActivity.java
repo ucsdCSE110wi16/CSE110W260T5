@@ -114,6 +114,7 @@ public class PageActivity extends AppCompatActivity implements AddCategoryFragme
             findViewById(R.id.frameFragmentLayout).setVisibility(View.VISIBLE);
 
 
+        setTitle(mPage.toString());
 
     }
 
