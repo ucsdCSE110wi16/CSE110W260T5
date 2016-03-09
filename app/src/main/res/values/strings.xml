@@ -15,6 +15,13 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_page_list">Pages</string>
     <string name="title_activity_graph">Graph</string>
+    <string name="app_intro">Writer\'s Bloc Tutorial</string>
+    <string name="onboard_intro1_title">Welcome to Writer\'s Bloc!</string>
+    <string name="onboard_intro1_desc">Easily create projects and new categories to organize your ideas</string>
+    <string name="onboard_intro2_title">Create Pages</string>
+    <string name="onboard_intro2_desc">Seamlessly create pages that describe parts of your story</string>
+    <string name="onboard_intro3_title">Linking between Pages</string>
+    <string name="onboard_intro3_desc">Automatically links page names together to show relationship</string>
 </resources>
 
 
