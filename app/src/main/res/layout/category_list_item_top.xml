@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="@dimen/category_item_height">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/listItemLayout"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/category_item_height"
+            android:id="@+id/listItemTextID"
+            android:text="@string/action_settings"
+            android:textSize="30dp"
+            android:textColor="#0f0f0f"
+            android:layout_weight="7"
+            android:gravity="left|center_vertical"
+            android:layout_marginLeft="40dp"
+            />
+
+        <ImageView
+
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/category_item_height"
+            android:src="@drawable/ic_navigate_next"
+            android:layout_gravity="right|center_vertical"
+            />
+
+    </LinearLayout>
+</LinearLayout>
