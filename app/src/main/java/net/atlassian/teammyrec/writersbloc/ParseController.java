@@ -23,18 +23,6 @@ public class ParseController {
         ParseUser user = new ParseUser();
         user.setUsername(username);
         user.setPassword(password);
-        /*user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    //
-                } else {
-                    // error
-                    System.out.println(e.toString());
-                    System.out.println("error signing up");
-                    Logger.getLogger("ok").log(Level.INFO, "Error signing up");
-                }
-            }
-        });*/
         try {
             user.signUp();
         } catch(ParseException e) {
@@ -86,6 +74,45 @@ public class ParseController {
 
     }
 
+    public static String getPageBody(String pageName, String categoryName, String projectName, String owner) {
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Page");
+        query.whereEqualTo("title", pageName);
+        query.whereEqualTo("category", categoryName);
+        query.whereEqualTo("project", projectName);
+        query.whereEqualTo("owner", owner);
+        query.setLimit(1);
+
+        try {
+            List<ParseObject> pages = query.find();
+            ParseObject page = pages.get(0);
+            return (String)page.get("pageContent");
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
+
+    }
+
+
+    public static void deletePage(String pageName, String category, String project, String userName) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Page");
+        query.whereEqualTo("title", pageName);
+        query.whereEqualTo("category", category);
+        query.whereEqualTo("project", project);
+        query.whereEqualTo("owner", userName);
+        query.setLimit(1);
+
+        try {
+            List<ParseObject> pages = query.find();
+            ParseObject page = pages.get(0);
+            page.delete();
+        } catch(ParseException e) {
+
+        }
+    }
+
     public static void updatePage(String pageName, String category, String project, String owner, String body) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Page");
         query.whereEqualTo("title", pageName);
@@ -117,6 +144,27 @@ public class ParseController {
 
     }
 
+    public static void deleteProject(String projectName, String owner) {
+        ArrayList<Category> categories = ParseController.getAllCategoriesForProject(projectName);
+        for(Category c : categories) {
+            ParseController.deleteCategory(c.toString(), projectName, owner);
+        }
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Project");
+        query.whereEqualTo("projectName", projectName);
+        query.whereEqualTo("owner", owner);
+        query.setLimit(1);
+
+        try {
+            List<ParseObject> projects = query.find();
+            ParseObject project = projects.get(0);
+            project.delete();
+        } catch (ParseException e) {
+
+        }
+
+
+    }
+
     public static void createCategory(String categoryName, String project, String owner) {
         ParseObject category = new ParseObject("Category");
         category.put("categoryName", categoryName);
@@ -128,6 +176,28 @@ public class ParseController {
             e.printStackTrace();
         }
 
+    }
+
+
+    public static void deleteCategory(String categoryName, String project, String owner) {
+        ArrayList<Page> pages = ParseController.getAllPagesForCategory(categoryName, project);
+
+        for(Page page : pages) {
+            ParseController.deletePage(page.toString(), categoryName, project, owner);
+        }
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Category");
+        query.whereEqualTo("categoryName", categoryName);
+        query.whereEqualTo("project", project);
+        query.whereEqualTo("owner", owner);
+        query.setLimit(1);
+
+        try {
+            List<ParseObject> categories = query.find();
+            ParseObject category = categories.get(0);
+            category.delete();
+        } catch (ParseException e) {
+
+        }
     }
 
 

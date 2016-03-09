@@ -43,7 +43,7 @@ public class Project {
     }
 
     public ArrayList<Category> getCategories() {
-       return ParseController.getAllCategoriesForProject(this.projectName);
+        return ParseController.getAllCategoriesForProject(this.projectName);
     }
 
 
@@ -81,9 +81,9 @@ public class Project {
             return (x.second.toString().length() > y.second.toString().length()? -1 : 1);
         }
     }
-
+    /*
     public String toString(){
         return projectFile.getName();
-    }
+    }*/
 
 }

@@ -38,9 +38,8 @@ public class Page {
     }
 
 
-
-
     public void delete(){
+        ParseController.deletePage(pageName, categoryName, projectName, owner);
     }
 
 
