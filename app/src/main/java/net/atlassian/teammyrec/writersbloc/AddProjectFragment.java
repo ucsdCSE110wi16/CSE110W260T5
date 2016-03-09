@@ -107,10 +107,10 @@ public class AddProjectFragment extends Fragment {
             ArrayList<String> projectNames = new ArrayList<String>();
             for(Project p: projects) {
                 System.out.println("Adding " + p.toString() + " to existing projects.");
-                projectNames.add(p.toString());
+                projectNames.add(p.toString().toLowerCase());
             }
 
-            if(projectNames.contains(projectName.getText().toString())) {
+            if(projectNames.contains(projectName.getText().toString().toLowerCase())) {
                 AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this.getContext());
                 dlgAlert.setMessage("Project '" + projectName.getText().toString() + "' already exists.");
                 dlgAlert.setTitle("Error");
@@ -118,9 +118,9 @@ public class AddProjectFragment extends Fragment {
                 dlgAlert.setCancelable(true);
                 dlgAlert.create().show();
 
-                return;
+                return null;
             }
-            Project project = new Project(getContext(), projectName.getText().toString(), ParseController.getCurrentUser());
+            Project project = new Project(projectName.getText().toString(), ParseController.getCurrentUser());
             ParseController.createProject(projectName.getText().toString(),
                     ParseController.getCurrentUser());
             ParseController.createCategory("Character", projectName.getText().toString(),

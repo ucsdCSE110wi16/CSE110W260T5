@@ -29,20 +29,18 @@ public class Category implements Deletable {
     private String categoryName;
     private String projectName;
     private String owner;
-    private Context context;
 
 
 
-    public Category(Context context, String categoryName, String owner, String projectName) {
+    public Category(String categoryName, String owner, String projectName) {
         this.categoryName = categoryName;
         this.owner = owner;
         this.projectName = projectName;
-        this.context = context;
     }
 
 
     public Project getProject(){
-         return new Project(this.context, this.projectName, this.owner);
+         return new Project(this.projectName, this.owner);
     }
 
 

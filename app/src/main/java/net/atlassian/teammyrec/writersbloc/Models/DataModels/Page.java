@@ -22,7 +22,6 @@ public class Page implements Deletable {
     private String projectName;
     private String owner;
     private String pageName;
-    private Context context;
 
 
     public Page(String pageName, String categoryName, String projectName, String owner) {
@@ -30,11 +29,10 @@ public class Page implements Deletable {
         this.categoryName = categoryName;
         this.projectName = projectName;
         this.owner = owner;
-        this.context = context;
     }
 
     public Category getCategory(){
-        return new Category(this.context, this.categoryName, this.owner, this.projectName);
+        return new Category(this.categoryName, this.owner, this.projectName);
     }
 
     public String toString(){

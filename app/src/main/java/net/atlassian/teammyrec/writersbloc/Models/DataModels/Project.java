@@ -19,21 +19,16 @@ import net.atlassian.teammyrec.writersbloc.Models.DataModels.*;
 /**
  * Created by jay on 2/10/16.
  */
-<<<<<<< HEAD
-public class Project {
-    private Context context;
-=======
+
 public class Project implements Deletable {
 
->>>>>>> f33c081809521102a693f9c09c3ca92774583a42
+
     private String projectName;
     private String owner;
 
-    public Project(Context context, String projectName, String owner) {
+    public Project(String projectName, String owner) {
         this.projectName = projectName;
         this.owner = owner;
-        this.context = context;
-
     }
 
 
@@ -44,7 +39,7 @@ public class Project implements Deletable {
             System.out.println("Adding " + c.toString() + " to existing projects.");
             categoryNames.add(c.toString());
         }
-        Category c = new Category(this.context, categoryName, this.owner, this.projectName);
+        Category c = new Category(categoryName, this.owner, this.projectName);
         ParseController.createCategory(categoryName, projectName, owner);
         return c;
 

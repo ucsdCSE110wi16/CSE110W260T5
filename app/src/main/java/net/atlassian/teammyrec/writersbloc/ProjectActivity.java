@@ -86,30 +86,6 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
             }
         });
 
-<<<<<<< HEAD
-        ListView deleteList = (ListView)findViewById(R.id.project_delete_view);
-
-        deleteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                try {
-                    Project project = new Project(getApplicationContext(), mProjects.get(position).toString(),
-                            ParseController.getCurrentUser());
-                    project.delete();
-                    mProjects.remove(position);
-                    updateAdapter();
-                }catch (Exception e){
-
-                }
-            }
-        });
-
-=======
->>>>>>> f33c081809521102a693f9c09c3ca92774583a42
-
-
-
-
     }
 
     @Override

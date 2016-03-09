@@ -20,7 +20,7 @@ public class PhraseLinker {
 
         // Valid delimiters that can be to the left or right of the keyphrase
         ArrayList<String> delimiters = new ArrayList<String>(
-                Arrays.asList(new String[] {" ", "\n", "'", "\"", ":", "-", ".", "!", ";", "?", ")", "("}));
+                Arrays.asList(new String[] {" ", ",", "\n", "'", "\"", ":", "-", ".", "!", ";", "?", ")", "("}));
 
 
         // Check each keyphrase to see if it's part of the body
@@ -35,8 +35,6 @@ public class PhraseLinker {
 
                 do {
                     addToLinks = true;
-                    System.out.println("BEG OF LOOP: globalIndex = " + globalIndex);
-                    System.out.println(phrase + " has been found at index " + globalIndex);
                     String beforeDelim ;
                     String afterDelim;
 
@@ -57,13 +55,10 @@ public class PhraseLinker {
                     // If any part of the phrase is part of another link, don't add
                     for(int i = globalIndex; i < globalIndex + phrase.length(); i++) {
                         if(hasBeenLinked[i]) {
-                            System.out.println("Index " + i + " has already been linked.");
                             addToLinks = false;
                             break;
                         }
                     }
-
-                    if(!addToLinks) System.out.println("We're not adding " + phrase + " to links this time.");
 
                     // Check that they're valid delimiters - this indicates the token is an intended link
                     if(delimiters.contains(beforeDelim) && delimiters.contains(afterDelim)) {
@@ -81,7 +76,6 @@ public class PhraseLinker {
                     newBody = newBody.substring(localIndex + phrase.length());
                     localIndex = newBody.toLowerCase().indexOf(phrase.toLowerCase());
                     globalIndex += localIndex;
-                    System.out.println("Local index is : " + localIndex);
                 } while(localIndex != -1);
             }
         }

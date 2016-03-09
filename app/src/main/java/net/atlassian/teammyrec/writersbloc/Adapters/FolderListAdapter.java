@@ -39,7 +39,7 @@ public class FolderListAdapter<T> extends ArraySwipeAdapter {
         final SwipeLayout layout = (SwipeLayout) convertView;
         if(layout != null){
             TextView title = (TextView)layout.findViewById(R.id.listItemTextID);
-            if(title != null)
+            if(title != null && mItemList.get(position) != null)
                 title.setText(mItemList.get(position).toString());
 
             ImageButton trashButton = (ImageButton)layout.findViewById(R.id.trash_button);

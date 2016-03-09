@@ -45,7 +45,7 @@ public class PageListActivity extends AppCompatActivity {
         }
 
         try {
-            mCategory = new Category(this, getIntent().getStringExtra(INTENT_EXTRA_CATEGORY_NAME),
+            mCategory = new Category(getIntent().getStringExtra(INTENT_EXTRA_CATEGORY_NAME),
                     ParseController.getCurrentUser(), getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
            mPages = mCategory.getPages();
         }catch (Exception e){
@@ -86,7 +86,8 @@ public class PageListActivity extends AppCompatActivity {
                     getIntent().getStringExtra(INTENT_EXTRA_CATEGORY_NAME),
                     getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME));
             for(Page pg : allPages){
-                if(((EditText) findViewById(R.id.addPageName)).getText().toString().equals(pg.toString()))
+                if(((EditText) findViewById(R.id.addPageName)).getText().toString().toLowerCase()
+                        .equals(pg.toString().toLowerCase()))
                 {
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
                     dlgAlert.setMessage("Page '" + ((EditText) findViewById(R.id.addPageName)).
