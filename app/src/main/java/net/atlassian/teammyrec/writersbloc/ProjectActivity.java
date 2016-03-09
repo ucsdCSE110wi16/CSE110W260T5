@@ -17,9 +17,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import net.atlassian.teammyrec.writersbloc.Adapters.DeleteListAdapter;
+import net.atlassian.teammyrec.writersbloc.Adapters.FolderListAdapter;
 import net.atlassian.teammyrec.writersbloc.Adapters.ProjectListAdapter;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
 
+import com.daimajia.swipe.adapters.ArraySwipeAdapter;
 import com.parse.Parse;
 
 import java.util.ArrayList;
@@ -47,7 +49,7 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
         Toolbar toolbar = (Toolbar) findViewById(R.id.project_toolbar);
         setSupportActionBar(toolbar);
 
-        final ArrayList<Project> mProjects = ParseController.getAllProjects();
+        mProjects = ParseController.getAllProjects();
         ArrayList<Project> projects = ParseController.getAllProjects();
         System.out.println(projects.size());
         for(Project project : projects) {
@@ -72,7 +74,7 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
         list.setAdapter(adapter);
 
 
-        updateAdapter();
+        updateAdapter(mProjects);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -84,6 +86,7 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
             }
         });
 
+<<<<<<< HEAD
         ListView deleteList = (ListView)findViewById(R.id.project_delete_view);
 
         deleteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -101,6 +104,8 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
             }
         });
 
+=======
+>>>>>>> f33c081809521102a693f9c09c3ca92774583a42
 
 
 
@@ -116,20 +121,11 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
 
     public void createProject(View v){
         AddProjectFragment fragment = (AddProjectFragment)getSupportFragmentManager().findFragmentById(R.id.overlayAddProject);
-        fragment.createProject(v);
+        mProjects.add(fragment.createProject(v));
 
         ListView list = (ListView)findViewById(R.id.projects_list_view);
+        ((ArraySwipeAdapter)list.getAdapter()).notifyDataSetChanged();
 
-
-        ArrayList<ProjectListAdapter.ProjectListViewModel> models = new ArrayList<>();
-        for(Project p: ParseController.getAllProjects()){
-            models.add(new ProjectListAdapter.ProjectListViewModel(p.toString()));
-        }
-
-        ProjectListAdapter adapter = new ProjectListAdapter(this, R.layout.project_list_item, models);
-        list.setAdapter(adapter);
-
-        updateAdapter();
 
         EditText edit = ((EditText)fragment.getActivity().findViewById(R.id.addProjectName));
         edit.setText("");
@@ -175,18 +171,10 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
     }
 
 
-    public void updateAdapter() {
+    public void updateAdapter(ArrayList<Project> mProjects) {
         ListView list = (ListView)findViewById(R.id.projects_list_view);
-        ArrayList<ProjectListAdapter.ProjectListViewModel> models = new ArrayList<>();
-        for(Project p: ParseController.getAllProjects()){
-            models.add(new ProjectListAdapter.ProjectListViewModel(p.toString()));
-        }
-        ProjectListAdapter adapter = new ProjectListAdapter(this, R.layout.project_list_item,models);
+        FolderListAdapter adapter = new FolderListAdapter(this, R.layout.project_list_item, mProjects );
         list.setAdapter(adapter);
-
-        ListView deleteList = (ListView)findViewById(R.id.project_delete_view);
-        DeleteListAdapter<ProjectListAdapter.ProjectListViewModel> deleteAdapter = new DeleteListAdapter<>(this,R.layout.project_trash_view_item, models);
-        deleteList.setAdapter(deleteAdapter);
     }
 
     @Override

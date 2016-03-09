@@ -6,8 +6,10 @@
     <color name="addButton">#7A4936</color>
     <color name="listItem">#c033345C</color>
     <color name="cancelButton">#B6451F</color>
+    <color name="trashBackground">#B6451F</color>
     <color name="graphButton">#DB5742</color>
     <color name="menuColor">#4D2A1E</color>
     <color name="menuAccent">#7D4430</color>
     <color name="listBackgroundColor">#fffdcc</color>
+    <color name="GridButton">#ffff99</color>
 </resources>

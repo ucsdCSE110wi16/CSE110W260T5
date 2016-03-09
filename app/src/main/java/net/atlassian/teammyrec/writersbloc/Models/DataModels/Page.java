@@ -2,6 +2,7 @@ package net.atlassian.teammyrec.writersbloc.Models.DataModels;
 
 import android.util.JsonToken;
 
+import net.atlassian.teammyrec.writersbloc.Interfaces.Deletable;
 import net.atlassian.teammyrec.writersbloc.ParseController;
 
 import org.json.JSONObject;
@@ -16,7 +17,7 @@ import android.content.*;
  */
 
 
-public class Page {
+public class Page implements Deletable {
     private String categoryName;
     private String projectName;
     private String owner;
@@ -41,6 +42,7 @@ public class Page {
     }
 
 
+    @Override
     public void delete(){
         ParseController.deletePage(pageName, categoryName, projectName, owner);
     }

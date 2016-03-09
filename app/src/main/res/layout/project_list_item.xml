@@ -1,33 +1,35 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="70dp"
-    tools:context="net.atlassian.teammyrec.writersbloc.ProjectListItemFragment"
-    android:orientation="horizontal"
-    android:id="@+id/listItemLayout"
-    android:background="@color/menuColor"
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="@dimen/project_item_height"
+    android:id="@+id/swipe"
     >
+    <!-- Bottom View Start-->
+    <LinearLayout
+        android:background="#66ddff00"
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="@dimen/trash_button_width"
+        android:weightSum="1"
+        android:layout_height="@dimen/project_item_height"
+        android:orientation="horizontal"
+        >
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="@dimen/list_item_height"
-        android:id="@+id/listItemTextID"
-        android:text="@string/action_settings"
-        android:textColor="#f0f0f0"
-        android:textSize="30dp"
+        <include layout="@layout/project_list_item_bottom"></include>
+        <!--What you want to show-->
+    </LinearLayout>
+    <!-- Bottom View End-->
 
-        android:layout_weight="7"
-        android:gravity="left|center_vertical"
-        android:layout_marginLeft="40dp"
-        />
+    <!-- Surface View Start -->
+    <LinearLayout
+        android:padding="0dp"
+        android:background="#f0f0f0"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_item_height"
+        android:orientation="horizontal"
+        >
 
-    <ImageView
+        <include layout="@layout/project_list_item_top"></include>
+        <!--What you want to show in SurfaceView-->
+    </LinearLayout>
+    <!-- Surface View End -->
+</com.daimajia.swipe.SwipeLayout>
 
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_navigate_next_white"
-        android:layout_gravity="right|center_vertical"
-        />
 
-</LinearLayout>

@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.parse.Parse;
 
+import net.atlassian.teammyrec.writersbloc.Interfaces.Deletable;
 import net.atlassian.teammyrec.writersbloc.ParseController;
 
 import java.io.File;
@@ -18,8 +19,13 @@ import net.atlassian.teammyrec.writersbloc.Models.DataModels.*;
 /**
  * Created by jay on 2/10/16.
  */
+<<<<<<< HEAD
 public class Project {
     private Context context;
+=======
+public class Project implements Deletable {
+
+>>>>>>> f33c081809521102a693f9c09c3ca92774583a42
     private String projectName;
     private String owner;
 
@@ -46,9 +52,12 @@ public class Project {
 
     public String toString() { return this.projectName; }
 
+    public void deleteCategory(String categoryName){
+
+    }
 
     public ArrayList<Category> getCategories() {
-       return ParseController.getAllCategoriesForProject(this.projectName);
+        return ParseController.getAllCategoriesForProject(this.projectName);
     }
 
 
@@ -71,8 +80,8 @@ public class Project {
     }
 
 
+    @Override
     public void delete(){
-        ParseController.deleteProject(projectName, owner);
 
     }
 
@@ -87,5 +96,9 @@ public class Project {
             return (x.second.toString().length() > y.second.toString().length()? -1 : 1);
         }
     }
+    /*
+    public String toString(){
+        return projectFile.getName();
+    }*/
 
 }
