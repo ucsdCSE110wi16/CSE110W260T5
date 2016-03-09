@@ -16,14 +16,6 @@
 
         <ListView
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:id="@+id/page_list_delete_view"
-            android:background="@color/listBackgroundColor"
-            />
-
-        <ListView
-            android:layout_width="0dp"
             android:layout_weight="8"
             android:layout_height="match_parent"
             android:id="@+id/page_list_view"

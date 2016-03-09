@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/trash_button"
+        android:layout_width="@dimen/trash_button_width"
+        android:layout_height="@dimen/project_item_height"
+        android:scaleType="fitCenter"
+        android:padding="9dp"
+        android:src="@drawable/trash"
+        android:background="@color/trashBackground"
+        />
+</LinearLayout>

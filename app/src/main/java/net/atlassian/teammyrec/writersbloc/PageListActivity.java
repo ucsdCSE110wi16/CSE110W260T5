@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import net.atlassian.teammyrec.writersbloc.Adapters.DeleteListAdapter;
+import net.atlassian.teammyrec.writersbloc.Adapters.FolderListAdapter;
 import net.atlassian.teammyrec.writersbloc.Adapters.PageListAdapter;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Category;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Page;
@@ -51,7 +52,7 @@ public class PageListActivity extends AppCompatActivity {
         }
 
         ListView list = (ListView) findViewById(R.id.page_list_view);
-        PageListAdapter adapter = new PageListAdapter(this, R.layout.page_list_item, mPages);
+        FolderListAdapter<Page> adapter = new FolderListAdapter<>(this, R.layout.page_list_item, mPages);
         list.setAdapter(adapter);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,18 +69,6 @@ public class PageListActivity extends AppCompatActivity {
             }
         });
 
-        ListView deleteList = (ListView) findViewById(R.id.page_list_delete_view);
-        deleteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Page page = mPages.get(position);
-                page.delete();
-                mPages.remove(page);
-                updateListAdapter();
-            }
-        });
-
-        deleteList.setAdapter(new DeleteListAdapter<Page>(this, R.layout.page_list_trash_item, mPages));
     }
 
     @Override
@@ -97,10 +86,9 @@ public class PageListActivity extends AppCompatActivity {
               //      getIntent().getStringExtra(INTENT_EXTRA_PROJECT_NAME), ParseController.getCurrentUser());
             //page.writePageInformation(info);
             mPages.add(page);
-            PageListAdapter adapter = new PageListAdapter(this, R.layout.page_list_item, mPages);
-            ((ListView)findViewById(R.id.page_list_view)).setAdapter(adapter);
 
-            ((ListView)findViewById(R.id.page_list_delete_view)).setAdapter(new DeleteListAdapter<Page>(this,R.layout.page_list_trash_item, mPages));
+            updateListAdapter();
+
             findViewById(R.id.frameFragmentLayout).setVisibility(View.INVISIBLE);
         }catch (Exception e){
             Logger.getLogger(LOG_ID).log(Level.WARNING, "Invalid IO error when creating page: " + e);
@@ -129,10 +117,7 @@ public class PageListActivity extends AppCompatActivity {
     }
 
     public void updateListAdapter(){
-        PageListAdapter adapter = new PageListAdapter(this, R.layout.page_list_item, mPages);
-        DeleteListAdapter<Page> deleteAdapter = new DeleteListAdapter<>(this, R.layout.page_list_trash_item, mPages);
-        ((ListView)findViewById(R.id.page_list_view)).setAdapter(adapter);
-        ((ListView)findViewById(R.id.page_list_delete_view)).setAdapter(deleteAdapter);
+        ((FolderListAdapter) ((ListView)findViewById(R.id.page_list_view)).getAdapter()).notifyDataSetChanged();
     }
 
 }
