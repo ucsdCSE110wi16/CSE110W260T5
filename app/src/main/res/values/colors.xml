@@ -10,4 +10,5 @@
     <color name="menuColor">#4D2A1E</color>
     <color name="menuAccent">#7D4430</color>
     <color name="listBackgroundColor">#fffdcc</color>
+    <color name="GridButton">#ffff99</color>
 </resources>

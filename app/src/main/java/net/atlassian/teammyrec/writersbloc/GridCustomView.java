@@ -6,10 +6,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import net.atlassian.teammyrec.writersbloc.Models.DataModels.Category;
 
 /**
  * TODO: document your custom view class.
@@ -26,6 +29,8 @@ public class GridCustomView extends View {
     private TextPaint nPaint;
     private int nColor = Color.BLACK;
     private float nD = 50;
+    private String p;
+    private Category c ;
 
     private OnToggledListener listen;
     private boolean dostuff;
@@ -33,18 +38,20 @@ public class GridCustomView extends View {
 
     public interface OnToggledListener
     {
-        void OnToggled(GridCustomView view, boolean stuff);
+        void OnToggled(GridCustomView view, boolean stuff , String pageName , String pagePath , Category cate);
     }
 
-    public GridCustomView(Context context, int x, int y, String name) {
+    public GridCustomView(Context context, int x, int y, String name , String path, Category cate) {
         super(context);
         XP = x;
         YP = y;
         nPaint = new TextPaint();
         setName(name);
+        p = path;
         setnD(30);
         setColor(Color.BLACK);
-        dostuff = false;
+        dostuff = true;
+        c = cate ;
         init();
     }
 
@@ -75,11 +82,11 @@ public class GridCustomView extends View {
         super.onTouchEvent(e);
         switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                dostuff = !dostuff;
+
 
                 invalidate();
                 if (listen != null) {
-                    listen.OnToggled(this, dostuff);
+                    listen.OnToggled(this, dostuff , n , p , c);
                 }
                 clicked = true;
                 return true;
@@ -109,13 +116,15 @@ public class GridCustomView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if( dostuff )
+        if( n.equals("") )
         {
-            canvas.drawColor(Color.BLUE);
+            dostuff= false;
+            //canvas.drawColor(ContextCompat.getColor(this.getContext(), R.color.listBackgroundColor));
         }
         else
         {
-            canvas.drawColor(Color.YELLOW);
+            //canvas.drawColor(Color.BLUE);
+            canvas.drawColor(ContextCompat.getColor(this.getContext(), R.color.GridButton));
         }
 
         int paddingLeft = getPaddingLeft();
