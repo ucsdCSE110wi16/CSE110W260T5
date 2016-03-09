@@ -6,6 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -25,10 +28,10 @@ public class GridCustomView extends View {
     private String n;
     private float nWidth;
     private float nHeight;
-    private Drawable nDrawable;
+    private GradientDrawable nDrawable;
     private TextPaint nPaint;
-    private int nColor = Color.BLACK;
-    private float nD = 50;
+    private int nColor ;
+    private float nD ;
     private String p;
     private Category c ;
 
@@ -41,18 +44,19 @@ public class GridCustomView extends View {
         void OnToggled(GridCustomView view, boolean stuff , String pageName , String pagePath , Category cate);
     }
 
-    public GridCustomView(Context context, int x, int y, String name , String path, Category cate) {
+    public GridCustomView(Context context, int x, int y, String name , String path, Category cate , float Dim) {
         super(context);
         XP = x;
         YP = y;
         nPaint = new TextPaint();
         setName(name);
         p = path;
-        setnD(30);
-        setColor(Color.WHITE);
+        setnD(Dim);
+        setColor(Color.BLACK);
         dostuff = true;
         c = cate ;
         init();
+
     }
 
     public int getXP(){ return XP ; }
@@ -123,8 +127,9 @@ public class GridCustomView extends View {
         }
         else
         {
-            //canvas.drawColor(Color.BLUE);
-            canvas.drawColor(ContextCompat.getColor(this.getContext(), R.color.listItem));
+
+
+            canvas.drawColor(ContextCompat.getColor(this.getContext(), R.color.GridButton));
         }
 
         int paddingLeft = getPaddingLeft();
@@ -142,11 +147,13 @@ public class GridCustomView extends View {
                 nPaint);
 
 
+
+        /*nDrawable.draw(canvas);
         if (nDrawable != null) {
             nDrawable.setBounds(paddingLeft, paddingTop,
                     paddingLeft + contentWidth, paddingTop + contentHeight);
             nDrawable.draw(canvas);
-        }
+        }*/
     }
 
     public String getName() {
@@ -184,7 +191,7 @@ public class GridCustomView extends View {
         return nDrawable;
     }
 
-    public void setDrawable(Drawable Draw) {
+    public void setDrawable(GradientDrawable Draw) {
         nDrawable = Draw;
     }
 

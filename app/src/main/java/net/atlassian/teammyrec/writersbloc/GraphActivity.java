@@ -1,12 +1,16 @@
 package net.atlassian.teammyrec.writersbloc;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 //import android.graphics.pdf.PdfDocument;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 //import android.support.design.widget.AppBarLayout;
 //import android.support.design.widget.FloatingActionButton;
 //import android.support.design.widget.Snackbar;
 //import android.support.v4.content.ContextCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 //import android.support.v7.widget.Toolbar;
 //import android.text.style.ClickableSpan;
@@ -63,6 +67,7 @@ public class GraphActivity extends AppCompatActivity {
     private int cenXC;
     private int cenYC;
 
+    private boolean HorzMode = false;
     //private Category mCategory;
     //private ArrayList<Page> mPages;
 
@@ -123,12 +128,14 @@ public class GraphActivity extends AppCompatActivity {
         if( mdispSize.x /3 < mdispSize.y/3 )
         {
             Radius = mdispSize.x / 3;
+            HorzMode = false ;
         }
         else
         {
             Radius = mdispSize.y / 5;
+            HorzMode = true ;
         }
-
+        cen.setBackgroundColor(0xFFeec76a);
         cenL.leftMargin = maxX / 2;
         cenL.topMargin = maxY / 2;
         cenX = cenL.leftMargin;
@@ -137,8 +144,13 @@ public class GraphActivity extends AppCompatActivity {
             @Override
             public void onGlobalLayout() {
                 if( createdG == 0 ) {
+
                     cenL.leftMargin = cenL.leftMargin - cen.getWidth() / 2;
                     cenL.topMargin = cenL.topMargin - cen.getHeight() / 2;
+                    if(HorzMode)
+                    {
+                        //cenL.topMargin = cenL.topMargin - (int)(0.2*Radius) ;
+                    }
                     cen.setLayoutParams(cenL);
                     createdG = 1 ;
 
@@ -153,6 +165,8 @@ public class GraphActivity extends AppCompatActivity {
             }
         });
         page.addView(cen, cenL);
+
+
 
 
         cen.setOnClickListener(new View.OnClickListener() {
@@ -218,6 +232,8 @@ public class GraphActivity extends AppCompatActivity {
         double XPosition;
         double YPosition;
 
+
+
         double angle = (2 * pie) / phrases.size() ;
 
         double currentA = pie/2 ;
@@ -226,20 +242,28 @@ public class GraphActivity extends AppCompatActivity {
         cenY = cenL.topMargin ;
         cen.setLayoutParams(cenL);
         RelativeLayout page = (RelativeLayout)findViewById(R.id.GraphPage);
+
         Button[] buttonArray = new Button[phrases.size()] ;
         for( int x = 0; x < phrases.size() ; x++ ) {
             buttonArray[x] = new Button(this);
             buttonArray[x].setText(pageNameTmp.get(x));
+
             RelativeLayout.LayoutParams buttonLayout = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT);
             YPosition = Math.sin(currentA)*Radius ;
             XPosition = Math.cos(currentA)*Radius ;
+            if(HorzMode) {
+                XPosition = XPosition + (XPosition * (0.8));
+                //YPosition = YPosition - (0.2*Radius);
+            }
             buttonLayout.leftMargin = cenX + (int)XPosition ;
             buttonLayout.topMargin = cenY + (int)YPosition ;
+
+            //drawArray[x] = new DrawLine(this, cenX , cenX + (int)XPosition , cenY , cenY + (int)YPosition);
             currentA = currentA + angle ;
-
+            buttonArray[x].setBackgroundColor(0xFFeec76a);
             buttonArray[x].setLayoutParams(buttonLayout);
-
+            //page.addView(drawArray[x]);
             page.addView(buttonArray[x], buttonLayout);
             final String pageNameTmpT = pageNameTmp.get(x);
             final String prjNameT = prjName.get(x);
@@ -258,7 +282,10 @@ public class GraphActivity extends AppCompatActivity {
             });
         }
         final Button[] buttonA = buttonArray ;
+        final DrawLine[] drawArray = new DrawLine[phrases.size()];
+        final android.content.Context passin = this;
         final int pSize = phrases.size() ;
+        final RelativeLayout tP = page ;
         page.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -269,6 +296,12 @@ public class GraphActivity extends AppCompatActivity {
                                 + cen.getWidth()/2;
                         buttonLayout.topMargin = buttonLayout.topMargin - buttonA[x].getHeight() / 2
                                 + cen.getHeight()/2;
+                        drawArray[x] = new DrawLine(passin,
+                                cenX + cen.getWidth()/2 ,
+                                buttonLayout.leftMargin + buttonA[x].getWidth()/2  ,
+                                cenY + cen.getHeight()/2,
+                                buttonLayout.topMargin + buttonA[x].getWidth()/2 );
+                        tP.addView(drawArray[x]);
                         buttonA[x].setLayoutParams(buttonLayout);
                     }
 

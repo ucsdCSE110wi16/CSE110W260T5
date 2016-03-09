@@ -1,10 +1,12 @@
 package net.atlassian.teammyrec.writersbloc;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.graphics.pdf.PdfDocument;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Pair;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
@@ -114,7 +116,20 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
         {
             return ;
         }
-
+        Display mdisp = getWindowManager().getDefaultDisplay();
+        Point mdispSize = new Point();
+        mdisp.getSize(mdispSize);
+        int maxX = mdispSize.x;
+        int maxY = mdispSize.y;
+        int fontSize;
+        if( maxX > maxY)
+        {
+            fontSize = maxY/30;
+        }
+        else
+        {
+            fontSize = maxX/30;
+        }
 
         pV = new GridCustomView[fillup];
 
@@ -125,11 +140,11 @@ public class GridActivity extends AppCompatActivity implements GridCustomView.On
                 GridCustomView tempView ;
                 if( x + y * colC < maxSize) {
                     tempView = new GridCustomView(this, x, y, pageNames.get(x + y * colC),
-                            pages.get(x + y * colC).toString(), pages.get(x + y * colC).getCategory());
+                            pages.get(x + y * colC).toString(), pages.get(x + y * colC).getCategory(),fontSize);
                 }
                 else
                 {
-                    tempView = new GridCustomView(this, x ,y, "",null,null);
+                    tempView = new GridCustomView(this, x ,y, "",null,null,1);
                 }
                 tempView.setOnToggledListener(this);
 
