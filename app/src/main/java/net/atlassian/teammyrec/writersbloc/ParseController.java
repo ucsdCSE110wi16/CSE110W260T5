@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import java.util.*;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.*;
 
+
 /**
  * Created by matt on 2/10/16.
  */
@@ -75,7 +76,7 @@ public class ParseController {
     }
 
     public static void deletePage(String pageName, String category, String project, String userName) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Page");
+        final ParseQuery<ParseObject> query = ParseQuery.getQuery("Page");
         query.whereEqualTo("title", pageName);
         query.whereEqualTo("category", category);
         query.whereEqualTo("project", project);
@@ -83,10 +84,18 @@ public class ParseController {
         query.setLimit(1);
 
         try {
-            List<ParseObject> pages = query.find();
-            ParseObject page = pages.get(0);
-            page.delete();
-        } catch(ParseException e) {
+
+            Thread th = new Thread(()-> {
+                try {
+                    List<ParseObject> pages = query.find();
+                    ParseObject page = pages.get(0);
+                    page.delete();
+                }catch (ParseException e){
+
+                }
+            });
+
+        } catch(Exception e) {
 
         }
     }

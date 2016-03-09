@@ -21,6 +21,7 @@ import com.parse.ParseUser;
 
 import net.atlassian.teammyrec.writersbloc.Adapters.CategoryListAdapter;
 import net.atlassian.teammyrec.writersbloc.Adapters.DeleteListAdapter;
+import net.atlassian.teammyrec.writersbloc.Adapters.FolderListAdapter;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Category;
 import net.atlassian.teammyrec.writersbloc.Models.DataModels.Project;
 
@@ -94,16 +95,6 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
 
 
 
-        ListView deleteList = (ListView) findViewById(R.id.category_delete_list_view);
-        deleteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Category category = mCategories.get(position);
-                category.delete();
-                mCategories.remove(category);
-                updateListAdapter();
-            }
-        });
 
         if(showOverlay)
             findViewById(R.id.frameFragmentLayout).setVisibility(View.VISIBLE);
@@ -155,16 +146,9 @@ public class CategoryActivity extends AppCompatActivity implements AddCategoryFr
 
     private void updateListAdapter(){
 
-        ArrayList<CategoryListAdapter.CategoryListViewModel> models = new ArrayList<>();
-        for(Category category: mCategories){
-            models.add(new CategoryListAdapter.CategoryListViewModel(category.toString()));
-        }
-
-        CategoryListAdapter categoryArrayAdapter = new CategoryListAdapter(this, R.layout.category_list_item, models);
+        FolderListAdapter categoryArrayAdapter = new FolderListAdapter(this, R.layout.category_list_item, mCategories);
         ((ListView)findViewById(R.id.category_list_view)).setAdapter(categoryArrayAdapter);
 
-        ListView deleteList = (ListView) findViewById(R.id.category_delete_list_view);
-        deleteList.setAdapter(new DeleteListAdapter<CategoryListAdapter.CategoryListViewModel>(this, R.layout.category_trash_list_item, models));
     }
 
     @Override

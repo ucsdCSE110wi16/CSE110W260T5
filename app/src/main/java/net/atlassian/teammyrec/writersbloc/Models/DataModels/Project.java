@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.parse.Parse;
 
+import net.atlassian.teammyrec.writersbloc.Interfaces.Deletable;
 import net.atlassian.teammyrec.writersbloc.ParseController;
 
 import java.io.File;
@@ -17,7 +18,7 @@ import net.atlassian.teammyrec.writersbloc.Models.DataModels.*;
 /**
  * Created by jay on 2/10/16.
  */
-public class Project {
+public class Project implements Deletable {
 
     private String projectName;
     private String owner;
@@ -63,6 +64,7 @@ public class Project {
     }
 
 
+    @Override
     public void delete(){
         ParseController.deleteProject(projectName, owner);
 

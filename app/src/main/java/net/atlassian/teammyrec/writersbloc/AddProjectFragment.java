@@ -98,7 +98,7 @@ public class AddProjectFragment extends Fragment {
         mListener = null;
     }
 
-    public void createProject(View v) {
+    public Project createProject(View v) {
         EditText projectName = (EditText) this.getActivity().findViewById(R.id.addProjectName);
         try {
             Project project = new Project(projectName.getText().toString(), ParseController.getCurrentUser());
@@ -114,8 +114,11 @@ public class AddProjectFragment extends Fragment {
                     ParseController.getCurrentUser());
             ParseController.createCategory("Event", projectName.getText().toString(),
                     ParseController.getCurrentUser());
+
+            return project;
         } catch (Exception e){
             Logger.getLogger("Hello World").log(Level.SEVERE, "Failed to create project" + e);
+            return null;
         }
     }
 
