@@ -19,10 +19,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Start thread to run the Tutorial
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+                //Helps track number of times tutorial has run
                 boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
 
                 if (isFirstStart) {
@@ -35,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
         t.start();
 
         setContentView(R.layout.activity_login);
