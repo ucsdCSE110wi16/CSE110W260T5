@@ -1,5 +1,6 @@
 package net.atlassian.teammyrec.writersbloc;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -97,7 +98,8 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
 
     public void createProject(View v){
         AddProjectFragment fragment = (AddProjectFragment)getSupportFragmentManager().findFragmentById(R.id.overlayAddProject);
-        mProjects.add(fragment.createProject(v));
+        Project p = fragment.createProject(v);
+        if(p != null) mProjects.add(p);
 
         ListView list = (ListView)findViewById(R.id.projects_list_view);
         ((ArraySwipeAdapter)list.getAdapter()).notifyDataSetChanged();

@@ -77,7 +77,7 @@ public class Project implements Deletable {
 
     @Override
     public void delete(){
-
+        ParseController.deleteProject(this.projectName, this.owner);
     }
 
     // Bottom of Project.java
