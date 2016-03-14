@@ -119,7 +119,7 @@ public class ProjectActivity extends AppCompatActivity implements AddProjectFrag
     }
 
     public void cancelCreateProject(View v){
-        ((EditText) findViewById(R.id.addPageName)).setText("");
+        ((EditText) findViewById(R.id.addProjectName)).setText("");
         findViewById(R.id.frameFragmentLayout).setVisibility(View.INVISIBLE);
         showOverlay=false;
     }
